@@ -1,0 +1,9 @@
+{
+  "firebase": "skagerak-client-page",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
