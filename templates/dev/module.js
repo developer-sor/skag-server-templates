@@ -18,4 +18,4 @@ var template = {
     endShow: function() {},
 };
 
-templates[template.id] = template;
+templateController.addTemplate( template );

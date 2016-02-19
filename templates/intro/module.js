@@ -5,11 +5,11 @@
 
 "use strict";
 
-console.log( "Loading plugin ", "intro.js" );
+console.log( "Loading plugin ", "intro" );
 
 var template = {
     id: "intro",
-    defaultTimeOut: 1000,
+    defaultTimeOut: 4000,
     name: "Forside",
     //canShow: function() { return true; },
     prepareShow: function() {},
@@ -20,4 +20,4 @@ var template = {
     endShow: function() {},
 };
 
-templates[template.id] = template;
+templateController.addTemplate( template );

@@ -1,7 +1,9 @@
+console.log( "Loading plugin ", "yr" );
 var template = {
     id: "yr",
     name: "YR",
-    canShow: function() { Math.floor((Math.random() * 10) + 1) != 7; },
+    defaultTimeOut: 10000,
+    //canShow: function() { Math.floor((Math.random() * 10) + 1) != 7; },
     prepareShow: function() {},
     doShow: function( doneCB ) {
         setTimeout( doneCB, 5000)
@@ -9,4 +11,4 @@ var template = {
     endShow: function() {},
 };
 
-templates[template.id] = template;
+templateController.addTemplate( template );

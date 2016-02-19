@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <title>The intro template</title>
 
-    <script id="entry-template" type="text/x-handlebars-template">
-        <div class="entry">
-            <h1>{{title}}</h1>
-            <div class="body">
-                {{body}}
-            </div>
-        </div>
-    </script>
-
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
-    <script src="intro.js"></script>
 
 </head>
 <body onload="console.log( 'template intro loaded??')">
 
-<h1>The intro template</h1>
-
 <div id="intro">
-    asdf
+    intro here pls
 </div>
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+        <h1>{{name}}</h1>
+        <div class="body">
+            {{text}}
+        </div>
+    </div>
+</script>
+
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+<script src="intro.js"></script>
+<script src="../../installation.js"></script>
 
 
 </body>
