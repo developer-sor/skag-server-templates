@@ -1,0 +1,36 @@
+﻿@import "base.scss";
+@import "variables.scss";
+
+
+#main {
+    background-size: cover;
+    background-position: center center;
+}
+
+.textContainer {
+    padding-right: 20%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    height: 65%;
+    border-top: 3px solid white;
+}
+
+.whiteBand {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    position: absolute;
+    bottom: 5rem;
+
+    .logo, .time {
+        max-height: 75px;
+        margin: 12.5px 0px;
+        width: auto;
+    }
+
+    .time{
+        color: black !important;
+        line-height: 75px;
+        font-size: 75px;
+    }
+}

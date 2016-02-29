@@ -1,0 +1,75 @@
+﻿@import "variables.scss";
+
+
+html, body, #main {
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+}
+
+html, body {
+    font-size: 16px;
+}
+
+iframe {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.darkTheme {
+    p, h1, h2, h3, h4, h5, h6, em, b, i, section, article , span{
+        color: $darkText !important;
+    }
+
+    .textContainer {
+        background-color: $lightTextContainer !important;
+    }
+}
+
+.lightTheme {
+    p, h1, h2, h3, h4, h5, h6, em, b, i, section, article , span{
+        color: $lightText !important;
+    }
+
+    .textContainer {
+        background-color: $darkTextContainer !important;
+    }
+}
+
+.italic {
+    font-style: italic;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float: right;
+}
