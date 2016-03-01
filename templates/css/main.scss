@@ -2,6 +2,12 @@
 @import "variables.scss";
 
 
+.topContainer {
+    height: 18%;
+    top: 0;
+    width: 100%;
+    position: absolute;
+}
 
 
 .textContainer {
@@ -9,6 +15,31 @@
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     border-top: 3px solid white;
+    height: 82%;
+    position: absolute;
+    top: 18%;
+}
+
+.weatherContainer {
+    height: 500px;
+    width: 100%;
+    position: absolute;
+    top: 18%;
+}
+
+.weatherForecast {
+    width: 100%;
+    height: 100%;
+
+    .weather{
+        width: 25%;
+        height: 100%;
+        border: 3px solid white;
+    }
+
+    .weather + .weather{
+        border-left: none;
+    }
 }
 
 .whiteBand {
@@ -24,7 +55,7 @@
         width: auto;
     }
 
-    .time{
+    .time {
         color: black !important;
         line-height: 75px;
         font-size: 75px;

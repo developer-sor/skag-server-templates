@@ -1,17 +1,60 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The YR template</title>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="yr.js"></script>
+
+
+    <link href="../css/normalize.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            background-image: url('../images/backgroundLight.jpg');
+        }
+    </style>
+
 </head>
 <body>
-<h1>The YR template</h1>
+    <div class="lightTheme container" id="main" role="main">
 
-<div id="yr">Værdata</div>
+        <section class="row topContainer">
+            <h1>Været i dag</h1>
+        </section>
 
-<div id="yr-credits">Levert av YR og met</div>
+        <div class="row weatherContainer">
+            <div class="lightContainer weatherForecast">
 
+                <div class="weather floatLeft">
+
+                </div>
+                <div class="weather floatLeft">
+
+                </div>
+                <div class="weather floatLeft">
+
+                </div>
+                <div class="weather floatLeft">
+
+                </div>
+            </div>
+            <div id="yr">Værdata</div>
+            <div id="yr-credits">Levert av YR og met</div>
+        </div>
+
+        <div class="whiteBand">
+            <div class="row">
+                <img class="logo" src="../images/log.png" />
+                <span class="floatRight time" data-bind="text: clock"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script src="clock.js"></script>
+    <script src="yr.js"></script>
 </body>
 </html>
