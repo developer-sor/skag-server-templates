@@ -1,20 +1,20 @@
 ﻿
 
+
 function viewModel() {
     var self = this;
 
-    function getTwoDigitDate() {
+    this.getTwoDigitDate = function() {
         var date = new Date();
         var hours = date.getHours();
         var minutes = date.getMinutes();
         return ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2)
     }
 
-
-    this.clock = ko.observable(getTwoDigitDate());
+    this.clock = ko.observable(this.getTwoDigitDate());
 
     this.tick = function () {
-        self.clock(getTwoDigitDate());
+        self.clock(self.getTwoDigitDate());
     };
 
     setInterval(self.tick, 3000);

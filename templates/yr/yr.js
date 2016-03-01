@@ -2,33 +2,44 @@
  * Created by narve on 2016-02-19.
  */
 
-var url = "http://www.yr.no/sted/Norge/Vest-Agder/Songdalen/Songdalen/varsel.xml";
 
-var settings = {
-    type: "GET",
-    cache: true,
-    dataType: "xml"
+function createWeatherForecast() {
+    var url = "http://www.yr.no/sted/Norge/Vest-Agder/Songdalen/Songdalen/varsel.xml";
+
+    var settings = {
+        type: "GET",
+        cache: true,
+        dataType: "xml"
+    };
+    jQuery.ajax(url, settings)
+        .done(function (data, textStatus, jqXHR) {
+            console.log("Got vær-data from yr");
+            var jsonData = xmlToJson(data);
+            console.log("Got vær-data from yr", jsonData);
+            $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
+
+            var weatherHTML = '';
+            for (var i = 0; i < 4; i++) {
+                var data = jsonData.weatherdata.forecast.tabular.time[i];
+
+                var from = new Date(data["@attributes"].from).getHours();
+                var to = new Date(data["@attributes"].to).getHours();
+                var period = data["@attributes"].period;
+                var temp = data.temperature["@attributes"].value;
+                var symbol = data.symbol["@attributes"];
+
+                var symbolHTML = '<div class="symbol">' + symbol.name + '</div>';
+                var tempHTML = '<h1 class="temp">' + temp + '</h1>';
+                var timeHTML = '<h3 class="time">kl ' + from + '-' + to + '</h3>';
+
+                weatherHTML += '<div class="weather floatLeft">' + symbolHTML + tempHTML + timeHTML + '</div>'
+            }
+            console.log(weatherHTML);
+            $("#weatherForecast").html(weatherHTML);
+        });
 };
 
-jQuery.ajax(url, settings)
-    .done(function (data, textStatus, jqXHR) {
-        console.log("Got vær-data from yr");
-        var jsonData = xmlToJson(data);
-        console.log("Got vær-data from yr", jsonData);
-        $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
-
-        var yrStuff = jsonData.weatherdata.forecast.tabular.time
-            .map( function(t) {
-                var s = "Time: " + t["@attributes"].from;
-                s += ", pressure: " + t.pressure["@attributes"].value + " " + t.pressure["@attributes"].unit;
-                return s;
-            }).map( function(s) { return "<p>" + s + "</p>"})
-            .join("");
-
-        $("#yr").html(yrStuff);
-
-    });
-
+createWeatherForecast();
 
 // https://davidwalsh.name/convert-xml-json
 // Changes XML to JSON
@@ -55,10 +66,10 @@ function xmlToJson(xml) {
         for (var i = 0; i < xml.childNodes.length; i++) {
             var item = xml.childNodes.item(i);
             var nodeName = item.nodeName;
-            if (typeof(obj[nodeName]) == "undefined") {
+            if (typeof (obj[nodeName]) == "undefined") {
                 obj[nodeName] = xmlToJson(item);
             } else {
-                if (typeof(obj[nodeName].push) == "undefined") {
+                if (typeof (obj[nodeName].push) == "undefined") {
                     var old = obj[nodeName];
                     obj[nodeName] = [];
                     obj[nodeName].push(old);
