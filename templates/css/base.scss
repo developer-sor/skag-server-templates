@@ -1,18 +1,22 @@
 ﻿@import "variables.scss";
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
-html, body, #main {
-    font-family: sans-serif;
+html, body{
     height: 100%;
     width: 100%;
     margin: 0 !important;
     padding: 0 !important;
     font-family: 'Lato', sans-serif;
-    overflow: hidden;
+    font-size: 16px;
+    /*overflow: hidden;*/
 }
 
-html, body {
-    font-size: 16px;
+body {
+    background-size: cover;
+    background-position: center center;
 }
 
 iframe {
@@ -20,7 +24,13 @@ iframe {
     padding: 0 !important;
 }
 
-.container {
+.container{
+    padding-top: 3rem;
+    padding-bottom:  5rem;
+    height: 100%;
+}
+
+.row {
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -72,4 +82,8 @@ h2 {
 
 .floatRight{
     float: right;
+}
+
+.fullHeight{
+    height: 100%;
 }
