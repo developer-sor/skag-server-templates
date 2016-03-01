@@ -1,0 +1,42 @@
+﻿
+
+@import "variables.scss";
+
+.chart{
+  width: 100%;
+}
+
+.c3-chart-texts {
+    .c3-target {
+        .c3-texts {
+            .c3-text {
+                fill: black !important;
+                font-size: 1.5rem;
+                font-family: 'Lato', sans-serif;
+                padding-bottom: 1rem;
+            }
+        }
+    }
+}
+
+.c3-chart-bars{
+
+    .c3-chart-bar:nth-child(1){
+        .c3-bars{
+            .c3-bar{
+                stroke: $barChart1 !important;
+                fill: $barChart1 !important;
+            }
+        }
+    }
+
+    .c3-chart-bar:nth-child(2){
+        .c3-bars{
+            .c3-bar{
+                stroke: $barChart2 !important;
+                fill: $barChart2 !important;
+            }
+        }
+    }
+}
+

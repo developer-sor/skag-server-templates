@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Forbuk siste tre måneder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../css/normalize.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
+    <link href="../css/c3.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            background-image: url('../images/backgroundLight.jpg');
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="lightTheme container" id="main" role="main">
+
+        <section class="row topContainer">
+            <h1 class="title">Forbuk siste tre måneder</h1>
+        </section>
+
+
+        <div class="chartContainer lightContainer pushLeft row">
+            <div id="chart" class="excludeFromTheme"></div>
+        </div>
+
+
+        <div class="whiteBand whiteBandExtended">
+            <div class="row whiteBandRow pushLeft" id="months">
+            </div>
+
+            <div class="row whiteBandRow">
+                <img class="logo" src="../images/log.png" />
+                <div class="floatRight">
+                    <p class="footerText">
+                        Forbruket er graddagsjustert
+                        <br />
+                        Sammenlignes opp mot et referanseforbruk
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="saved" id="saved">
+            <div class="savedTextHorizontalWrapper">
+                <div class="savedText">
+                    <h2>Spart</h2>
+                    <h1 class="amountSaved" id="amountSaved"></h1>
+                    <h3>kWh</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="d3.js"></script>
+    <script src="c3.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

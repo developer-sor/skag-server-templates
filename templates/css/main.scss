@@ -1,6 +1,6 @@
 ﻿@import "base.scss";
 @import "variables.scss";
-
+@import "chart.scss";
 
 .topContainer {
     height: 18%;
@@ -14,14 +14,25 @@
     bottom: 0;
 }
 
-.textContainer {
+.pushLeft {
     padding-right: 20%;
+}
+
+.textContainer {
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
     border-top: 3px solid white;
     position: absolute;
     top: 18%;
+    padding-bottom: 1.5rem;
     height: 82%;
+}
+
+.chartContainer {
+    padding-top: 1.5rem;
+    border-top: 3px solid white;
+    position: absolute;
+    top: 18%;
+    padding-bottom: 1.5rem;
 }
 
 .weatherContainer {
@@ -41,7 +52,7 @@
         height: 100%;
         padding-top: 5rem;
 
-        .dayText{
+        .dayText {
             min-height: 2.5rem;
             line-height: 2.5rem;
         }
@@ -57,7 +68,7 @@
         }
     }
 
-    .weatherWrapper + .weatherWrapper{
+    .weatherWrapper + .weatherWrapper {
         .weather {
             border-left: none;
         }
@@ -77,9 +88,68 @@
         width: auto;
     }
 
+    .footerText {
+        text-align: right;
+        margin: 12.5px 0px;
+        font-size: 1.5rem;
+        line-height: 37.5px;
+    }
+
     .time {
         color: black !important;
         line-height: 75px;
         font-size: 75px;
+    }
+
+    .whiteBandRow {
+        height: 100px;
+    }
+}
+
+.whiteBandExtended {
+    height: 205px;
+
+    .category {
+        width: 33.3%;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.saved {
+    text-align: center;
+    position: absolute;
+    top: 5rem;
+    right: 8rem;
+    border-radius: 50%;
+    background-color: white;
+    -webkit-box-shadow: -7px 9px 15px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: -7px 9px 15px 0px rgba(0,0,0,0.2);
+    box-shadow: -7px 9px 15px 0px rgba(0,0,0,0.2);
+    width: 18rem;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .savedTextHorizontalWrapper {
+        transform: rotate($savedRotation);
+        -webkit-transform: rotate($savedRotation);
+        -moz-transform: rotate($savedRotation);
+        -o-transform: rotate($savedRotation);
+        -ms-transform: rotate($savedRotation);
+    }
+
+    .savedText {
+        width: 100%;
+        height: 100%;
+
+        h1, h2, h3, h4 {
+            margin: 0.5rem;
+        }
+    }
+
+    .amountSaved {
+        color: $barChart2;
     }
 }

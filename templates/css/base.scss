@@ -60,9 +60,10 @@ h3 {
     margin-bottom: 1.25rem;
 }
 
+
 .lightTheme {
-    p, h1, h2, h3, h4, h5, h6, em, b, i, section, article, span {
-        color: $darkText !important;
+    p, h1, h2, h3, h4, h5, h6{
+        color: $darkText;
     }
 
     .textContainer, .lightContainer {
@@ -71,8 +72,8 @@ h3 {
 }
 
 .darkTheme {
-    p, h1, h2, h3, h4, h5, h6, em, b, i, section, article, span {
-        color: $lightText !important;
+    p, h1, h2, h3, h4, h5, h6{
+        color: $lightText;
     }
 
     .textContainer, .darkContainer {
