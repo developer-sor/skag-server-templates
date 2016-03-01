@@ -8,9 +8,9 @@
 console.log("Loading plugin ", "intro");
 
 var template = {
-    id: "slide1",
+    id: "chart1",
     defaultTimeOut: 4000,
-    name: "Forside",
+    name: "Chart1",
     //canShow: function() { return true; },
     prepareShow: function () { },
     doShow: function (doneCB) {
