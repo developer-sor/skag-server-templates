@@ -44,12 +44,12 @@ h2 {
 .darkTheme p, .darkTheme h1, .darkTheme h2, .darkTheme h3, .darkTheme h4, .darkTheme h5, .darkTheme h6, .darkTheme em, .darkTheme b, .darkTheme i, .darkTheme section, .darkTheme article, .darkTheme span {
   color: black !important; }
 .darkTheme .textContainer {
-  background-color: rgba(255, 255, 255, 0.1) !important; }
+  background-color: rgba(255, 255, 255, 0.33) !important; }
 
 .lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6, .lightTheme em, .lightTheme b, .lightTheme i, .lightTheme section, .lightTheme article, .lightTheme span {
   color: white !important; }
 .lightTheme .textContainer {
-  background-color: rgba(0, 0, 0, 0.1) !important; }
+  background-color: rgba(0, 0, 0, 0.33) !important; }
 
 .italic {
   font-style: italic; }
