@@ -9,7 +9,7 @@
     position: absolute;
 }
 
-.title{
+.title {
     position: absolute;
     bottom: 0;
 }
@@ -28,23 +28,39 @@
     padding-bottom: 15rem;
     width: 100%;
     position: absolute;
-    top: 18%;
-    height: 82%;
+    top: 0;
+    height: 100%;
 }
 
 .weatherForecast {
     width: 100%;
     height: 100%;
 
-    .weather{
+    .weatherWrapper {
         width: 25%;
         height: 100%;
-        border: 3px solid white;
-        text-align: center;
+        padding-top: 5rem;
+
+        .dayText{
+            min-height: 2.5rem;
+            line-height: 2.5rem;
+        }
+
+        .weather {
+            text-align: center;
+            border: 3px solid white;
+            height: 80%;
+        }
+
+        .weather {
+            border-left: none;
+        }
     }
 
-    .weather + .weather{
-        border-left: none;
+    .weatherWrapper + .weatherWrapper{
+        .weather {
+            border-left: none;
+        }
     }
 }
 

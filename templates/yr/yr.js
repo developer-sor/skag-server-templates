@@ -2,6 +2,12 @@
  * Created by narve on 2016-02-19.
  */
 
+getTwoDigitDate = function () {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2)
+}
 
 function createWeatherForecast() {
     var url = "http://www.yr.no/sted/Norge/Vest-Agder/Songdalen/Songdalen/varsel.xml";
@@ -18,6 +24,7 @@ function createWeatherForecast() {
             console.log("Got vær-data from yr", jsonData);
             $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
 
+
             var weatherHTML = '';
             for (var i = 0; i < 4; i++) {
                 var data = jsonData.weatherdata.forecast.tabular.time[i];
@@ -28,11 +35,19 @@ function createWeatherForecast() {
                 var temp = data.temperature["@attributes"].value;
                 var symbol = data.symbol["@attributes"];
 
+                var dayText = '';
+                if (i == 0) {
+                    dayText = 'I dag';
+                }
+                else if (period === "0") {
+                    dayText = 'I morgen';
+                }
+
                 var symbolHTML = '<div class="symbol">' + symbol.name + '</div>';
                 var tempHTML = '<h1 class="temp">' + temp + '</h1>';
-                var timeHTML = '<h3 class="time">kl ' + from + '-' + to + '</h3>';
+                var timeHTML = '<h3 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
 
-                weatherHTML += '<div class="weather floatLeft">' + symbolHTML + tempHTML + timeHTML + '</div>'
+                weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
             }
             console.log(weatherHTML);
             $("#weatherForecast").html(weatherHTML);
