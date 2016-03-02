@@ -78,6 +78,12 @@ h4 {
 .inlineBlock {
   display: inline-block; }
 
+.moveForwardZ {
+  z-index: 1000; }
+
+.moveBackZ {
+  z-index: -1; }
+
 .chart {
   width: 100%; }
 
@@ -157,6 +163,7 @@ h4 {
   padding-right: 20%; }
 
 .textContainer {
+  z-index: -2;
   padding-top: 1.5rem;
   border-top: 3px solid white;
   position: absolute;
@@ -165,7 +172,6 @@ h4 {
   height: 82%; }
 
 .chartContainer {
-  z-index: 1000;
   padding-top: 1.5rem;
   border-top: 3px solid white;
   position: absolute;
@@ -203,7 +209,6 @@ h4 {
   display: inline-block; }
 
 .whiteBand {
-  z-index: -1;
   width: 100%;
   height: 100px;
   position: absolute;

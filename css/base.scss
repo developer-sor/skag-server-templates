@@ -106,3 +106,11 @@ h4 {
 .inlineBlock{
     display: inline-block;
 }
+
+.moveForwardZ{
+    z-index: 1000;
+}
+
+.moveBackZ{
+    z-index: -1;
+}
