@@ -6,6 +6,7 @@
     width: 100%;
 }
 
+
 .c3-chart-texts {
     .c3-target {
         .c3-texts {
@@ -40,8 +41,23 @@
     }
 }
 
+.c3-chart-lines {
+    .c3-chart-line {
+        path {
+            stroke: $braChartSpline1 !important;
+            stroke-width: 2px;
+        }
+    }
+}
+
+
 
 .c3-axis-y {
+    -ms-transform: translate(10px,0px);
+    -moz-transform: translate(10px,0px);
+    -webkit-transform: translate(10px,0px);
+    transform: translate(10px,0px);
+
     path {
         stroke: transparent !important;
         fill: transparent !important;
@@ -54,8 +70,27 @@
         }
 
         line {
-            stroke: $barChart2;
-            fill: $barChart2;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
+
+.c3-axis-y2 {
+    path {
+        stroke: transparent !important;
+        fill: transparent !important;
+    }
+
+    .tick {
+        text {
+            fill: $braChartSpline1;
+            font-size: 1.5rem;
+        }
+
+        line {
+            opacity: 0;
+            visibility: hidden;
         }
     }
 }

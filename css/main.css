@@ -86,15 +86,34 @@ h3 {
   stroke: #198dc7 !important;
   fill: #198dc7 !important; }
 
-.c3-axis-y path {
+.c3-chart-lines .c3-chart-line path {
+  stroke: #c22323 !important;
+  stroke-width: 2px; }
+
+.c3-axis-y {
+  -ms-transform: translate(10px, 0px);
+  -moz-transform: translate(10px, 0px);
+  -webkit-transform: translate(10px, 0px);
+  transform: translate(10px, 0px); }
+  .c3-axis-y path {
+    stroke: transparent !important;
+    fill: transparent !important; }
+  .c3-axis-y .tick text {
+    fill: #198dc7;
+    font-size: 1.5rem; }
+  .c3-axis-y .tick line {
+    opacity: 0;
+    visibility: hidden; }
+
+.c3-axis-y2 path {
   stroke: transparent !important;
   fill: transparent !important; }
-.c3-axis-y .tick text {
-  fill: #198dc7;
+.c3-axis-y2 .tick text {
+  fill: #c22323;
   font-size: 1.5rem; }
-.c3-axis-y .tick line {
-  stroke: #198dc7;
-  fill: #198dc7; }
+.c3-axis-y2 .tick line {
+  opacity: 0;
+  visibility: hidden; }
 
 .topContainer {
   height: 18%;
@@ -147,6 +166,12 @@ h3 {
       height: 80%; }
   .weatherForecast .weatherWrapper + .weatherWrapper .weather {
     border-left: none; }
+
+.tempBox {
+  background-color: #c22323;
+  width: 100px;
+  height: 100px;
+  display: inline-block; }
 
 .whiteBand {
   width: 100%;
