@@ -131,7 +131,8 @@
     }
 
     .timeUsage {
-        width: 40%;
+        max-width: 40%;
+        min-width: 33%;
 
         h1, h2, h3, h4 {
             margin: 0;
@@ -147,7 +148,8 @@
         width: 59%;
 
         .sensor {
-            width: 49%;
+            max-width: 49%;
+            min-width: 33%;
 
             h4 {
                 margin: 0;

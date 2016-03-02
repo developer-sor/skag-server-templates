@@ -90,8 +90,8 @@
         }
 
         line {
-            opacity: 0;
-            visibility: hidden;
+            stroke: $barChart2;
+            stroke-width: 2px;
         }
     }
 }

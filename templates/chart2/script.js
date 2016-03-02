@@ -38,7 +38,7 @@ var chart = c3.generate({
     padding: {
         top: 10,
         left: paddingLeft,
-        bottom: -8
+        bottom: -2
     },
     data: {
         columns: data,
@@ -78,7 +78,10 @@ var chart = c3.generate({
             }
         },
         x: {
-           
+            show: true,
+            tick: {
+                format: function (x) { if (x == 0 || x == 24) { return "" }; }
+            }
         },
         x2: {
             show: true
@@ -98,6 +101,12 @@ var chart = c3.generate({
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
     $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
+}
+
+function adjustXTicks() {
+    $(".c3-axis-x line").each(function () {
+        $(this).attr('y2', 12);
+    });
 }
 
 
@@ -128,3 +137,4 @@ function makePathGoAllTheWayAndGetLastXY() {
 expandWhiteBand();
 markHighestBar();
 makePathGoAllTheWayAndGetLastXY();
+adjustXTicks();

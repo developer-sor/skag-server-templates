@@ -120,8 +120,8 @@ h4 {
   fill: #198dc7;
   font-size: 2.5rem; }
 .c3-axis-x .tick line {
-  opacity: 0;
-  visibility: hidden; }
+  stroke: #198dc7;
+  stroke-width: 2px; }
 
 .c3-axis-y2 path {
   stroke: transparent !important;
@@ -238,7 +238,8 @@ h4 {
     position: absolute;
     bottom: 0; }
   .whiteBandGraph2 .timeUsage {
-    width: 40%; }
+    max-width: 40%;
+    min-width: 33%; }
     .whiteBandGraph2 .timeUsage h1, .whiteBandGraph2 .timeUsage h2, .whiteBandGraph2 .timeUsage h3, .whiteBandGraph2 .timeUsage h4 {
       margin: 0; }
     .whiteBandGraph2 .timeUsage h1 {
@@ -247,7 +248,8 @@ h4 {
   .whiteBandGraph2 .sensors {
     width: 59%; }
     .whiteBandGraph2 .sensors .sensor {
-      width: 49%; }
+      max-width: 49%;
+      min-width: 33%; }
       .whiteBandGraph2 .sensors .sensor h4 {
         margin: 0;
         line-height: 2rem;
