@@ -44,7 +44,7 @@ function createWeatherForecast() {
                 }
 
                 var symbolHTML = '<div class="symbol">' + symbol.name + '</div>';
-                var tempHTML = '<h1 class="temp">' + temp + '</h1>';
+                var tempHTML = '<h1 class="temp">' + temp + '&#8451;</h1>';
                 var timeHTML = '<h3 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
 
                 weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
