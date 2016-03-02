@@ -25,16 +25,38 @@
         </section>
 
 
-        <div class="chartContainer lightContainer row">
+        <div class="chartContainer lightContainer row" id="chartContainer">
             <div id="chart" class="excludeFromTheme mainChart"></div>
-            <div class="tempBox" id="tempBox" style="display: none">
-                <p>OK</p>
-            </div>
         </div>
 
 
-        <div class="whiteBand">
+        <div class="whiteBand whiteBandGraph2" id="whiteBand">
             <div class="row whiteBandRow">
+            </div>
+
+            <div class="row">
+                <div class="inlineBlock timeUsage">
+                    <h4>Høyeste timesforbruk</h4>
+                    <h1>4300kW</h1>
+                </div>
+
+                <div class="inlineBlock sensors" id="sensors">
+                    <div class="sensor inlineBlock">
+                        <h4 class="inlineBlock">
+                            <span class="sensorLabel inlineBlock"></span> Sensor navn 1
+                        </h4>
+                    </div>
+
+                    <div class="sensor inlineBlock">
+                        <h4 class="inlineBlock">
+                            <span class="sensorLabel inlineBlock"></span> Sensor navn 2
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row whiteBandRow logoRow">
                 <img class="logo" src="../../images/log.png" />
             </div>
         </div>

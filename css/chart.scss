@@ -76,6 +76,26 @@
     }
 }
 
+
+.c3-axis-x {
+    path {
+        stroke: transparent !important;
+        fill: transparent !important;
+    }
+
+    .tick {
+        text {
+            fill: $barChart2;
+            font-size: 2.5rem;
+        }
+
+        line {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
+
 .c3-axis-y2 {
     path {
         stroke: transparent !important;
@@ -93,4 +113,17 @@
             visibility: hidden;
         }
     }
+}
+
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
+    stroke: lighten($barChart1, $markedBarLighten) !important;
+    fill: lighten($barChart1, $markedBarLighten) !important;
+    opacity: 0.7 !important;
+}
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
+    stroke: lighten($barChart2, $markedBarLighten) !important;
+    fill: lighten($barChart2, $markedBarLighten) !important;
+    opacity: 0.7 !important;
 }

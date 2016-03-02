@@ -28,6 +28,7 @@
 }
 
 .chartContainer {
+    z-index: 1000;
     padding-top: 1.5rem;
     border-top: 3px solid white;
     position: absolute;
@@ -71,7 +72,7 @@
     }
 }
 
-.tempBox{
+.tempBox {
     background-color: $braChartSpline1;
     width: 100px;
     height: 100px;
@@ -80,6 +81,7 @@
 
 
 .whiteBand {
+    z-index: -1;
     width: 100%;
     height: 100px;
     position: absolute;
@@ -117,6 +119,52 @@
         width: 33.3%;
         display: inline-block;
         text-align: center;
+    }
+}
+
+.whiteBandGraph2 {
+    height: auto;
+
+    .logoRow {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .timeUsage {
+        width: 40%;
+
+        h1, h2, h3, h4 {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 6rem;
+            vertical-align: middle;
+        }
+    }
+
+    .sensors {
+        width: 59%;
+
+        .sensor {
+            width: 49%;
+
+            h4 {
+                margin: 0;
+                line-height: 2rem;
+                padding-left: 4rem;
+
+                .sensorLabel {
+                    background-color: black;
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    vertical-align: text-top;
+                    position: relative;
+                    margin-left: -2.25rem;
+                    left: -1rem;
+                }
+            }
+        }
     }
 }
 
@@ -162,8 +210,6 @@
         -webkit-align-self: auto;
         -ms-flex-item-align: auto;
         align-self: auto;
-
-
         transform: rotate($savedRotation);
         -webkit-transform: rotate($savedRotation);
         -moz-transform: rotate($savedRotation);

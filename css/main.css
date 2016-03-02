@@ -48,6 +48,11 @@ h3 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem; }
 
+h4 {
+  font-size: 1.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+
 .lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6 {
   color: black; }
 .lightTheme .textContainer, .lightTheme .lightContainer {
@@ -69,6 +74,9 @@ h3 {
 
 .fullHeight {
   height: 100%; }
+
+.inlineBlock {
+  display: inline-block; }
 
 .chart {
   width: 100%; }
@@ -105,6 +113,16 @@ h3 {
     opacity: 0;
     visibility: hidden; }
 
+.c3-axis-x path {
+  stroke: transparent !important;
+  fill: transparent !important; }
+.c3-axis-x .tick text {
+  fill: #198dc7;
+  font-size: 2.5rem; }
+.c3-axis-x .tick line {
+  opacity: 0;
+  visibility: hidden; }
+
 .c3-axis-y2 path {
   stroke: transparent !important;
   fill: transparent !important; }
@@ -114,6 +132,16 @@ h3 {
 .c3-axis-y2 .tick line {
   opacity: 0;
   visibility: hidden; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
+  stroke: #1989c1 !important;
+  fill: #1989c1 !important;
+  opacity: 0.7 !important; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
+  stroke: #2ea8e5 !important;
+  fill: #2ea8e5 !important;
+  opacity: 0.7 !important; }
 
 .topContainer {
   height: 18%;
@@ -137,6 +165,7 @@ h3 {
   height: 82%; }
 
 .chartContainer {
+  z-index: 1000;
   padding-top: 1.5rem;
   border-top: 3px solid white;
   position: absolute;
@@ -174,6 +203,7 @@ h3 {
   display: inline-block; }
 
 .whiteBand {
+  z-index: -1;
   width: 100%;
   height: 100px;
   position: absolute;
@@ -201,6 +231,35 @@ h3 {
     width: 33.3%;
     display: inline-block;
     text-align: center; }
+
+.whiteBandGraph2 {
+  height: auto; }
+  .whiteBandGraph2 .logoRow {
+    position: absolute;
+    bottom: 0; }
+  .whiteBandGraph2 .timeUsage {
+    width: 40%; }
+    .whiteBandGraph2 .timeUsage h1, .whiteBandGraph2 .timeUsage h2, .whiteBandGraph2 .timeUsage h3, .whiteBandGraph2 .timeUsage h4 {
+      margin: 0; }
+    .whiteBandGraph2 .timeUsage h1 {
+      font-size: 6rem;
+      vertical-align: middle; }
+  .whiteBandGraph2 .sensors {
+    width: 59%; }
+    .whiteBandGraph2 .sensors .sensor {
+      width: 49%; }
+      .whiteBandGraph2 .sensors .sensor h4 {
+        margin: 0;
+        line-height: 2rem;
+        padding-left: 4rem; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel {
+          background-color: black;
+          width: 1.75rem;
+          height: 1.75rem;
+          vertical-align: text-top;
+          position: relative;
+          margin-left: -2.25rem;
+          left: -1rem; }
 
 .saved {
   text-align: center;
