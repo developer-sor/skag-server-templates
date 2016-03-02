@@ -24,7 +24,6 @@ function createWeatherForecast() {
             console.log("Got vær-data from yr", jsonData);
             $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
 
-
             var weatherHTML = '';
             for (var i = 0; i < 4; i++) {
                 var data = jsonData.weatherdata.forecast.tabular.time[i];
@@ -43,18 +42,30 @@ function createWeatherForecast() {
                     dayText = 'I morgen';
                 }
 
-                var symbolHTML = '<div class="symbol">' + symbol.name + '</div>';
+                var symbolHTML = '<div class="symbol"><img src="b200/' + symbol.var + '.png" alt="weatherSymbol"></div>';
                 var tempHTML = '<h1 class="temp">' + temp + '&#8451;</h1>';
                 var timeHTML = '<h3 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
-
                 weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
             }
-            console.log(weatherHTML);
             $("#weatherForecast").html(weatherHTML);
         });
 };
 
 createWeatherForecast();
+
+
+
+function imageExists(image_url) {
+
+    var http = new XMLHttpRequest();
+
+    http.open('HEAD', image_url, false);
+    http.send();
+
+    return http.status != 404;
+
+}
+
 
 // https://davidwalsh.name/convert-xml-json
 // Changes XML to JSON

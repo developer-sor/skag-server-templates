@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Forbuk siste tre måneder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../../css/normalize.css" rel="stylesheet" />
+    <link href="../../css/main.css" rel="stylesheet" />
+    <link href="../../css/c3.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-image: url('../../images/backgroundLight.jpg');
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="lightTheme container" id="main" role="main">
+
+        <section class="row topContainer">
+            <h1 class="title">Siste ukes forbruk</h1>
+        </section>
+
+
+        <div class="chartContainer lightContainer pushLeft row">
+            <div id="chart" class="excludeFromTheme"></div>
+        </div>
+
+
+        <div class="whiteBand">
+            <div class="row whiteBandRow">
+                <img class="logo" src="../../images/log.png" />
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="../../js/jquery-2.2.0.min.js"></script>
+    <script src="d3.js"></script>
+    <script src="c3.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

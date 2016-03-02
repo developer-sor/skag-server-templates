@@ -30,7 +30,7 @@ iframe {
   width: 100%; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 300; }
 
 h1 {
@@ -51,12 +51,12 @@ h3 {
 .lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6 {
   color: black; }
 .lightTheme .textContainer, .lightTheme .lightContainer {
-  background-color: rgba(255, 255, 255, 0.33) !important; }
+  background-color: rgba(255, 255, 255, 0.5) !important; }
 
 .darkTheme p, .darkTheme h1, .darkTheme h2, .darkTheme h3, .darkTheme h4, .darkTheme h5, .darkTheme h6 {
   color: white; }
 .darkTheme .textContainer, .darkTheme .darkContainer {
-  background-color: rgba(0, 0, 0, 0.33) !important; }
+  background-color: rgba(0, 0, 0, 0.5) !important; }
 
 .italic {
   font-style: italic; }
@@ -76,7 +76,7 @@ h3 {
 .c3-chart-texts .c3-target .c3-texts .c3-text {
   fill: black !important;
   font-size: 1.5rem;
-  font-family: 'Lato', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   padding-bottom: 1rem; }
 
 .c3-chart-bars .c3-chart-bar:nth-child(1) .c3-bars .c3-bar {
@@ -85,6 +85,16 @@ h3 {
 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bars .c3-bar {
   stroke: #198dc7 !important;
   fill: #198dc7 !important; }
+
+.c3-axis-y path {
+  stroke: transparent !important;
+  fill: transparent !important; }
+.c3-axis-y .tick text {
+  fill: #198dc7;
+  font-size: 1.5rem; }
+.c3-axis-y .tick line {
+  stroke: #198dc7;
+  fill: #198dc7; }
 
 .topContainer {
   height: 18%;
@@ -104,7 +114,7 @@ h3 {
   border-top: 3px solid white;
   position: absolute;
   top: 18%;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
   height: 82%; }
 
 .chartContainer {
@@ -135,8 +145,6 @@ h3 {
       text-align: center;
       border: 3px solid white;
       height: 80%; }
-    .weatherForecast .weatherWrapper .weather {
-      border-left: none; }
   .weatherForecast .weatherWrapper + .weatherWrapper .weather {
     border-left: none; }
 
