@@ -1,6 +1,6 @@
-﻿var temp = ['temp', 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1, 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1];
-var sensor1 = ['sensor1', 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250];
+﻿var sensor1 = ['sensor1', 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250];
 var sensor2 = ['sensor2', 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50];
+var temp = ['temp', 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1, 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1];
 
 var actualMax = Math.max.apply(null, temp.slice(1));
 var actualMin = Math.min.apply(null, temp.slice(1));
@@ -18,6 +18,7 @@ function findDataAverageValues() {
     //TODO: Erstatte sensors med data fra server
     var maxValue = 0;
     var amountOfSensors = data.length - 1; //Minus temp sensor?
+
     for (var i = 0; i < data[0].length; i++) {
 
         var amountToCheckAgainstMax = 0;

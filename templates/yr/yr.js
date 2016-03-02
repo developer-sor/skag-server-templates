@@ -10,6 +10,12 @@ getTwoDigitDate = function () {
 }
 
 function createWeatherForecast() {
+
+    if (hasValidStoredData()) {
+        setWeatherForecast();
+        return;
+    }
+
     var url = "http://www.yr.no/sted/Norge/Vest-Agder/Songdalen/Songdalen/varsel.xml";
 
     var settings = {
@@ -22,38 +28,57 @@ function createWeatherForecast() {
             console.log("Got vær-data from yr");
             var jsonData = xmlToJson(data);
             console.log("Got vær-data from yr", jsonData);
-            $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
+            setWeatherForecast(jsonData);
 
-            var weatherHTML = '';
-            for (var i = 0; i < 4; i++) {
-                var data = jsonData.weatherdata.forecast.tabular.time[i];
-
-                var from = new Date(data["@attributes"].from).getHours();
-                var to = new Date(data["@attributes"].to).getHours();
-                var period = data["@attributes"].period;
-                var temp = data.temperature["@attributes"].value;
-                var symbol = data.symbol["@attributes"];
-
-                var dayText = '';
-                if (i == 0) {
-                    dayText = 'I dag';
-                }
-                else if (period === "0") {
-                    dayText = 'I morgen';
-                }
-
-                var symbolHTML = '<div class="symbol"><img src="b200/' + symbol.var + '.png" alt="weatherSymbol"></div>';
-                var tempHTML = '<h1 class="temp">' + temp + '&#8451;</h1>';
-                var timeHTML = '<h3 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
-                weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
-            }
-            $("#weatherForecast").html(weatherHTML);
+            window.localStorage.setItem("yrTime", new Date());
+            window.localStorage.setItem("yrData", JSON.stringify(jsonData));
         });
 };
 
 createWeatherForecast();
 
+function hasValidStoredData(){
+    var date = window.localStorage.getItem("yrTime");
+    var d1 = new Date ();
+    var d2 = new Date ( d1 );
+    d2.setHours(d1.getHours() + 3);
 
+    return date !== null && date !== undefined && Date.parse(date) < d2.getTime();
+}
+
+function setWeatherForecast(jsonData) {
+    this.jsonData = jsonData;
+    if (jsonData === undefined || jsonData === null) {
+        this.jsonData = JSON.parse(window.localStorage.getItem("yrData"));
+        console.log("got data from local storage ", this.jsonData);
+    }
+
+    $("#yr-credits").html(this.jsonData.weatherdata.credit.link["@attributes"].text);
+    var weatherHTML = '';
+    for (var i = 0; i < 4; i++) {
+        var data = this.jsonData.weatherdata.forecast.tabular.time[i];
+
+        var from = new Date(data["@attributes"].from).getHours();
+        var to = new Date(data["@attributes"].to).getHours();
+        var period = data["@attributes"].period;
+        var temp = data.temperature["@attributes"].value;
+        var symbol = data.symbol["@attributes"];
+
+        var dayText = '';
+        if (i == 0) {
+            dayText = 'I dag';
+        }
+        else if (period === "0") {
+            dayText = 'I morgen';
+        }
+
+        var symbolHTML = '<div class="symbol"><img src="b200/' + symbol.var + '.png" alt="weatherSymbol"></div>';
+        var tempHTML = '<h1 class="temp">' + temp + '&#8451;</h1>';
+        var timeHTML = '<h3 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
+        weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
+    }
+    $("#weatherForecast").html(weatherHTML);
+}
 
 function imageExists(image_url) {
 
