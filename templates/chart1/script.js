@@ -6,10 +6,15 @@ $(function () {
     installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
     $('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
 
+    window.localStorage.removeItem(constants.refChartTime);
+    window.localStorage.removeItem(constants.refChartData);
+
     if (hasRecentChartData() && hasValidChartData()) {
+        //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(prosessRawData);
     }
     else {
+        //Getting data. See chartLocalstore.js for more
         fetchData();
     }
 });
@@ -22,25 +27,10 @@ var years = [];
 var data = [];
 var savedAmount = 0;
 
-function fetchData() {
-    var url = constants.api + constants.dataview.replace('{id}', installationData.id);
-    $.ajax({
-        method: "GET",
-        contentType: "application/json",
-        url: url,
-        dataType: 'json'
-    })
-    .done(function (data) {
-        var rawData = data.subs.months.data;
-        if (!isNullOrEmpty(rawData)) {
-            setChartLocalStoreData(rawData);
-            prosessRawData(rawData);
-        }
-    });
-}
-
-function prosessRawData(rawData) {
+function prosessRawData(allRawData) {
+    var rawData = allRawData.subs.months.data;
     console.log(rawData);
+    
     var referenceData = [referenceLabel];
     var compareData = [compareLabelDefault];
     

@@ -1,4 +1,25 @@
-﻿
+﻿//TODO: remove installationData references. Only useable when working with single slide
+var installationData = "";
+
+$(function () {
+    installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
+    $('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+
+    if (hasRecentChartData() && hasValidChartData()) {
+        //Setting data based on local storage data. See chartLocalstore.js for more
+        setChartWithLocalstoreData(prosessRawData);
+    }
+    else {
+        //Getting data. See chartLocalstore.js for more
+        fetchData();
+    }
+});
+
+function prosessRawData(rawData) {
+    console.log("prosessRawData() -> Initiated on chart2");
+}
+
+
 
 var sensor1 = ['sensor1', 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250];
 var sensor2 = ['sensor2', 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50];

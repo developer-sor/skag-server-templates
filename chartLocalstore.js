@@ -35,3 +35,19 @@ function setChartLocalStoreData(rawData) {
         console.log('Error: setChartLocalStoreData() -> rawData is not defined!');
     }
 }
+
+function fetchData() {
+    var url = constants.api + constants.dataview.replace('{id}', installationData.id);
+    $.ajax({
+        method: "GET",
+        contentType: "application/json",
+        url: url,
+        dataType: 'json'
+    })
+    .done(function (data) {
+        if (!isNullOrEmpty(data)) {
+            setChartLocalStoreData(data);
+            prosessRawData(data);
+        }
+    });
+}
