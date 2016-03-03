@@ -147,8 +147,7 @@
         width: 59%;
 
         .sensor {
-            max-width: 49%;
-            min-width: 33%;
+            width: 49%;
 
             h4 {
                 margin: 0;
@@ -230,4 +229,9 @@
     .amountSaved {
         color: $barChart2;
     }
+}
+
+
+.colorLabel1{
+    background-color: green !important;
 }

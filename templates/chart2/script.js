@@ -1,11 +1,12 @@
 ﻿//TODO: Only use when working with single slide
-//var installationData = "";
-//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-//$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+var installationData = "";
+installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
+$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
 //window.localStorage.removeItem(constants.refChartTime);
 //window.localStorage.removeItem(constants.refChartData);
 
 $(function () {
+
     if (hasRecentChartData() && hasValidChartData()) {
         //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(prosessRawData);
@@ -16,15 +17,8 @@ $(function () {
     }
 });
 
-function prosessRawData(rawData) {
-    console.log("prosessRawData() -> Initiated on chart2");
-}
 
-
-
-var sensor1 = ['sensor1', 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250, 30, 200, 200, 400, 150, 250];
-var sensor2 = ['sensor2', 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50, 130, 100, 30, 200, 30, 50];
-var temp = ['temp', 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1, 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1];
+var temp = ['temp', 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1, 1, 2, 3, 2, -3, 3, -2, 1, 1];
 
 var actualMax = Math.max.apply(null, temp.slice(1));
 var actualMin = Math.min.apply(null, temp.slice(1));
@@ -33,9 +27,35 @@ var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
 
-var data = [sensor1, sensor2, temp];
+var data = [];
+var groups = [];
+//var data = [sensor1, sensor2, temp];
 
 var paddingLeft = 115;
+var indexForMaxSensor = 0;
+
+function prosessRawData(allRawData) {
+    var rawData = allRawData.subs.days.subs;
+    console.log("prosessRawData() -> Initiated on chart2 ", rawData);
+
+
+    var count = 0;
+    for (var key in rawData) {
+        count++;
+        if (count > 6) {
+            break;
+        }
+        var newSensor = [key];
+        groups.push(key);
+        for (var y = 0; y < rawData[key].data.length; y++) {
+            newSensor.push(rawData[key].data[y].val);
+        }
+        data.push(newSensor);
+    }
+
+    data.push(temp);
+    populateChart();
+}
 
 
 function findDataAverageValues() {
@@ -43,84 +63,98 @@ function findDataAverageValues() {
     var maxValue = 0;
     var amountOfSensors = data.length - 1; //Minus temp sensor?
 
-    for (var i = 0; i < data[0].length; i++) {
-
+    //i = 1 because first cell is text, not number
+    for (var i = 1; i < data[0].length; i++) {
         var amountToCheckAgainstMax = 0;
         for (var y = 0; y < amountOfSensors; y++) {
-            amountToCheckAgainstMax += data[y][i];
+            amountToCheckAgainstMax += parseInt(data[y][i]);
         }
-        maxValue = amountToCheckAgainstMax > maxValue ? amountToCheckAgainstMax : maxValue;
+        if (amountToCheckAgainstMax > maxValue) {
+            maxValue = amountToCheckAgainstMax;
+            indexForMaxSensor = i;
+        }
     }
     dataMax = maxValue;
-    dataTwoThirds = maxValue * 0.66;;
-    dataOneThird = maxValue * 0.33;;
-    console.log("max ", dataMax, " dataTwoThirds ", dataTwoThirds, " dataOneThird ", dataOneThird);
+    dataTwoThirds = parseInt(maxValue * 0.66);
+    dataOneThird = parseInt(maxValue * 0.33);
 }
 
-findDataAverageValues();
 
-var chart = c3.generate({
-    padding: {
-        top: 10,
-        left: paddingLeft,
-        bottom: -2
-    },
-    data: {
-        columns: data,
-        type: 'bar',
-        types: {
-            temp: 'spline'
+function populateChart() {
+    findDataAverageValues();
+
+    var chart = c3.generate({
+        padding: {
+            top: 10,
+            left: paddingLeft,
+            bottom: -2
         },
-        groups: [
-            ['sensor1', 'sensor2']
-        ],
-        axes: {
-            temp: 'y2'
-        }
-    },
-    legend: {
-        show: false
-    },
-    axis: {
-        y: {
-            padding: {
-                top: 100
+        data: {
+            columns: data,
+            type: 'bar',
+            types: {
+                temp: 'spline'
             },
-            tick: {
-                format: function (x) { return " " + x + "kW -"; },
-                count: 3,
-                values: [dataOneThird, dataTwoThirds, dataMax]
+            groups: [
+                groups
+            ],
+            axes: {
+                temp: 'y2'
             }
         },
-        y2: {
-            show: true,
-            max: actualMax + (actualMax - actualMin) * 0.5,
-            min: actualMin - (actualMax - actualMin) * 0.5,
-            tick: {
-                format: function (x) { return x + "C°"; },
-                count: 3,
-                values: [actualMin, actualMax]
+        legend: {
+            show: false
+        },
+        axis: {
+            y: {
+                padding: {
+                    top: 100
+                },
+                tick: {
+                    format: function (x) { return " " + x + "kW -"; },
+                    count: 3,
+                    values: [dataOneThird, dataTwoThirds, dataMax]
+                }
+            },
+            y2: {
+                show: true,
+                max: actualMax + (actualMax - actualMin) * 0.5,
+                min: actualMin - (actualMax - actualMin) * 0.5,
+                tick: {
+                    format: function (x) { return x + "C°"; },
+                    count: 3,
+                    values: [actualMin, actualMax]
+                }
+            },
+            x: {
+                show: true,
+                tick: {
+                    format: function (x) { if (x == 0 || x == 24) { return "" }; }
+                }
+            },
+            x2: {
+                show: true
             }
         },
-        x: {
-            show: true,
-            tick: {
-                format: function (x) { if (x == 0 || x == 24) { return "" }; }
+        bar: {
+            width: {
+                ratio: 0.9
             }
         },
-        x2: {
-            show: true
+        point: {
+            show: false
         }
-    },
-    bar: {
-        width: {
-            ratio: 0.99
-        }
-    },
-    point: {
-        show: false
-    }
-});
+    });
+
+    expandWhiteBand();
+    markHighestBar();
+    makePathGoAllTheWayAndGetLastXY();
+    adjustXTicks();
+
+    ko.applyBindings({
+        groups: groups
+    });
+}
 
 
 function expandWhiteBand() {
@@ -134,21 +168,9 @@ function adjustXTicks() {
     });
 }
 
-
 //Markerer bar som har høyeste verdi
 function markHighestBar() {
-    var highestHeight = window.innerHeight;
-    var index = null;
-    $(".c3-bar").each(function () {
-        var d = $(this).attr('d').split(',');
-        var height = parseFloat(d[d.length - 1]);
-        if (highestHeight > height) {
-            highestHeight = height;
-            index = $(this).attr("class").split('c3-bar-')[1];
-            console.log(index);
-        }
-    });
-    $('.c3-bar-' + index).addClass("markedBar");
+    $('.c3-bar-' + (indexForMaxSensor-1)).addClass("markedBar");
 }
 
 //Gjøre line graf litt lenger på slutten
@@ -159,7 +181,3 @@ function makePathGoAllTheWayAndGetLastXY() {
     path.attr('d', data);
 }
 
-expandWhiteBand();
-markHighestBar();
-makePathGoAllTheWayAndGetLastXY();
-adjustXTicks();

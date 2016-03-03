@@ -35,19 +35,12 @@
                     <h1>4300kW</h1>
                 </div>
 
-                <div class="inlineBlock sensors" id="sensors">
+                <div class="inlineBlock sensors" id="sensors"  data-bind="foreach: groups">
                     <div class="sensor inlineBlock floatLeft">
                         <h4 class="inlineBlock">
-                            <span class="sensorLabel inlineBlock"></span> Sensor navn 1
+                            <span class="sensorLabel inlineBlock sensorLabelColor" data-bind="css: 'colorLabel'+$index"></span><span data-bind="text: $data"></span>
                         </h4>
                     </div>
-
-                    <div class="sensor inlineBlock floatLeft">
-                        <h4 class="inlineBlock">
-                            <span class="sensorLabel inlineBlock"></span> Sensor navn 2
-                        </h4>
-                    </div>
-
                 </div>
             </div>
 
@@ -57,9 +50,12 @@
         </div>
     </div>
 
+
     <script src="../../js/jquery-2.2.0.min.js"></script>
+    <script src="../../js/knockout-3.4.0.js"></script>
     <script src="d3.js"></script>
     <script src="c3.js"></script>
+    <script src="../../constants.js"></script>
     <script src="../../chartLocalstore.js"></script>
     <script src="script.js"></script>
 </body>
