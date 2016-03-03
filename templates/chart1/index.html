@@ -20,16 +20,16 @@
         </section>
 
 
-        <div class="chartContainer lightContainer pushLeft row ">
+        <div class="chartContainer lightContainer pushLeft row" id="chartContainer">
             <div id="chart" class="excludeFromTheme"></div>
         </div>
 
 
-        <div class="whiteBand whiteBandExtended">
+        <div class="whiteBand whiteBandExtended" id="whiteBand">
             <div class="row whiteBandRow pushLeft" id="months">
             </div>
 
-            <div class="row whiteBandRow">
+            <div class="row whiteBandRow bottomAbsolute">
                 <img class="logo" src="../../images/log.png" />
                 <div class="floatRight">
                     <p class="footerText">
@@ -56,6 +56,8 @@
     <script src="../../js/jquery-2.2.0.min.js"></script>
     <script src="d3.js"></script>
     <script src="c3.js"></script>
+    <script src="../../constants.js"></script>
+    <script src="../../chartLocalstore.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

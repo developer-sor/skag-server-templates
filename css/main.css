@@ -84,6 +84,10 @@ h4 {
 .moveBackZ {
   z-index: -1; }
 
+.bottomAbsolute {
+  position: absolute;
+  bottom: 0; }
+
 .chart {
   width: 100%; }
 
@@ -231,7 +235,8 @@ h4 {
     height: 100px; }
 
 .whiteBandExtended {
-  height: 205px; }
+  top: 69%;
+  height: auto; }
   .whiteBandExtended .category {
     width: 33.3%;
     display: inline-block;

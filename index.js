@@ -61,7 +61,7 @@ var templateController = {
         var date = window.localStorage.getItem(constants.installationTime);
         var d1 = new Date();
         var d2 = new Date(d1);
-        d2.setHours(d1.getHours() + 1);
+        d2.setHours(d1.getHours() + constants.InstallationRefreshHours);
 
         return date !== null && date !== undefined && Date.parse(date) < d2.getTime();
     },

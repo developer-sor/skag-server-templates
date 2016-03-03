@@ -1,7 +1,7 @@
 ﻿
 
 function isNullOrEmpty(variabel) {
-    return variabel === null || variabel === undefined
+    return variabel === null; //|| variabel === "" TODO: legge inn denne når vi har valid data
 }
 
 function convertToDataURLviaCanvas(url, callback, outputFormat) {
@@ -22,9 +22,17 @@ function convertToDataURLviaCanvas(url, callback, outputFormat) {
 }
 
 var constants = {
+    installationData: 'installationData',
+    installationTime: 'installationTime',
+    InstallationRefreshHours: 24,
+    yrTime: 'yrTime',
+    yrData: 'yrData',
+    yrRefreshHours: 3,
+    refChartTime: 'refChartTime',
+    refChartData: 'refChartData',
+    refChartRefreshHours: 12,
     api: 'http://skagerak-dpnmn.rhcloud.com/api/',
     installation: 'installation/{id}',
     client: 'installation/{id}/clients',
-    installationData: 'installationData',
-    installationTime: 'installationTime'
+    dataview: 'installation/{id}/dataview'
 }

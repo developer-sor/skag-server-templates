@@ -31,18 +31,18 @@ function createWeatherForecast() {
             console.log("Got vær-data from yr", jsonData);
             setWeatherForecast(jsonData);
 
-            window.localStorage.setItem("yrTime", new Date());
-            window.localStorage.setItem("yrData", JSON.stringify(jsonData));
+            window.localStorage.setItem(constants.yrTime, new Date());
+            window.localStorage.setItem(constants.yrData, JSON.stringify(jsonData));
         });
 };
 
 createWeatherForecast();
 
 function hasValidStoredData(){
-    var date = window.localStorage.getItem("yrTime");
+    var date = window.localStorage.getItem(constants.yrTime);
     var d1 = new Date ();
     var d2 = new Date ( d1 );
-    d2.setHours(d1.getHours() + 3);
+    d2.setHours(d1.getHours() + constants.yrRefreshHours);
 
     return date !== null && date !== undefined && Date.parse(date) < d2.getTime();
 }
@@ -50,7 +50,7 @@ function hasValidStoredData(){
 function setWeatherForecast(jsonData) {
     this.jsonData = jsonData;
     if (jsonData === undefined || jsonData === null) {
-        this.jsonData = JSON.parse(window.localStorage.getItem("yrData"));
+        this.jsonData = JSON.parse(window.localStorage.getItem(constants.yrData));
         console.log("got data from local storage ", this.jsonData);
     }
 
