@@ -20,7 +20,7 @@ var compareLabelDefault = new Date().getFullYear();
 var categories = [];
 var years = [];
 var data = [];
-
+var savedAmount = 0;
 
 function fetchData() {
     var url = constants.api + constants.dataview.replace('{id}', installationData.id);
@@ -43,12 +43,15 @@ function prosessRawData(rawData) {
     console.log(rawData);
     var referenceData = [referenceLabel];
     var compareData = [compareLabelDefault];
+    
     for (var i = 0; i < rawData.length; i++) {
         categories.push(rawData[i].description);
         years.push(new Date().getMonth() + 1 > rawData[i].ind ? new Date().getFullYear() - 1 : new Date().getFullYear());
 
         referenceData.push(rawData[i].ref);
         compareData.push(rawData[i].val);
+
+        savedAmount += (rawData[i].ref - rawData[i].val);
     }
     data.push(referenceData, compareData);
     populateChart();
@@ -94,7 +97,7 @@ function populateChart() {
     });
 
     setCategories();
-    setSavedAmout(54320);
+    setSavedAmount();
     expandWhiteBand();
 }
 
@@ -106,9 +109,14 @@ function setCategories() {
     $("#months").html(categoriesHTML);
 }
 
-function setSavedAmout(amount) {
-    if (amount > 0) {
-        $("#amountSaved").text(amount);
+function getSavedAmount() {
+
+}
+
+function setSavedAmount() {
+    savedAmount = Math.floor(savedAmount);
+    if (savedAmount > 0) {
+        $("#amountSaved").text(savedAmount);
         $("#saved").show();
     }
     else {
