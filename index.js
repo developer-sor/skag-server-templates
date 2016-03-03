@@ -44,7 +44,7 @@ var templateController = {
             dataType: 'json'
         })
         .done(function (data) {
-            console.log('Fetched data: ',data);
+            //TODO: remove when we get real data from server
             data.templatesInUse = ["slide1", "yr", "chart2", "chart1"];
             self.setInstallationData(data);
 
