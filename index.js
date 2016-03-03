@@ -28,8 +28,11 @@ var templateController = {
             window.localStorage.setItem(constants.installationTime, new Date());
             window.localStorage.setItem(constants.installationData, JSON.stringify(data));
             self.runTemplates();
-            $('body').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
+            self.setBackgroundImage();
         });
+    },
+    setBackgroundImage: function(){
+        $('body').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
     },
     fetchDataFromServer: function () {
         var self = this;
@@ -76,6 +79,7 @@ var templateController = {
         var data = JSON.parse(window.localStorage.getItem(constants.installationData));
         this.templatesInUse = data.templatesInUse;
         installationData = data;
+        this.setBackgroundImage();
     },
     findTemplate: function( templateIdString ) {
         var template = null;
