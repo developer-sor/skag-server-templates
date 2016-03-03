@@ -1,14 +1,12 @@
 ﻿
-//TODO: remove installationData references. Only useable when working with single slide
-var installationData = "";
+//TODO: Only use when working with single slide
+//var installationData = "";
+//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
+//$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+//window.localStorage.removeItem(constants.refChartTime);
+//window.localStorage.removeItem(constants.refChartData);
 
 $(function () {
-    installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-    $('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
-
-    window.localStorage.removeItem(constants.refChartTime);
-    window.localStorage.removeItem(constants.refChartData);
-
     if (hasRecentChartData() && hasValidChartData()) {
         //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(prosessRawData);
