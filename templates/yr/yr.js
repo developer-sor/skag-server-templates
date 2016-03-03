@@ -16,7 +16,8 @@ function createWeatherForecast() {
         return;
     }
 
-    var url = "http://www.yr.no/sted/Norge/Vest-Agder/Songdalen/Songdalen/varsel.xml";
+    
+    var url = installationData.location;
 
     var settings = {
         type: "GET",
@@ -78,17 +79,6 @@ function setWeatherForecast(jsonData) {
         weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer">' + symbolHTML + tempHTML + timeHTML + '</div></div>'
     }
     $("#weatherForecast").html(weatherHTML);
-}
-
-function imageExists(image_url) {
-
-    var http = new XMLHttpRequest();
-
-    http.open('HEAD', image_url, false);
-    http.send();
-
-    return http.status != 404;
-
 }
 
 

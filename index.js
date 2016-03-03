@@ -3,7 +3,7 @@
  */
 
 "use strict";
-
+var installationData = "";
 
 console.log("Loading index");
 
@@ -11,30 +11,47 @@ var templateController = {
 // TODO: Fetch from server, cache in local storage
 //    templatesInUse: ["intro", "dev", "yr"],
     templatesInUse: null,
-
     templates: [],
     templateIndex: 0,
     defaultTimeOut: 5000,
     addTemplate: function( templ ) {
         this.templates.push( templ );
     },
-    setInstallationData: function(data){
-        window.localStorage.setItem(constants.installationTime, new Date());
-        window.localStorage.setItem(constants.installationData, JSON.stringify(data));
+    setInstallationData: function (data) {
+        console.log("setInstallationData running", data);
+        var self = this;
+        this.templatesInUse = data.templatesInUse;
+        installationData = data;
+
+        convertToDataURLviaCanvas(data.backgroundImageURL, function (base64Img) {
+            data.backgroundImage = base64Img;
+            window.localStorage.setItem(constants.installationTime, new Date());
+            window.localStorage.setItem(constants.installationData, JSON.stringify(data));
+            self.runTemplates();
+            $('body').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
+        });
     },
-    fetchDataFromServer: function(){
+    fetchDataFromServer: function () {
+        var self = this;
         var url = constants.api + constants.installation.replace("{id}", installation.id);
         $.ajax({
             method: "GET",
-            url: url
+            contentType: "application/json",
+            url: url,
+            dataType: 'json'
         })
         .done(function (data) {
-            console.log('data ',data);
-            this.setInstallationData(data);
+            console.log('Fetched data: ',data);
+            data.templatesInUse = ["slide1", "yr", "chart2", "chart1"];
+            self.setInstallationData(data);
+
         })
         .fail(function (error) {
-            console.log('error ', error);
-            //fallback to local storage or retry x times?
+            console.log('Error fetching data from server: ', error);
+            if (self.hasValidInstallationData()) {
+                console.log('Backup solution: getting installationdata from localstorage since fetch failed');
+                self.setInstallationBasedOnInstallationData();
+            }
         });
     },
     hasRecentInstallationData: function(){
@@ -52,7 +69,13 @@ var templateController = {
         }
         tempData = JSON.parse(tempData);
         console.log(tempData);
-        return !isNullOrEmpty(tempData.image_url) && !isNullOrEmpty(tempData.templatesInUse);
+        //Checking if required strings is okay
+        return !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.description) && !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.location);
+    },
+    setInstallationBasedOnInstallationData: function(){
+        var data = JSON.parse(window.localStorage.getItem(constants.installationData));
+        this.templatesInUse = data.templatesInUse;
+        installationData = data;
     },
     findTemplate: function( templateIdString ) {
         var template = null;
@@ -86,14 +109,16 @@ var templateController = {
     start: function () {
         if (this.hasRecentInstallationData() && this.hasValidInstallationData()) {
             console.log("Found valid installationdata");
-            var data = JSON.parse(window.localStorage.getItem(constants.installationData));
-            this.templatesInUse = data.templatesInUse;
+            this.setInstallationBasedOnInstallationData();
+            this.runTemplates();
         }
         else {
-            console.log("Installationdata not retrieved yet. Attempting to fetch from server..");
+            console.log("Installationdata not retrieved yet or to old. Attempting to fetch from server..");
             this.fetchDataFromServer();
         }
-
+    },
+    runTemplates: function () {
+        console.log('runTemplates : ', this.templatesInUse);
         if (this.templatesInUse != null) {
             var s = this.templates
             .map(function (t) {
@@ -106,7 +131,6 @@ var templateController = {
             this.showSlide(this.findTemplate(this.templatesInUse[0]));
         }
     },
-
     showSlide: function (template) {
         var self = this;
         if (!template.canShow || template.canShow()) {
@@ -124,3 +148,4 @@ var templateController = {
         }, timeoutMillis);
     }
 }
+
