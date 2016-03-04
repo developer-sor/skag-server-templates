@@ -138,6 +138,9 @@ h4 {
 .c3-axis-x path {
   stroke: transparent !important;
   fill: transparent !important; }
+.c3-axis-x .tick text {
+  fill: #198dc7;
+  font-size: 2.5rem; }
 .c3-axis-x .tick line {
   stroke: #198dc7;
   stroke-width: 2px; }
@@ -365,5 +368,10 @@ h4 {
       margin: 0.5rem; }
   .saved .amountSaved {
     color: #198dc7; }
+
+.lastNight {
+  padding-right: 75px;
+  padding-top: 20px;
+  font-size: 2rem; }
 
 /*# sourceMappingURL=main.css.map */

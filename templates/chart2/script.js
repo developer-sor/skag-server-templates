@@ -1,7 +1,7 @@
 ﻿//TODO: Only use when working with single slide
-//var installationData = "";
-//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-//$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+var installationData = "";
+installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
+$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
 //window.localStorage.removeItem(constants.refChartTime);
 //window.localStorage.removeItem(constants.refChartData);
 
@@ -62,7 +62,6 @@ function findDataAverageValues() {
     //TODO: Erstatte sensors med data fra server
     var maxValue = 0;
     var amountOfSensors = data.length - 1; //Minus temp sensor?
-
     //i = 1 because first cell is text, not number
     for (var i = 1; i < data[0].length; i++) {
         var amountToCheckAgainstMax = 0;
@@ -154,15 +153,20 @@ function populateChart() {
     expandWhiteBand();
     markHighestBar();
     makePathGoAllTheWayAndGetLastXY();
-    adjustXTicks();
-
+    
+    var refChartTime = window.localStorage.getItem(constants.refChartTime);
+    var chartLastUpdated = new Date(refChartTime);
+    var date = new Date();
     ko.applyBindings({
         groups: groups,
         getClass: function (index) {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
-        dataMax: dataMax + 'kW'
+        dataMax: dataMax + 'kW',
+        lastNight: ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl 24:00"
     });
+
+    adjustXTicks();
 }
 
 
@@ -174,15 +178,30 @@ function expandWhiteBand() {
 function adjustXTicks() {
     //minus 2 pga length vs index samt label
     var maxLength = (data[0].length - 2);
-
+    
     $(".c3-axis.c3-axis-x line").each(function ($i) {
-        if (($i + 1) % 24 == 0) {//$i == maxLength
+        if (($i + 1) % 24 == 0) {
             $(this).attr('y2', 12);
+
+            if ($i + 24 > data[0].length) {
+                alignLastNightDateText($(this).offset().left);
+            }
+        }
+        else if ($i == maxLength) {
+            var colWidth = ($(".c3-event-rect-0").attr("width")/2)-3;
+            $(this).attr({ 'y2': 36, 'x1': colWidth, 'x2': colWidth });
         }
         else {
             $(this).hide();
         }
     });
+}
+
+//Aligner lastNight datoen til å være midtstilg på den den siste streken
+function alignLastNightDateText(elementLeftOffset) {
+    var lastNightElement = $("#lastNight");
+    var left = elementLeftOffset - (lastNightElement.width() / 2);
+    $("#lastNight").css({ 'position': 'absolute', 'left': left + 'px' });
 }
 
 //Markerer bar som har høyeste verdi
