@@ -1,7 +1,7 @@
 ﻿//TODO: Only use when working with single slide
-var installationData = "";
-installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+//var installationData = "";
+//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
+//$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
 //window.localStorage.removeItem(constants.refChartTime);
 //window.localStorage.removeItem(constants.refChartData);
 
@@ -79,9 +79,14 @@ function findDataAverageValues() {
     dataOneThird = parseInt(maxValue * 0.33);
 }
 
+function calculateLeftPadding() {
+    paddingLeft = (dataMax.toString().length * 28) + 50;
+}
+
 
 function populateChart() {
     findDataAverageValues();
+    calculateLeftPadding();
 
     var chart = c3.generate({
         padding: {
@@ -152,7 +157,11 @@ function populateChart() {
     adjustXTicks();
 
     ko.applyBindings({
-        groups: groups
+        groups: groups,
+        getClass: function (index) {
+            return 'sensorLabel' + (this.groups.indexOf(index) + 1);
+        },
+        dataMax: dataMax + 'kW'
     });
 }
 

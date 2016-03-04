@@ -36,6 +36,7 @@ var templateController = {
     },
     fetchDataFromServer: function () {
         var self = this;
+        console.log("installation.key ", installation.key);
         var url = constants.api + constants.installation.replace("{key}", installation.key);
         $.ajax({
             method: "GET",
@@ -44,8 +45,9 @@ var templateController = {
             dataType: 'json'
         })
         .done(function (data) {
+            console.log(data);
             //TODO: remove when we get real data from server
-            data.templatesInUse = ["slide1", "yr", "chart2", "chart1"];
+            data.templatesInUse = ["chart2", "yr", "slide1", "chart1"];
             self.setInstallationData(data);
 
         })

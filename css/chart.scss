@@ -39,6 +39,42 @@
             }
         }
     }
+
+    .c3-chart-bar:nth-child(3) {
+        .c3-bars {
+            .c3-bar {
+                stroke: $barChart3 !important;
+                fill: $barChart3 !important;
+            }
+        }
+    }
+
+    .c3-chart-bar:nth-child(4) {
+        .c3-bars {
+            .c3-bar {
+                stroke: $barChart4 !important;
+                fill: $barChart4 !important;
+            }
+        }
+    }
+
+    .c3-chart-bar:nth-child(5) {
+        .c3-bars {
+            .c3-bar {
+                stroke: $barChart5 !important;
+                fill: $barChart5 !important;
+            }
+        }
+    }
+
+    .c3-chart-bar:nth-child(6) {
+        .c3-bars {
+            .c3-bar {
+                stroke: $barChart6 !important;
+                fill: $barChart6 !important;
+            }
+        }
+    }
 }
 
 .c3-chart-lines {
@@ -125,5 +161,30 @@
 .c3-chart .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
     stroke: lighten($barChart2, $markedBarLighten) !important;
     fill: lighten($barChart2, $markedBarLighten) !important;
+    opacity: 0.7 !important;
+}
+
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
+    stroke: lighten($barChart3, $markedBarLighten) !important;
+    fill: lighten($barChart3, $markedBarLighten) !important;
+    opacity: 0.7 !important;
+}
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
+    stroke: lighten($barChart4, $markedBarLighten) !important;
+    fill: lighten($barChart4, $markedBarLighten) !important;
+    opacity: 0.7 !important;
+}
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
+    stroke: lighten($barChart5, $markedBarLighten) !important;
+    fill: lighten($barChart5, $markedBarLighten) !important;
+    opacity: 0.7 !important;
+}
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
+    stroke: lighten($barChart6, $markedBarLighten) !important;
+    fill: lighten($barChart6, $markedBarLighten) !important;
     opacity: 0.7 !important;
 }

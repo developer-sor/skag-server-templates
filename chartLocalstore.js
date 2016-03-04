@@ -1,4 +1,6 @@
-﻿function hasRecentChartData() {
+﻿var devMode = false;
+
+function hasRecentChartData() {
     var date = window.localStorage.getItem(constants.refChartTime);
     var d1 = new Date();
     var d2 = new Date(d1);
@@ -37,12 +39,25 @@ function setChartLocalStoreData(rawData) {
 }
 
 function fetchData() {
-    var url = constants.api + constants.dataview.replace('{key}', installationData.key);
+    console.log("devMode ? ", devMode);
+    var self = this;
+    var installationId = devMode ? "29" : parent.installationData.id;
+    var clientKey = devMode ? "Birkelid_Songdalen" : parent.installation.clientKey;
+
+    if (!parent.installationData) {
+        return;
+    }
+
+    var url = constants.api + constants.dataview.replace('{id}', installationId);
+    console.log('dataview url', url);
     $.ajax({
         method: "GET",
         contentType: "application/json",
         url: url,
-        dataType: 'json'
+        dataType: 'json',
+        headers: {
+            "clientKey": self.clientKey
+        }
     })
     .done(function (data) {
         if (!isNullOrEmpty(data)) {

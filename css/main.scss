@@ -114,6 +114,7 @@
 .whiteBandExtended {
     top: 69%;
     height: auto;
+
     .category {
         width: 33.3%;
         display: inline-block;
@@ -162,6 +163,30 @@
                     position: relative;
                     margin-left: -2.25rem;
                     left: -1rem;
+                }
+
+                .sensorLabel1 {
+                    background-color: $barChart1;
+                }
+
+                .sensorLabel2 {
+                    background-color: $barChart2;
+                }
+
+                .sensorLabel3 {
+                    background-color: $barChart3;
+                }
+
+                .sensorLabel4 {
+                    background-color: $barChart4;
+                }
+
+                .sensorLabel5 {
+                    background-color: $barChart5;
+                }
+
+                .sensorLabel6 {
+                    background-color: $barChart6;
                 }
             }
         }
@@ -229,9 +254,4 @@
     .amountSaved {
         color: $barChart2;
     }
-}
-
-
-.colorLabel1{
-    background-color: green !important;
 }

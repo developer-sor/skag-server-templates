@@ -32,13 +32,13 @@
             <div class="row">
                 <div class="inlineBlock timeUsage">
                     <h4>Høyeste timesforbruk</h4>
-                    <h1>4300kW</h1>
+                    <h1 data-bind="text: dataMax"></h1>
                 </div>
 
                 <div class="inlineBlock sensors" id="sensors"  data-bind="foreach: groups">
                     <div class="sensor inlineBlock floatLeft">
                         <h4 class="inlineBlock">
-                            <span class="sensorLabel inlineBlock sensorLabelColor" data-bind="css: 'colorLabel'+$index"></span><span data-bind="text: $data"></span>
+                            <span class="sensorLabel inlineBlock sensorLabelColor" data-bind="css: $parent.getClass($data)"></span><span data-bind="text: $data"></span>
                         </h4>
                     </div>
                 </div>

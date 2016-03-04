@@ -103,6 +103,18 @@ h4 {
 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bars .c3-bar {
   stroke: #198dc7 !important;
   fill: #198dc7 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(3) .c3-bars .c3-bar {
+  stroke: #945913 !important;
+  fill: #945913 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(4) .c3-bars .c3-bar {
+  stroke: #c78819 !important;
+  fill: #c78819 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(5) .c3-bars .c3-bar {
+  stroke: #139441 !important;
+  fill: #139441 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(6) .c3-bars .c3-bar {
+  stroke: #19c74a !important;
+  fill: #19c74a !important; }
 
 .c3-chart-lines .c3-chart-line path {
   stroke: #c22323 !important;
@@ -151,6 +163,26 @@ h4 {
 .c3-chart .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
   stroke: #2ea8e5 !important;
   fill: #2ea8e5 !important;
+  opacity: 0.7 !important; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
+  stroke: #c17419 !important;
+  fill: #c17419 !important;
+  opacity: 0.7 !important; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
+  stroke: #e5a32e !important;
+  fill: #e5a32e !important;
+  opacity: 0.7 !important; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
+  stroke: #19c155 !important;
+  fill: #19c155 !important;
+  opacity: 0.7 !important; }
+
+.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
+  stroke: #2ee562 !important;
+  fill: #2ee562 !important;
   opacity: 0.7 !important; }
 
 .topContainer {
@@ -271,6 +303,18 @@ h4 {
           position: relative;
           margin-left: -2.25rem;
           left: -1rem; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel1 {
+          background-color: #136994; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel2 {
+          background-color: #198dc7; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel3 {
+          background-color: #945913; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel4 {
+          background-color: #c78819; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel5 {
+          background-color: #139441; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel6 {
+          background-color: #19c74a; }
 
 .saved {
   text-align: center;
@@ -324,8 +368,5 @@ h4 {
       margin: 0.5rem; }
   .saved .amountSaved {
     color: #198dc7; }
-
-.colorLabel1 {
-  background-color: green !important; }
 
 /*# sourceMappingURL=main.css.map */

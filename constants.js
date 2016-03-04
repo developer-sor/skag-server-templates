@@ -4,6 +4,16 @@ function isNullOrEmpty(variabel) {
     return variabel === null; //|| variabel === "" TODO: legge inn denne når vi har valid data
 }
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 function convertToDataURLviaCanvas(url, callback, outputFormat) {
     var img = new Image();
     img.crossOrigin = 'Anonymous';
@@ -32,7 +42,7 @@ var constants = {
     refChartData: 'refChartData',
     refChartRefreshHours: 12,
     api: 'http://skagerak-dpnmn.rhcloud.com/api/',
-    installation: 'installation/{id}',
+    installation: 'installation/{key}',
     client: 'installation/{key}/clients',
-    dataview: 'installation/{key}/dataview'
+    dataview: 'installation/{id}/dataview'
 }

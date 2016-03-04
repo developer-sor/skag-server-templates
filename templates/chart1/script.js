@@ -18,7 +18,7 @@ $(function () {
 });
 
 
-var referenceLabel = installationData.referenceLabel || 'Referanse';
+var referenceLabel = parent.installationData.referenceLabel || 'Referanse';
 var compareLabelDefault = new Date().getFullYear();
 var categories = [];
 var years = [];

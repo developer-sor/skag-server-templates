@@ -17,8 +17,8 @@ function createWeatherForecast() {
     }
 
     
-    var url = installationData.location;
-
+    var url = parent.installationData.location;
+    console.log('yr.no url -> ', url);
     var settings = {
         type: "GET",
         cache: true,
