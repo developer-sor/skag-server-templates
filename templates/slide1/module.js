@@ -5,7 +5,7 @@
 
 "use strict";
 
-console.log("Loading plugin ", "intro");
+console.log("Loading plugin ", "slide1");
 
 var template = {
     id: "slide1",

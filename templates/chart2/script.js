@@ -172,14 +172,22 @@ function expandWhiteBand() {
 }
 
 function adjustXTicks() {
-    $(".c3-axis-x line").each(function () {
-        $(this).attr('y2', 12);
+    //minus 2 pga length vs index samt label
+    var maxLength = (data[0].length - 2);
+
+    $(".c3-axis.c3-axis-x line").each(function ($i) {
+        if (($i + 1) % 24 == 0) {//$i == maxLength
+            $(this).attr('y2', 12);
+        }
+        else {
+            $(this).hide();
+        }
     });
 }
 
 //Markerer bar som har høyeste verdi
 function markHighestBar() {
-    $('.c3-bar-' + (indexForMaxSensor-1)).addClass("markedBar");
+    $('.c3-bar-' + (indexForMaxSensor - 1)).addClass("markedBar");
 }
 
 //Gjøre line graf litt lenger på slutten

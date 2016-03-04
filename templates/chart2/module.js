@@ -5,7 +5,7 @@
 
 "use strict";
 
-console.log("Loading plugin ", "intro");
+console.log("Loading plugin ", "chart2");
 
 var template = {
     id: "chart2",

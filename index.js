@@ -36,8 +36,9 @@ var templateController = {
     },
     fetchDataFromServer: function () {
         var self = this;
-        console.log("installation.key ", installation.key);
+        
         var url = constants.api + constants.installation.replace("{key}", installation.key);
+        console.log("get() installation -> url ", url);
         $.ajax({
             method: "GET",
             contentType: "application/json",
