@@ -33,6 +33,6 @@ var constants = {
     refChartRefreshHours: 12,
     api: 'http://skagerak-dpnmn.rhcloud.com/api/',
     installation: 'installation/{id}',
-    client: 'installation/{id}/clients',
-    dataview: 'installation/{id}/dataview'
+    client: 'installation/{key}/clients',
+    dataview: 'installation/{key}/dataview'
 }

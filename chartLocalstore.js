@@ -37,7 +37,7 @@ function setChartLocalStoreData(rawData) {
 }
 
 function fetchData() {
-    var url = constants.api + constants.dataview.replace('{id}', installationData.id);
+    var url = constants.api + constants.dataview.replace('{key}', installationData.key);
     $.ajax({
         method: "GET",
         contentType: "application/json",
