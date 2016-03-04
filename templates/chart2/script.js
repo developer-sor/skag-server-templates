@@ -18,10 +18,10 @@ $(function () {
 });
 
 
-var temp = ['temp', 1, 2, 3, 2, -3, 3, -2, 1, 1, 1, 0, 1, 1, 2, 3, 2, -3, 3, -2, 1, 1];
+var temp = [];
 
-var actualMax = Math.max.apply(null, temp.slice(1));
-var actualMin = Math.min.apply(null, temp.slice(1));
+var actualMax = 0;
+var actualMin = 0;
 
 var dataMax = 0;
 var dataTwoThirds = 0;
@@ -38,7 +38,6 @@ function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
     console.log("prosessRawData() -> Initiated on chart2 ", rawData);
 
-
     var count = 0;
     for (var key in rawData) {
         count++;
@@ -53,7 +52,26 @@ function prosessRawData(allRawData) {
         data.push(newSensor);
     }
 
+    processRawTempData(allRawData);
+}
+
+function processRawTempData(allRawData) {
+    var rawTempData = allRawData.subs.temperature.data;
+    console.log("processRawTempData() -> Initiated on chart2 ", rawTempData);
+
+    //Henter kun ut temperatur for det vi har strømdata for
+    var measurements = data[0].length - 1;
+    var tempLength = rawTempData.length - 1;
+    for (var i = tempLength; i > (tempLength - measurements) ; i--) {
+        temp.push(rawTempData[i].val);
+    }
+
+    temp.push('temp');
+    temp.reverse();
     data.push(temp);
+    actualMax = Math.max.apply(null, temp.slice(1));
+    actualMin = Math.min.apply(null, temp.slice(1));
+
     populateChart();
 }
 
@@ -163,7 +181,8 @@ function populateChart() {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
         dataMax: dataMax + 'kW',
-        lastNight: ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl 24:00"
+        lastNight: ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl 24:00",
+        showLastNight: data[0].length > 24
     });
 
     adjustXTicks();

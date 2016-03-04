@@ -41,7 +41,7 @@ var constants = {
     refChartTime: 'refChartTime',
     refChartData: 'refChartData',
     refChartRefreshHours: 12,
-    api: 'http://skagerak-dpnmn.rhcloud.com/api/',
+    api: 'http://ec2-52-58-27-236.eu-central-1.compute.amazonaws.com/api/',
     installation: 'installation/{key}',
     client: 'installation/{key}/clients',
     dataview: 'installation/{id}/dataview'

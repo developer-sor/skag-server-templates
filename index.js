@@ -94,6 +94,8 @@ var templateController = {
         return template;
     },
     nextSlide: function (current) {
+        return;
+
         var self = this;
         if (current != self.templateIndex) {
             console.log("Next slide ", current, self.templateIndex, " was redundant, ignoring");
