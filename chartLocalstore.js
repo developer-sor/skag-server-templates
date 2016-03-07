@@ -4,9 +4,9 @@ function hasRecentChartData() {
     var date = window.localStorage.getItem(constants.refChartTime);
     var d1 = new Date();
     var d2 = new Date(d1);
-    d2.setHours(d1.getHours() + constants.refChartRefreshHours);
+    d2.setHours(d1.getHours() - constants.refChartRefreshHours);
 
-    return date !== null && date !== undefined && Date.parse(date) < d2.getTime();
+    return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
 }
 
 function hasValidChartData() {
@@ -48,6 +48,7 @@ function fetchData() {
         return;
     }
 
+    console.log(installationId);
     var url = constants.api + constants.dataview.replace('{id}', installationId);
     console.log('dataview url', url);
     $.ajax({

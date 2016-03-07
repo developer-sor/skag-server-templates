@@ -62,11 +62,12 @@ var templateController = {
     },
     hasRecentInstallationData: function(){
         var date = window.localStorage.getItem(constants.installationTime);
+        
         var d1 = new Date();
         var d2 = new Date(d1);
-        d2.setHours(d1.getHours() + constants.InstallationRefreshHours);
+        d2.setHours(d1.getHours() - constants.InstallationRefreshHours);
 
-        return date !== null && date !== undefined && Date.parse(date) < d2.getTime();
+        return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
     },
     hasValidInstallationData: function () {
         var tempData = window.localStorage.getItem(constants.installationData);
