@@ -8,16 +8,9 @@
 console.log("Loading plugin ", "slide1");
 
 var template = {
-    id: "slide1",
-    defaultTimeOut: 4000,
-    name: "Forside",
-    //canShow: function() { return true; },
-    prepareShow: function () { },
-    doShow: function (doneCB) {
-        console.log("Showing ", this.name, ", cb: ", doneCB);
-        setTimeout(doneCB, 5000)
-    },
-    endShow: function () { },
+    name: "slide1",
+    canShow: function() { return true; }
 };
 
-templateController.addTemplate(template);
+console.log('attaching module to parent');
+parent.templateController.template = template;

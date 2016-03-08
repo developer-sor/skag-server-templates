@@ -1,6 +1,8 @@
 ﻿var devMode = false;
+var isFetchingData = false;
 
 function hasRecentChartData() {
+    console.log('running hasRecentChartData');
     var date = window.localStorage.getItem(constants.refChartTime);
     var d1 = new Date();
     var d2 = new Date(d1);
@@ -39,6 +41,7 @@ function setChartLocalStoreData(rawData) {
 }
 
 function fetchData() {
+    isFetchingData = true;
     console.log("devMode ? ", devMode);
     var self = this;
     var installationId = devMode ? "29" : parent.installationData.id;
@@ -70,7 +73,8 @@ function fetchData() {
             self.setChartWithLocalstoreData(prosessRawData);
         }
         else {
-            console.log('Backup solution failed! No chartdata in localstorage and fetch failed!');
+            console.log('Backup solution failed! No chartdata in localstorage and fetch failed, running next slide');
+            parent.templateController.abortSlide(template.name);
         }
     })
     .fail(function (error) {
@@ -80,7 +84,11 @@ function fetchData() {
             self.setChartWithLocalstoreData(prosessRawData);
         }
         else {
-            console.log('Backup solution failed! No chartdata in localstorage and fetch failed!');
+            console.log('Backup solution failed! No chartdata in localstorage and fetch failed, running next slide');
+            parent.templateController.abortSlide(template.name);
         }
+    })
+    .always(function () {
+        isFetchingData = false;
     });
 }

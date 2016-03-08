@@ -11,9 +11,15 @@ var templateController = {
     templatesInUse: null,
     templates: [],
     templateIndex: 0,
+    template: null,
     defaultTimeOut: 5000,
-    addTemplate: function (templ) {
-        this.templates.push(templ);
+    failText : 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
+    addTemplates: function (templates) {
+        if (!templates || templates.length == 0) {
+            console.log('addTemplates() -> missing templates');
+            return;
+        }
+        this.templates = this.templates.concat(templates);
     },
     setInstallationData: function (data) {
         console.log("setInstallationData running", data);
@@ -46,7 +52,23 @@ var templateController = {
         .done(function (data) {
             if (data) {
                 //TODO: remove when we get real data from server
-                data.templatesInUse = ["chart2", "yr", "slide1", "chart1"];
+                data.templatesInUse = [
+                    {
+                        name: "chart2",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "yr",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "slide1",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 5000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -54,7 +76,8 @@ var templateController = {
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.log('Backup solution failed! No local data from server or in local storage');
+                console.log(self.failText);
+                $("#message").show().text(self.failText);
             }
 
         })
@@ -65,7 +88,8 @@ var templateController = {
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.log('Backup solution failed! No local data from server or in local storage');
+                console.log(self.failText);
+                $("#message").show().text(self.failText);
             }
         });
     },
@@ -94,34 +118,19 @@ var templateController = {
         installationData = data;
         this.setBackgroundImage();
     },
-    findTemplate: function (templateIdString) {
-        var template = null;
-        for (var i = 0; i < this.templates.length; i++) {
-            if (this.templates[i].id == templateIdString)
-                template = this.templates[i];
-        }
-        //console.log( "Findtemplate ", templateIdString, " => ", template, " from ", this.templatesInUse );
-        return template;
-    },
     nextSlide: function (current) {
-
         var self = this;
-        if (current != self.templateIndex) {
+        if (current != this.templatesInUse[this.templateIndex].name) {
             console.log("Next slide ", current, self.templateIndex, " was redundant, ignoring");
             return;
         }
 
-        var template = this.findTemplate(this.templatesInUse[self.templateIndex]);
-        $("#" + template.id).attr("style", "border: 0");
-
-        console.log("Should show next slide...", self.templateIndex);
         self.templateIndex++;
         if (self.templateIndex >= self.templatesInUse.length)
             self.templateIndex = 0;
 
-        template = this.findTemplate(this.templatesInUse[self.templateIndex]);
-
         console.log("Should show next slide...", self.templateIndex);
+        var template = this.templatesInUse[self.templateIndex];
         self.showSlide(template);
     },
     start: function () {
@@ -138,32 +147,32 @@ var templateController = {
     runTemplates: function () {
         console.log('runTemplates : ', this.templatesInUse);
         if (this.templatesInUse != null) {
-            var s = this.templates
-            .map(function (t) {
-                return "<span id=" + t.id + ">" + t.name + "</span>";
-            })
-            .join("");
-            $("#template-list").html(s);
+            this.addTemplates(this.templatesInUse);
             $("#master-header").html(installation.name);
-
-            this.showSlide(this.findTemplate(this.templatesInUse[0]));
+            this.showSlide();
         }
     },
-    showSlide: function (template) {
-        var self = this;
-        if (!template.canShow || template.canShow()) {
-            console.log("Launching template: ", template.name);
-            $("#content").attr("src", "templates/" + template.id + "/index.html");
-            $("#" + template.id).attr("style", "border-bottom: 2px solid black");
-            $("#timeout").html(template.defaultTimeOut || this.defaultTimeOut)
-            //template.doShow(this.nextSlide);
-        }
-
-        var timeoutMillis = template.defaultTimeOut || this.defaultTimeOut;
+    abortSlide: function (name) {
+        console.log('aborting slide...');
         clearTimeout(this.currentNextSlidePromise);
-        this.currentNextSlidePromise = setTimeout(function () {
-            self.nextSlide(self.templateIndex);
-        }, timeoutMillis);
+        this.nextSlide(name);
+    },
+    showSlide: function () {
+        var self = this;
+        var currentTemplate = this.templates[this.templateIndex];
+        $("#content").attr("src", "templates/" + currentTemplate.name + "/index.html").load(function () {
+            if (self.template.canShow()) {
+                var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
+
+                clearTimeout(self.currentNextSlidePromise);
+                self.currentNextSlidePromise = setTimeout(function () {
+                    self.nextSlide(currentTemplate.name);
+                }, timeoutMillis);
+            }
+            else {
+                self.nextSlide(currentTemplate.name);
+            }
+        });
     }
 }
 

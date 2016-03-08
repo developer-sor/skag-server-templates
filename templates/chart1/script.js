@@ -1,4 +1,5 @@
 ﻿
+
 //TODO: Only use when working with single slide
 //var installationData = "";
 //installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
@@ -8,6 +9,7 @@
 
 $(function () {
     if (hasRecentChartData() && hasValidChartData()) {
+        isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(prosessRawData);
     }

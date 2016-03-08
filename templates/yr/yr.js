@@ -41,7 +41,8 @@ function createWeatherForecast() {
             self.setWeatherForecast(prosessRawData);
         }
         else {
-            console.log('Failed to retrieve data from yr. Got no backup data either.');
+            console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
+            parent.templateController.abortSlide(template.name);
         }
     })
     .fail(function (error) {
@@ -51,7 +52,8 @@ function createWeatherForecast() {
             self.setWeatherForecast(prosessRawData);
         }
         else {
-            console.log('Failed to retrieve data from yr. Got no backup data either.');
+            console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
+            parent.templateController.abortSlide(template.name);
         }
     });
 

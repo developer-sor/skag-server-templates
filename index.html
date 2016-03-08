@@ -23,57 +23,22 @@
     <script src="installation.js"></script>
     <script src="index.js"></script>
 
-    <script src="templates/intro/module.js"></script>
+    <!--<script src="templates/intro/module.js"></script>
     <script src="templates/dev/module.js"></script>
     <script src="templates/yr/module.js"></script>
     <script src="templates/slide1/module.js"></script>
     <script src="templates/chart1/module.js"></script>
-    <script src="templates/chart2/module.js"></script>
+    <script src="templates/chart2/module.js"></script>-->
 
 </head>
 
 <body onload="templateController.start()" style="height: 100%">
 
-    <!--<header style="height: 10%">
-        <p id="master-header">The master header...</p>
-    </header>
-
-    <p>Current template should display for <span id="timeout"> xxx </span> millisecs.</p>-->
-
+    <h3 id="message" style="display: none" class="systemFailureMessage"></h3>
 
     <iframe id="content" style="width: 100%; height: 100%; border:0" sandbox="allow-same-origin allow-scripts allow-top-navigation"></iframe>
+    
 
-
-    <!--<footer style="position: absolute; bottom: 0">
-        <p id="template-list">The master footer...</p>
-    </footer>-->
-    <!--<div id="liveExample" class="liveExample">-->
-    <!--<p>-->
-    <!--Choose a ticket class:-->
-    <!--<select data-bind="options: tickets,-->
-    <!--optionsCaption: 'Choose...',-->
-    <!--optionsText: 'name',-->
-    <!--value: chosenTicket"></select>-->
-    <!--<button data-bind="enable: chosenTicket,-->
-    <!--click: resetTicket">Clear</button>-->
-    <!--</p>-->
-    <!--<p data-bind="with: chosenTicket">-->
-    <!--You have chosen <b data-bind="text: name"></b>-->
-    <!--($<span data-bind="text: price"></span>)-->
-    <!--</p>-->
-    <!--<script type="text/javascript">-->
-    <!--function TicketsViewModel() {-->
-    <!--this.tickets = [-->
-    <!--{ name: "Economy", price: 199.95 },-->
-    <!--{ name: "Business", price: 449.22 },-->
-    <!--{ name: "First Class", price: 1199.99 }-->
-    <!--];-->
-    <!--this.chosenTicket = ko.observable();-->
-    <!--this.resetTicket = function() { this.chosenTicket(null) }-->
-    <!--}-->
-    <!--ko.applyBindings(new TicketsViewModel(), document.getElementById("liveExample"));-->
-    <!--</script>-->
-    <!--</div>-->
 
 </body>
 </html>
