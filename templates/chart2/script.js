@@ -168,7 +168,7 @@ function populateChart() {
         }
     });
 
-    expandWhiteBand();
+    
     markHighestBar();
     makePathGoAllTheWayAndGetLastXY();
     
@@ -186,12 +186,13 @@ function populateChart() {
     });
 
     adjustXTicks();
+    expandWhiteBand();
 }
 
 
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
-    $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
+    $("#whiteBand").css({ "top": chartContainer.offset().top +( chartContainer.height()) + "px" });
 }
 
 function adjustXTicks() {

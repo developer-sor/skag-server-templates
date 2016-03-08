@@ -36,7 +36,8 @@ function prosessRawData(allRawData) {
     
     for (var i = 0; i < rawData.length; i++) {
         categories.push(rawData[i].description);
-        years.push(new Date().getMonth() + 1 > rawData[i].ind ? new Date().getFullYear() - 1 : new Date().getFullYear());
+        var currentDate = new Date();
+        years.push(currentDate.getMonth() + 1 > rawData[i].ind || rawData[i].ind - 4 > currentDate.getMonth() ? currentDate.getFullYear() - 1 : currentDate.getFullYear());
 
         referenceData.push(rawData[i].ref);
         compareData.push(rawData[i].val);
@@ -116,5 +117,7 @@ function setSavedAmount() {
 
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
-    $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
+    console.log(chartContainer.offset().top);
+    console.log(chartContainer.height());
+    $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height()+  "px" });
 }

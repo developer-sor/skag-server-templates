@@ -219,8 +219,10 @@ h4 {
   padding-top: 1.5rem;
   border-top: 3px solid white;
   position: absolute;
-  top: 18%;
-  padding-bottom: 1.5rem; }
+  top: 18%; }
+
+.chartContainer1 {
+  padding-top: 5px; }
 
 .weatherContainer {
   padding-bottom: 15rem;
