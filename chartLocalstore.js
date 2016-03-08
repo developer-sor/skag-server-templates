@@ -61,9 +61,26 @@ function fetchData() {
         }
     })
     .done(function (data) {
-        if (!isNullOrEmpty(data)) {
+        if (data) {
             setChartLocalStoreData(data);
             prosessRawData(data);
+        }
+        else if (!data && self.hasValidChartData()) {
+            console.log('Backup solution: getting chartdata from localstorage since fetch failed');
+            self.setChartWithLocalstoreData(prosessRawData);
+        }
+        else {
+            console.log('Backup solution failed! No chartdata in localstorage and fetch failed!');
+        }
+    })
+    .fail(function (error) {
+        console.log('Error fetching chartdata from server: ', error);
+        if (self.hasValidChartData()) {
+            console.log('Backup solution: getting chartdata from localstorage since fetch failed');
+            self.setChartWithLocalstoreData(prosessRawData);
+        }
+        else {
+            console.log('Backup solution failed! No chartdata in localstorage and fetch failed!');
         }
     });
 }

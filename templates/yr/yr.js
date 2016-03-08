@@ -10,22 +10,24 @@ getTwoDigitDate = function () {
 }
 
 function createWeatherForecast() {
+    var self = this;
 
     if (hasValidStoredData()) {
         setWeatherForecast();
         return;
     }
 
-    
     var url = parent.installationData.location;
     console.log('yr.no url -> ', url);
-    var settings = {
-        type: "GET",
+
+    $.ajax({
+        method: "GET",
+        url: url,
         cache: true,
-        dataType: "xml"
-    };
-    jQuery.ajax(url, settings)
-        .done(function (data, textStatus, jqXHR) {
+        dataType: 'xml'
+    })
+    .done(function (data) {
+        if (data) {
             console.log("Got vær-data from yr");
             var jsonData = xmlToJson(data);
             console.log("Got vær-data from yr", jsonData);
@@ -33,15 +35,34 @@ function createWeatherForecast() {
 
             window.localStorage.setItem(constants.yrTime, new Date());
             window.localStorage.setItem(constants.yrData, JSON.stringify(jsonData));
-        });
+        }
+        else if (!data && self.hasValidStoredData()) {
+            console.log('Backup solution: getting yrdata from localstorage since data is undefined');
+            self.setWeatherForecast(prosessRawData);
+        }
+        else {
+            console.log('Failed to retrieve data from yr. Got no backup data either.');
+        }
+    })
+    .fail(function (error) {
+        console.log('Error fetching data from yr: ', error);
+        if (self.hasValidStoredData()) {
+            console.log('Backup solution: getting yrdata from localstorage since fetch failed');
+            self.setWeatherForecast(prosessRawData);
+        }
+        else {
+            console.log('Failed to retrieve data from yr. Got no backup data either.');
+        }
+    });
+
 };
 
 createWeatherForecast();
 
-function hasValidStoredData(){
+function hasValidStoredData() {
     var date = window.localStorage.getItem(constants.yrTime);
-    var d1 = new Date ();
-    var d2 = new Date ( d1 );
+    var d1 = new Date();
+    var d2 = new Date(d1);
     d2.setHours(d1.getHours() - constants.yrRefreshHours);
 
     return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
