@@ -9,13 +9,13 @@ console.log("Loading plugin ", "chart2");
 
 var template = {
     id: "chart2",
-    defaultTimeOut: 40000,
+    defaultTimeOut: 4000,
     name: "Chart2",
     //canShow: function() { return true; },
     prepareShow: function () { },
     doShow: function (doneCB) {
         console.log("Showing ", this.name, ", cb: ", doneCB);
-        setTimeout(doneCB, 50000)
+        setTimeout(doneCB, 5000)
     },
     endShow: function () { },
 };
