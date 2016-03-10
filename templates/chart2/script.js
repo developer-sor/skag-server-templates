@@ -18,7 +18,7 @@ $(function () {
 });
 
 
-var temp = [];
+var temp = ['temp'];
 
 var actualMax = 0;
 var actualMin = 0;
@@ -36,7 +36,6 @@ var indexForMaxSensor = 0;
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
-    console.log("prosessRawData() -> Initiated on chart2 ", rawData);
 
     var count = 0;
     for (var key in rawData) {
@@ -57,17 +56,10 @@ function prosessRawData(allRawData) {
 
 function processRawTempData(allRawData) {
     var rawTempData = allRawData.subs.temperature.data;
-    console.log("processRawTempData() -> Initiated on chart2 ", rawTempData);
 
-    //Henter kun ut temperatur for det vi har strømdata for
-    var measurements = data[0].length - 1;
-    var tempLength = rawTempData.length - 1;
-    for (var i = tempLength; i > (tempLength - measurements) ; i--) {
+    for (var i = 0; i < rawTempData.length ; i++) {
         temp.push(rawTempData[i].val);
     }
-
-    temp.push('temp');
-    temp.reverse();
     data.push(temp);
     actualMax = Math.max.apply(null, temp.slice(1));
     actualMin = Math.min.apply(null, temp.slice(1));
@@ -99,7 +91,6 @@ function findDataAverageValues() {
 function calculateLeftPadding() {
     paddingLeft = (dataMax.toString().length * 28) + 50;
 }
-
 
 function populateChart() {
     findDataAverageValues();
