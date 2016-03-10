@@ -1,7 +1,10 @@
 ﻿
 
 function isNullOrEmpty(variabel) {
-    return variabel === null; //|| variabel === "" TODO: legge inn denne når vi har valid data
+    if (!variabel) {
+        return true;
+    }
+    return variabel === null || variabel === "";
 }
 
 function getParameterByName(name, url) {
