@@ -1,5 +1,16 @@
 # skag-server-templates
 
+Deploy to server
+==========================
+Install GnuWin32 - http://gnuwin32.sourceforge.net/packages.html
+Search for and install:
+Zip	3.0	 package and compress zip-archive files
+Install Putty, choose the .msi-file - http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+Run Pageant (already installed in Windows)
+Add certificate, .pkk in Pageant (Foudn in the skag-server map. Retrieve from server if you dont have it yet)
+Run deploy.ps1 in PowerShell
+
+
 
 Test locally on Windows
 =======================
