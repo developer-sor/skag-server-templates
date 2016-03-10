@@ -28,6 +28,9 @@ function convertToDataURLviaCanvas(url, callback, outputFormat) {
         callback(dataURL);
         canvas = null;
     };
+    img.onerror = function () {
+        callback('');
+    }
     img.src = url;
 }
 
