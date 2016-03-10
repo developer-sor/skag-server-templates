@@ -17,6 +17,9 @@ $(function () {
         //Getting data. See chartLocalstore.js for more
         fetchData();
     }
+
+    $("#chartContainer").addClass(parent.installationData.theme + 'Container');
+    $("#main").addClass(parent.installationData.theme + 'Theme');
 });
 
 
@@ -30,10 +33,10 @@ var savedAmount = 0;
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.months.data;
     console.log(rawData);
-    
+
     var referenceData = [referenceLabel];
     var compareData = [compareLabelDefault];
-    
+
     for (var i = 0; i < rawData.length; i++) {
         categories.push(rawData[i].description);
         var currentDate = new Date();
@@ -119,5 +122,5 @@ function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
     console.log(chartContainer.offset().top);
     console.log(chartContainer.height());
-    $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height()+  "px" });
+    $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
 }

@@ -1,6 +1,25 @@
 /**
  * Created by narve on 2016-02-18.
  */
+//Mock data
+//data.templatesInUse = [
+//    {
+//        name: "chart2",
+//        timeoutMillis: 500000
+//    },
+//    {
+//        name: "chart1",
+//        timeoutMillis: 500000
+//    },
+//    {
+//        name: "yr",
+//        timeoutMillis: 500000
+//    },
+//    {
+//        name: "slide1",
+//        timeoutMillis: 500000
+//    }];
+
 
 "use strict";
 var installationData = "";
@@ -23,7 +42,7 @@ var templateController = {
     },
     setInstallationData: function (data) {
         console.log("setInstallationData running", data);
-        var self = this;
+        var self = this
         this.templatesInUse = data.templatesInUse;
         installationData = data;
 
@@ -51,24 +70,25 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                //TODO: remove when we get real data from server
                 data.templatesInUse = [
                     {
                         name: "chart2",
-                        timeoutMillis: 500000
+                        timeoutMillis: 10000
                     },
                     {
                         name: "chart1",
-                        timeoutMillis: 500000
+                        timeoutMillis: 10000
                     },
                     {
                         name: "yr",
-                        timeoutMillis: 500000
+                        timeoutMillis: 10000
                     },
                     {
                         name: "slide1",
-                        timeoutMillis: 500000
+                        timeoutMillis: 10000
                     }];
+
+
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -108,7 +128,6 @@ var templateController = {
             return false;
         }
         tempData = JSON.parse(tempData);
-        console.log(tempData);
         //Checking if required strings is okay
         return !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.description) && !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.location);
     },
@@ -121,7 +140,6 @@ var templateController = {
     nextSlide: function (current) {
         var self = this;
         if (current != this.templatesInUse[this.templateIndex].name) {
-            console.log("Next slide ", current, self.templateIndex, " was redundant, ignoring");
             return;
         }
 
@@ -145,7 +163,6 @@ var templateController = {
         }
     },
     runTemplates: function () {
-        console.log('runTemplates : ', this.templatesInUse);
         if (this.templatesInUse != null) {
             this.addTemplates(this.templatesInUse);
             $("#master-header").html(installation.name);

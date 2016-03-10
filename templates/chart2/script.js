@@ -15,6 +15,9 @@ $(function () {
         //Getting data. See chartLocalstore.js for more
         fetchData();
     }
+
+    $("#chartContainer").addClass(parent.installationData.theme + 'Container');
+    $("#main").addClass(parent.installationData.theme + 'Theme');
 });
 
 
@@ -36,7 +39,7 @@ var indexForMaxSensor = 0;
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
-
+    console.log(rawData);
     var count = 0;
     for (var key in rawData) {
         count++;
@@ -183,7 +186,8 @@ function populateChart() {
 
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
-    $("#whiteBand").css({ "top": chartContainer.offset().top +( chartContainer.height()) + "px" });
+    $("#whiteBand").css({ "top": chartContainer.offset().top + (chartContainer.height()) + "px" });
+    $("#chart").addClass('chart2MarginFix');
 }
 
 function adjustXTicks() {
@@ -195,6 +199,8 @@ function adjustXTicks() {
             $(this).attr('y2', 12);
 
             if ($i + 24 > data[0].length) {
+                console.log(data[0].length);
+                console.log('$i + 24 ', $i + 24);
                 alignLastNightDateText($(this).offset().left);
             }
         }
