@@ -3,7 +3,7 @@
 //TODO: Only use when working with single slide
 //var installationData = "";
 //installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-//$('body').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+//$('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
 //window.localStorage.removeItem(constants.refChartTime);
 //window.localStorage.removeItem(constants.refChartData);
 

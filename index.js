@@ -36,7 +36,7 @@ var templateController = {
         });
     },
     setBackgroundImage: function () {
-        $('body').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
+        $('#backgroundImage').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
     },
     fetchDataFromServer: function () {
         var self = this;
