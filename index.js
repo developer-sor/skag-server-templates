@@ -55,19 +55,19 @@ var templateController = {
                 data.templatesInUse = [
                     {
                         name: "chart2",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "yr",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "slide1",
-                        timeoutMillis: 5000
+                        timeoutMillis: 500000
                     },
                     {
                         name: "chart1",
-                        timeoutMillis: 5000
+                        timeoutMillis: 500000
+                    },
+                    {
+                        name: "yr",
+                        timeoutMillis: 500000
+                    },
+                    {
+                        name: "slide1",
+                        timeoutMillis: 500000
                     }];
                 self.setInstallationData(data);
             }

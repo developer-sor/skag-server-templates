@@ -84,7 +84,7 @@ function findDataAverageValues() {
     for (var i = 1; i < data[0].length; i++) {
         var amountToCheckAgainstMax = 0;
         for (var y = 0; y < amountOfSensors; y++) {
-            amountToCheckAgainstMax += parseInt(data[y][i]);
+            amountToCheckAgainstMax += Math.round(data[y][i]);
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
@@ -92,8 +92,8 @@ function findDataAverageValues() {
         }
     }
     dataMax = maxValue;
-    dataTwoThirds = parseInt(maxValue * 0.66);
-    dataOneThird = parseInt(maxValue * 0.33);
+    dataTwoThirds = Math.round((dataMax*2 ) / 3);
+    dataOneThird = Math.round(dataMax / 3);
 }
 
 function calculateLeftPadding() {
