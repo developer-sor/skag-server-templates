@@ -68,7 +68,7 @@ function populateChart() {
             type: 'bar',
             labels: {
                 format: function (v, id, i, j) {
-                    return id == '0' ? parent.installationData.referenceLabel.capitalizeFirstLetter() : years[i];
+                    return id == '0' ? parent.installationData.referenceLabel || 'Reference' : years[i];
                 }
             }
         },

@@ -42,7 +42,6 @@ function setChartLocalStoreData(rawData) {
 
 function fetchData() {
     isFetchingData = true;
-    console.log("devMode ? ", devMode);
     var self = this;
     var installationId = devMode ? "29" : parent.installationData.id;
     var clientKey = devMode ? "Birkelid_Songdalen" : parent.installation.clientKey;
@@ -51,9 +50,7 @@ function fetchData() {
         return;
     }
 
-    console.log(installationId);
     var url = constants.api + constants.dataview.replace('{id}', installationId);
-    console.log('dataview url', url);
     $.ajax({
         method: "GET",
         contentType: "application/json",
@@ -78,7 +75,7 @@ function fetchData() {
         }
     })
     .fail(function (error) {
-        console.log('Error fetching chartdata from server: ', error);
+        console.log('Error fetching data from server: ', error);
         if (self.hasValidChartData()) {
             console.log('Backup solution: getting chartdata from localstorage since fetch failed');
             self.setChartWithLocalstoreData(prosessRawData);

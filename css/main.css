@@ -229,7 +229,6 @@ h4 {
   bottom: 0; }
 
 .chartContainer {
-  padding-top: 1.5rem;
   border-top: 3px solid white;
   position: absolute;
   top: 19.5%; }
@@ -237,8 +236,16 @@ h4 {
 .chartContainer1 {
   padding-top: 5px; }
 
+.chartContainer2 {
+  padding-top: 0; }
+
 .chart2MarginFix {
   margin-bottom: -28px; }
+
+.chart2Row {
+  padding-left: 4%;
+  padding-right: 4%;
+  width: 100%; }
 
 .weatherContainer {
   width: 100%;
@@ -296,6 +303,8 @@ h4 {
     font-size: 65px; }
   .whiteBand .whiteBandRow {
     height: 100px; }
+  .whiteBand .whiteBandRowSlim {
+    height: 70px; }
 
 .whiteBandExtended {
   height: 220px; }
@@ -310,18 +319,22 @@ h4 {
     margin-top: 20px; }
 
 .whiteBandGraph2 {
-  height: auto; }
+  height: 350px; }
+  .whiteBandGraph2 .sensorRow {
+    position: absolute;
+    bottom: 130px; }
   .whiteBandGraph2 .logoRow {
     position: absolute;
     bottom: 0; }
   .whiteBandGraph2 .timeUsage {
     max-width: 40%;
     min-width: 33%; }
-    .whiteBandGraph2 .timeUsage h1, .whiteBandGraph2 .timeUsage h2, .whiteBandGraph2 .timeUsage h3, .whiteBandGraph2 .timeUsage h4 {
+    .whiteBandGraph2 .timeUsage h4 {
       margin: 0; }
     .whiteBandGraph2 .timeUsage h1 {
-      font-size: 6rem;
-      vertical-align: middle; }
+      font-size: 7rem;
+      vertical-align: middle;
+      margin: 0; }
   .whiteBandGraph2 .sensors {
     width: 59%; }
     .whiteBandGraph2 .sensors .sensor {

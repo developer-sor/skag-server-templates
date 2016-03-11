@@ -30,6 +30,8 @@ var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
 
+var calculatedRatio = 0.9;
+
 var data = [];
 var groups = [];
 //var data = [sensor1, sensor2, temp];
@@ -39,7 +41,6 @@ var indexForMaxSensor = 0;
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
-    console.log(rawData);
     var count = 0;
     for (var key in rawData) {
         count++;
@@ -54,6 +55,7 @@ function prosessRawData(allRawData) {
         data.push(newSensor);
     }
 
+    calculatedRatio = 0.85;
     processRawTempData(allRawData);
 }
 
@@ -100,10 +102,14 @@ function populateChart() {
     calculateLeftPadding();
 
     var chart = c3.generate({
+        bindto: '#chart',
         padding: {
-            top: 10,
             left: paddingLeft,
+            right: paddingLeft,
             bottom: -2
+        },
+        size: {
+            height: 430
         },
         data: {
             columns: data,
@@ -154,7 +160,7 @@ function populateChart() {
         },
         bar: {
             width: {
-                ratio: 0.9
+                ratio: calculatedRatio,
             }
         },
         point: {
@@ -186,7 +192,9 @@ function populateChart() {
 
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
-    $("#whiteBand").css({ "top": chartContainer.offset().top + (chartContainer.height()) + "px" });
+    var chart2MarginFix = 28;
+    var magicNumber = 4;
+    $("#whiteBand").css({ "top": chartContainer.offset().top + (chartContainer.height()) - (chart2MarginFix - magicNumber) + "px" });
     $("#chart").addClass('chart2MarginFix');
 }
 
@@ -198,10 +206,8 @@ function adjustXTicks() {
         if (($i + 1) % 24 == 0) {
             $(this).attr('y2', 12);
 
-            if ($i + 24 > data[0].length) {
-                console.log(data[0].length);
-                console.log('$i + 24 ', $i + 24);
-                alignLastNightDateText($(this).offset().left);
+            if ($i + 48 > data[0].length && $i + 24 < data[0].length) {
+                alignLastNightDateText($(this).offset().left);    
             }
         }
         else if ($i == maxLength) {
