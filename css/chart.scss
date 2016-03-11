@@ -6,73 +6,18 @@
     width: 100%;
 }
 
-
-.c3-chart-texts {
-    .c3-target {
-        .c3-texts {
-            .c3-text {
-                fill: black !important;
-                font-size: 1.5rem;
-                font-family: Arial, Helvetica, sans-serif;
-                padding-bottom: 1rem;
-            }
+.lightTheme {
+    .c3-chart-texts {
+        .c3-text {
+            fill: $darkText !important;
         }
     }
 }
 
-.c3-chart-bars {
-
-    .c3-chart-bar:nth-child(1) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart1 !important;
-                fill: $barChart1 !important;
-            }
-        }
-    }
-
-    .c3-chart-bar:nth-child(2) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart2 !important;
-                fill: $barChart2 !important;
-            }
-        }
-    }
-
-    .c3-chart-bar:nth-child(3) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart3 !important;
-                fill: $barChart3 !important;
-            }
-        }
-    }
-
-    .c3-chart-bar:nth-child(4) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart4 !important;
-                fill: $barChart4 !important;
-            }
-        }
-    }
-
-    .c3-chart-bar:nth-child(5) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart5 !important;
-                fill: $barChart5 !important;
-            }
-        }
-    }
-
-    .c3-chart-bar:nth-child(6) {
-        .c3-bars {
-            .c3-bar {
-                stroke: $barChart6 !important;
-                fill: $barChart6 !important;
-            }
+.darkTheme {
+    .c3-chart-texts {
+        .c3-text {
+            fill: $lightText !important;
         }
     }
 }
@@ -80,12 +25,23 @@
 .c3-chart-lines {
     .c3-chart-line {
         path {
-            stroke: $braChartSpline1 !important;
+            stroke: $barChartSpline1 !important;
             stroke-width: 2px;
         }
     }
 }
 
+.c3-chart-texts {
+    .c3-target {
+        .c3-texts {
+            .c3-text {
+                font-size: 1.5rem;
+                font-family: Arial, Helvetica, sans-serif;
+                padding-bottom: 1rem;
+            }
+        }
+    }
+}
 
 
 .c3-axis-y {
@@ -140,7 +96,7 @@
 
     .tick {
         text {
-            fill: $braChartSpline1;
+            fill: $barChartSpline1;
             font-size: 1.5rem;
         }
 
@@ -151,40 +107,18 @@
     }
 }
 
+@each $color in $barChartList {
+    $i: index($barChartList, $color);
 
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
-    stroke: lighten($barChart1, $markedBarLighten) !important;
-    fill: lighten($barChart1, $markedBarLighten) !important;
-    opacity: 0.7 !important;
-}
-
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
-    stroke: lighten($barChart2, $markedBarLighten) !important;
-    fill: lighten($barChart2, $markedBarLighten) !important;
-    opacity: 0.7 !important;
-}
-
-
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
-    stroke: lighten($barChart3, $markedBarLighten) !important;
-    fill: lighten($barChart3, $markedBarLighten) !important;
-    opacity: 0.7 !important;
-}
-
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
-    stroke: lighten($barChart4, $markedBarLighten) !important;
-    fill: lighten($barChart4, $markedBarLighten) !important;
-    opacity: 0.7 !important;
-}
-
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
-    stroke: lighten($barChart5, $markedBarLighten) !important;
-    fill: lighten($barChart5, $markedBarLighten) !important;
-    opacity: 0.7 !important;
-}
-
-.c3-chart .c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
-    stroke: lighten($barChart6, $markedBarLighten) !important;
-    fill: lighten($barChart6, $markedBarLighten) !important;
-    opacity: 0.7 !important;
+    .c3-chart-bars .c3-chart-bar:nth-child(#{$i}) {
+        .markedBar {
+            stroke: lighten($color, $markedBarLighten) !important;
+            fill: lighten($color, $markedBarLighten) !important;
+            opacity: 0.7 !important;
+        }
+        .c3-bar {
+            stroke: $color !important;
+            fill: $color !important;
+        }
+    }
 }

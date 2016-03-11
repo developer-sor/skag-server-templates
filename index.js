@@ -71,20 +71,20 @@ var templateController = {
             if (data) {
                 data.templatesInUse = [
                     {
-                        name: "yr",
-                        timeoutMillis: 10000
+                        name: "chart1",
+                        timeoutMillis: 1000000
                     },
                     {
-                        name: "chart1",
-                        timeoutMillis: 10000
+                        name: "yr",
+                        timeoutMillis: 1000000
                     },
                     {
                         name: "slide1",
-                        timeoutMillis: 10000
+                        timeoutMillis: 1000000
                     },
                     {
                         name: "chart2",
-                        timeoutMillis: 10000
+                        timeoutMillis: 1000000
                     }];
 
 

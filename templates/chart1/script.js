@@ -55,8 +55,11 @@ function populateChart() {
 
     var chart = c3.generate({
         bindto: '#chart',
+        padding: {
+            top: 50
+        },
         size: {
-            height: 480
+            height:560
         },
         data: {
             columns: data,
