@@ -13,11 +13,6 @@ function hasRecentChartData() {
 
 function hasValidChartData() {
     var tempData = window.localStorage.getItem(constants.refChartData);
-    if (!tempData || tempData.length < 1) {
-        return false;
-    }
-    tempData = JSON.parse(tempData);
-    //Checking if required strings is okay
     return !isNullOrEmpty(tempData);
 }
 
