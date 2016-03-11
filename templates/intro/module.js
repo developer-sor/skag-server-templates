@@ -1,23 +1,16 @@
-/**
+﻿/**
  * Created by narve on 2016-02-18.
  */
 
 
 "use strict";
 
-console.log( "Loading plugin ", "intro" );
+console.log("Loading plugin ", "intro");
 
 var template = {
-    id: "intro",
-    defaultTimeOut: 4000,
-    name: "Forside",
-    //canShow: function() { return true; },
-    prepareShow: function() {},
-    doShow: function( doneCB ) {
-        console.log( "Showing ", this.name, ", cb: ", doneCB);
-        setTimeout( doneCB, 5000)
-    },
-    endShow: function() {},
+    name: "intro",
+    canShow: function() { return true; }
 };
 
-templateController.addTemplate( template );
+console.log('attaching module to parent');
+parent.templateController.template = template;

@@ -2,7 +2,6 @@
 var isFetchingData = false;
 
 function hasRecentChartData() {
-    console.log('running hasRecentChartData');
     var date = window.localStorage.getItem(constants.refChartTime);
     var d1 = new Date();
     var d2 = new Date(d1);

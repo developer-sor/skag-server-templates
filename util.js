@@ -3,7 +3,6 @@
 //Set default AJAX headers
 var currentInstallation = parent ? parent.installation : installation;
 if (currentInstallation) {
-    console.log('running ajaxSetup');
     $.ajaxSetup({
         beforeSend: function(xhr) {
             xhr.setRequestHeader('ClientKey', currentInstallation.clientKey);
