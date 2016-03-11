@@ -1,4 +1,18 @@
-﻿function isNullOrEmpty(varToCheck) {
+﻿
+
+//Set default AJAX headers
+var currentInstallation = parent ? parent.installation : installation;
+if (currentInstallation) {
+    console.log('running ajaxSetup');
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('ClientKey', currentInstallation.clientKey);
+        }
+    });
+}
+
+
+function isNullOrEmpty(varToCheck) {
     if (typeof varToCheck === 'object') {
         console.log('isNullOrEmpty, varToCheck is object.');
         return varToCheck.length > 1;
