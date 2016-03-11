@@ -41,7 +41,6 @@ var templateController = {
         this.templates = this.templates.concat(templates);
     },
     setInstallationData: function (data) {
-        console.log("setInstallationData running", data);
         var self = this
         this.templatesInUse = data.templatesInUse;
         installationData = data;
@@ -124,12 +123,12 @@ var templateController = {
     },
     hasValidInstallationData: function () {
         var tempData = window.localStorage.getItem(constants.installationData);
-        if (isNullOrEmpty(tempData)) {
+        if (!tempData) {
             return false;
         }
         tempData = JSON.parse(tempData);
         //Checking if required strings is okay
-        return !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.description) && !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.location);
+        return !isNullOrEmpty(tempData.description) && !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.location);
     },
     setInstallationBasedOnInstallationData: function () {
         var data = JSON.parse(window.localStorage.getItem(constants.installationData));

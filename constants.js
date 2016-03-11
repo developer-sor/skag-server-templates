@@ -1,10 +1,15 @@
 ﻿
 
-function isNullOrEmpty(variabel) {
-    if (!variabel) {
+function isNullOrEmpty(varToCheck) {
+    if (typeof varToCheck === 'object') {
+        console.log('isNullOrEmpty, varToCheck is object.');
+        return varToCheck.length > 1;
+    }
+    
+    if (!varToCheck) {
         return true;
     }
-    return variabel === null || variabel === "";
+    return varToCheck === null || varToCheck === "";
 }
 
 function getParameterByName(name, url) {

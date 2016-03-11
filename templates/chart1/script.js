@@ -32,7 +32,6 @@ var savedAmount = 0;
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.months.data;
-    console.log(rawData);
 
     var referenceData = [referenceLabel];
     var compareData = [compareLabelDefault];
@@ -120,7 +119,5 @@ function setSavedAmount() {
 
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
-    console.log(chartContainer.offset().top);
-    console.log(chartContainer.height());
     $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
 }

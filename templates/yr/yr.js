@@ -33,7 +33,6 @@ function createWeatherForecast() {
         if (data) {
             console.log("Got vær-data from yr");
             var jsonData = xmlToJson(data);
-            console.log("Got vær-data from yr", jsonData);
             setWeatherForecast(jsonData);
 
             window.localStorage.setItem(constants.yrTime, new Date());
@@ -77,7 +76,7 @@ function setWeatherForecast(jsonData) {
     this.jsonData = jsonData;
     if (jsonData === undefined || jsonData === null) {
         this.jsonData = JSON.parse(window.localStorage.getItem(constants.yrData));
-        console.log("got data from local storage ", this.jsonData);
+        console.log("got data from local storage ");
     }
 
     $("#yr-credits").html(this.jsonData.weatherdata.credit.link["@attributes"].text);
