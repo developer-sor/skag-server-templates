@@ -23,8 +23,9 @@ $(function () {
 });
 
 
-var referenceLabel = parent.installationData.referenceLabel || 'Referanse';
-var compareLabelDefault = new Date().getFullYear();
+var referenceLabel = '0';
+var compareLabelDefault = new Date().getFullYear().toString();
+
 var categories = [];
 var years = [];
 var data = [];
@@ -38,10 +39,12 @@ function prosessRawData(allRawData) {
 
     for (var i = 0; i < rawData.length; i++) {
         categories.push(rawData[i].description);
+
         var currentDate = new Date();
-        years.push(currentDate.getMonth() + 1 > rawData[i].ind || rawData[i].ind - 4 > currentDate.getMonth() ? currentDate.getFullYear() - 1 : currentDate.getFullYear());
+        years.push(currentDate.getMonth() + 1 >= rawData[i].ind ? currentDate.getFullYear() : currentDate.getFullYear() - 1);
 
         referenceData.push(rawData[i].ref);
+
         compareData.push(rawData[i].val);
 
         savedAmount += (rawData[i].ref - rawData[i].val);
@@ -52,7 +55,6 @@ function prosessRawData(allRawData) {
 
 
 function populateChart() {
-
     var chart = c3.generate({
         bindto: '#chart',
         padding: {
@@ -66,13 +68,9 @@ function populateChart() {
             type: 'bar',
             labels: {
                 format: function (v, id, i, j) {
-                    //console.log('v ', v, ' id', id, ' i ', i, ' j ', j);
-                    if (id !== referenceLabel) {
-                        return years[i];
-                    }
-                    else { return id; }
+                    return id == '0' ? parent.installationData.referenceLabel.capitalizeFirstLetter() : years[i];
                 }
-            },
+            }
         },
         axis: {
             y: {
