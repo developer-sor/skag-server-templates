@@ -1,13 +1,16 @@
 ﻿
-
+var skipForYr = skipForYr || false;
 //Set default AJAX headers
 var currentInstallation = parent ? parent.installation : installation;
-if (currentInstallation) {
+if (currentInstallation && !skipForYr) {
     $.ajaxSetup({
         beforeSend: function(xhr) {
             xhr.setRequestHeader('ClientKey', currentInstallation.clientKey);
         }
     });
+}
+else {
+    console.log('yr template. skipping ajax setup');
 }
 
 
