@@ -56,7 +56,7 @@
 .weatherContainer {
     width: 100%;
     position: absolute;
-    top: 9.5%;
+    top: 9.2%;
     bottom: 24%;
 }
 
@@ -132,7 +132,7 @@
     }
 
     .whiteBandRow {
-        height: 100px;
+        height: 90px;
     }
 
     .whiteBandRowSlim{
@@ -141,7 +141,8 @@
 }
 
 .whiteBandExtended {
-    min-height: 220px;
+    min-height: 180px;
+    height: auto;
 
     .category {
         width: 33.3%;
@@ -152,14 +153,12 @@
             margin-bottom: 0;
         }
     }
-
-    .whiteBandRow + .whiteBandRow{
-        margin-top: 20px;
-    }
 }
 
 .whiteBandGraph2 {
     min-height: 350px;
+    height: auto;
+    padding-top: 28px;
 
     .sensorRow{
         position: absolute;

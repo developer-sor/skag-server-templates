@@ -9,7 +9,7 @@ html, body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   position: relative;
-  overflow: hidden; }
+  /*overflow: hidden;*/ }
 
 #backgroundImage {
   position: fixed;
@@ -275,7 +275,7 @@ h4 {
 .weatherContainer {
   width: 100%;
   position: absolute;
-  top: 9.5%;
+  top: 9.2%;
   bottom: 24%; }
 
 .weatherForecast {
@@ -327,12 +327,13 @@ h4 {
     line-height: 65px;
     font-size: 65px; }
   .whiteBand .whiteBandRow {
-    height: 100px; }
+    height: 90px; }
   .whiteBand .whiteBandRowSlim {
     height: 70px; }
 
 .whiteBandExtended {
-  min-height: 220px; }
+  min-height: 180px;
+  height: auto; }
   .whiteBandExtended .category {
     width: 33.3%;
     display: inline-block;
@@ -340,11 +341,11 @@ h4 {
     .whiteBandExtended .category h3 {
       margin-top: 1.75rem;
       margin-bottom: 0; }
-  .whiteBandExtended .whiteBandRow + .whiteBandRow {
-    margin-top: 20px; }
 
 .whiteBandGraph2 {
-  min-height: 350px; }
+  min-height: 350px;
+  height: auto;
+  padding-top: 28px; }
   .whiteBandGraph2 .sensorRow {
     position: absolute;
     bottom: 130px; }
