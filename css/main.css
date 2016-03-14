@@ -13,8 +13,9 @@ html, body {
 
 #backgroundImage {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 103%;
+  height: 103%;
+  margin: -5px;
   background-size: cover;
   background-position: center center;
   -webkit-filter: blur(5px);
@@ -62,14 +63,14 @@ h4 {
   margin-top: 1rem;
   margin-bottom: 1rem; }
 
-.lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6, .lightTheme .themeTextColor {
+.lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6, .lightTheme .themeTextColor, .lightTheme .dayText {
   color: black; }
-.lightTheme .textContainer, .lightTheme .lightContainer {
+.lightTheme .textContainer, .lightTheme .lightContainer, .lightTheme .weather {
   background-color: rgba(255, 255, 255, 0.5) !important; }
 
-.darkTheme p, .darkTheme h1, .darkTheme h2, .darkTheme h3, .darkTheme h4, .darkTheme h5, .darkTheme h6, .darkTheme .themeTextColor {
+.darkTheme p, .darkTheme h1, .darkTheme h2, .darkTheme h3, .darkTheme h4, .darkTheme h5, .darkTheme h6, .darkTheme .themeTextColor, .darkTheme .dayText {
   color: white; }
-.darkTheme .textContainer, .darkTheme .darkContainer {
+.darkTheme .textContainer, .darkTheme .darkContainer, .darkTheme .weather {
   background-color: rgba(0, 0, 0, 0.5) !important; }
 
 .italic {
@@ -206,6 +207,30 @@ h4 {
   stroke: #19c74a !important;
   fill: #19c74a !important; }
 
+.c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
+  stroke: #ff3333 !important;
+  fill: #ff3333 !important;
+  opacity: 0.7 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(7) .c3-bar {
+  stroke: red !important;
+  fill: red !important; }
+
+.c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
+  stroke: #ffff33 !important;
+  fill: #ffff33 !important;
+  opacity: 0.7 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(8) .c3-bar {
+  stroke: yellow !important;
+  fill: yellow !important; }
+
+.c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
+  stroke: #cc3636 !important;
+  fill: #cc3636 !important;
+  opacity: 0.7 !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(9) .c3-bar {
+  stroke: brown !important;
+  fill: brown !important; }
+
 .topContainer {
   height: 19.5%;
   top: 0;
@@ -307,7 +332,7 @@ h4 {
     height: 70px; }
 
 .whiteBandExtended {
-  height: 220px; }
+  min-height: 220px; }
   .whiteBandExtended .category {
     width: 33.3%;
     display: inline-block;
@@ -319,7 +344,7 @@ h4 {
     margin-top: 20px; }
 
 .whiteBandGraph2 {
-  height: 350px; }
+  min-height: 350px; }
   .whiteBandGraph2 .sensorRow {
     position: absolute;
     bottom: 130px; }
@@ -363,6 +388,12 @@ h4 {
           background-color: #139441; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel6 {
           background-color: #19c74a; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel7 {
+          background-color: red; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel8 {
+          background-color: yellow; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel9 {
+          background-color: brown; }
 
 .saved {
   text-align: center;
@@ -412,13 +443,14 @@ h4 {
   .saved .savedText {
     width: 100%;
     height: 100%; }
-    .saved .savedText h1, .saved .savedText h2, .saved .savedText h3, .saved .savedText h4 {
-      margin: 0.5rem; }
+    .saved .savedText h2, .saved .savedText h3, .saved .savedText h4 {
+      margin: 0.5rem;
+      color: black; }
   .saved .amountSaved {
-    color: #198dc7; }
+    color: #198dc7;
+    margin: 0; }
 
 .lastNight {
-  padding-right: 75px;
   padding-top: 20px;
   font-size: 2rem; }
 

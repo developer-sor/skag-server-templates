@@ -17,8 +17,10 @@ html, body {
 
 #backgroundImage {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 103%;
+    height: 103%;
+    margin: -5px;
+
     background-size: cover;
     background-position: center center;
     -webkit-filter: blur($backgroundBlurSize);
@@ -77,21 +79,21 @@ h4 {
 
 
 .lightTheme {
-    p, h1, h2, h3, h4, h5, h6, .themeTextColor {
+    p, h1, h2, h3, h4, h5, h6, .themeTextColor, .dayText {
         color: $darkText;
     }
 
-    .textContainer, .lightContainer {
+    .textContainer, .lightContainer, .weather {
         background-color: $lightTextContainer !important;
     }
 }
 
 .darkTheme {
-    p, h1, h2, h3, h4, h5, h6, .themeTextColor {
+    p, h1, h2, h3, h4, h5, h6, .themeTextColor, .dayText {
         color: $lightText;
     }
 
-    .textContainer, .darkContainer {
+    .textContainer, .darkContainer, .weather {
         background-color: $darkTextContainer !important;
     }
 }

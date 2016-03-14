@@ -103,12 +103,23 @@ function setCategories() {
     $("#months").html(categoriesHTML);
 }
 
-function getSavedAmount() {
 
-}
 
 function setSavedAmount() {
-    savedAmount = Math.floor(savedAmount);
+    var amountPrefix = $("#amountPrefix");
+    if (savedAmount > 1000000) {
+        amountPrefix.text('GWh');
+        savedAmount = roundToTwo(savedAmount * 0.000001);
+    }
+    else if (savedAmount > 1000) {
+        amountPrefix.text('MWh');
+        savedAmount = roundToTwo(savedAmount * 0.001);
+    }
+    else {
+        amountPrefix.text('kWh');
+        savedAmount = roundToTwo(savedAmount);
+    }
+
     if (savedAmount > 0) {
         $("#amountSaved").text(savedAmount);
         $("#saved").show();

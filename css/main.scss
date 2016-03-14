@@ -141,7 +141,7 @@
 }
 
 .whiteBandExtended {
-    height: 220px;
+    min-height: 220px;
 
     .category {
         width: 33.3%;
@@ -159,7 +159,7 @@
 }
 
 .whiteBandGraph2 {
-    height: 350px;
+    min-height: 350px;
 
     .sensorRow{
         position: absolute;
@@ -207,29 +207,14 @@
                     left: -1rem;
                 }
 
-                .sensorLabel1 {
-                    background-color: $barChart1;
-                }
+                @each $color in $barChartList {
+                    $i: index($barChartList, $color);
 
-                .sensorLabel2 {
-                    background-color: $barChart2;
+                    .sensorLabel#{$i} {
+                       background-color: $color;
+                    }
                 }
-
-                .sensorLabel3 {
-                    background-color: $barChart3;
-                }
-
-                .sensorLabel4 {
-                    background-color: $barChart4;
-                }
-
-                .sensorLabel5 {
-                    background-color: $barChart5;
-                }
-
-                .sensorLabel6 {
-                    background-color: $barChart6;
-                }
+                
             }
         }
     }
@@ -288,18 +273,19 @@
         width: 100%;
         height: 100%;
 
-        h1, h2, h3, h4 {
+        h2, h3, h4{
             margin: 0.5rem;
+            color: black;
         }
     }
 
     .amountSaved {
         color: $barChart2;
+        margin: 0;
     }
 }
 
 .lastNight {
-    padding-right: 75px;
     padding-top: 20px;
     font-size: 2rem;
 }

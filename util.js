@@ -36,6 +36,16 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getTwoDigitClock(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2)
+}
+
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+}
+
 function convertToDataURLviaCanvas(url, callback, outputFormat) {
     var img = new Image();
     img.crossOrigin = 'Anonymous';

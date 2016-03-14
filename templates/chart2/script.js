@@ -29,7 +29,9 @@ var actualMin = 0;
 var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
+var lastTempDate = null;
 
+var maxAmountOfSensors = 9;
 var calculatedRatio = 0.9;
 
 var data = [];
@@ -44,7 +46,7 @@ function prosessRawData(allRawData) {
     var count = 0;
     for (var key in rawData) {
         count++;
-        if (count > 6) {
+        if (count > maxAmountOfSensors) {
             break;
         }
         var newSensor = [key];
@@ -61,7 +63,8 @@ function prosessRawData(allRawData) {
 
 function processRawTempData(allRawData) {
     var rawTempData = allRawData.subs.temperature.data;
-
+    var chartLastUpdated  = new Date(rawTempData[rawTempData.length - 1].description);
+    lastTempDate = ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
     for (var i = 0; i < rawTempData.length ; i++) {
         temp.push(rawTempData[i].val);
     }
@@ -181,8 +184,7 @@ function populateChart() {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
         dataMax: dataMax + 'kW',
-        lastNight: ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl 24:00",
-        showLastNight: data[0].length > 24
+        lastNight: lastTempDate
     });
 
     adjustXTicks();
@@ -193,7 +195,7 @@ function populateChart() {
 function expandWhiteBand() {
     var chartContainer = $("#chartContainer");
     var chart2MarginFix = 28;
-    var magicNumber = 4;
+    var magicNumber = 3;
     $("#whiteBand").css({ "top": chartContainer.offset().top + (chartContainer.height()) - (chart2MarginFix - magicNumber) + "px" });
     $("#chart").addClass('chart2MarginFix');
 }
@@ -201,31 +203,20 @@ function expandWhiteBand() {
 function adjustXTicks() {
     //minus 2 pga length vs index samt label
     var maxLength = (data[0].length - 2);
-    
+
     $(".c3-axis.c3-axis-x line").each(function ($i) {
         if (($i + 1) % 24 == 0) {
             $(this).attr('y2', 12);
-
-            if ($i + 48 > data[0].length && $i + 24 < data[0].length) {
-                alignLastNightDateText($(this).offset().left);    
-            }
-        }
-        else if ($i == maxLength) {
-            var colWidth = ($(".c3-event-rect-0").attr("width")/2)-3;
-            $(this).attr({ 'y2': 36, 'x1': colWidth, 'x2': colWidth });
         }
         else {
             $(this).hide();
         }
     });
+
+    var lastNight = $("#lastNight");
+    lastNight.css({ 'margin-right': (lastNight.width() / 2) +10+ 'px' });
 }
 
-//Aligner lastNight datoen til å være midtstilg på den den siste streken
-function alignLastNightDateText(elementLeftOffset) {
-    var lastNightElement = $("#lastNight");
-    var left = elementLeftOffset - (lastNightElement.width() / 2);
-    $("#lastNight").css({ 'position': 'absolute', 'left': left + 'px' });
-}
 
 //Markerer bar som har høyeste verdi
 function markHighestBar() {

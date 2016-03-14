@@ -69,6 +69,11 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
+                data.templatesInUse = [
+                    {
+                        name: "yr",
+                        timeoutMillis: 500000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
