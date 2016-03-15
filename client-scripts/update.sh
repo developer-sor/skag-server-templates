@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /home/pi/git/skag-server-templates
+cd /home/pi/repo
 git pull

@@ -9,4 +9,4 @@
 @xset -dpms
 @xset s noblank
 
-/home/pi/fullscreen.sh
+/home/pi/repo/client-scripts/fullscreen.sh
