@@ -8,14 +8,25 @@
 //window.localStorage.removeItem(constants.refChartData);
 
 $(function () {
-    if (hasRecentChartData() && hasValidChartData() && !parent.forceFetch) {
+    if (parent.forceFetch) {
+        console.log('force fetching for chart1');
+        fetchData();
+    }
+    else if (hasRecentChartData(constants.chart1CalcualtedData)) {
+        console.log('getting calcualted data for chart1');
+        isFetchingData = false;
+        setChartWithLocalstoreData(constants.chart1CalcualtedData, prosessCalculatedData);
+    }
+    else if (hasRecentChartData(constants.chartRawdataData)) {
+        console.log('getting raw data for chart1');
         isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
-        setChartWithLocalstoreData(prosessRawData);
+        setChartWithLocalstoreData(constants.chartRawdataData, prosessRawData);
     }
     else {
         //Getting data. See chartLocalstore.js for more
-        fetchData();
+        console.log('else: fetchData() for chart1. No valid local data stored');
+        fetchData(prosessRawData);
     }
 
     $("#chartContainer").addClass(parent.installationData.theme + 'Container');
@@ -23,33 +34,42 @@ $(function () {
 });
 
 
-var referenceLabel = '0';
-var compareLabelDefault = new Date().getFullYear().toString();
 
-var categories = [];
-var years = [];
-var data = [];
-var savedAmount = 0;
+var chartModel = {
+    referenceLabel : '0',
+    compareLabelDefault : new Date().getFullYear().toString(),
+    categories : [],
+    years : [],
+    data : [],
+    savedAmount : 0
+}
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.months.data;
 
-    var referenceData = [referenceLabel];
-    var compareData = [compareLabelDefault];
+    var referenceData = [chartModel.referenceLabel];
+    var compareData = [chartModel.compareLabelDefault];
 
     for (var i = 0; i < rawData.length; i++) {
-        categories.push(rawData[i].description);
+        chartModel.categories.push(rawData[i].description);
 
         var currentDate = new Date();
-        years.push(currentDate.getMonth() + 1 >= rawData[i].ind ? currentDate.getFullYear() : currentDate.getFullYear() - 1);
+        chartModel.years.push(currentDate.getMonth() + 1 >= rawData[i].ind ? currentDate.getFullYear() : currentDate.getFullYear() - 1);
 
         referenceData.push(rawData[i].ref);
-
         compareData.push(rawData[i].val);
 
-        savedAmount += (rawData[i].ref - rawData[i].val);
+        chartModel.savedAmount += (rawData[i].ref - rawData[i].val);
     }
-    data.push(referenceData, compareData);
+    chartModel.data.push(referenceData, compareData);
+    setChartLocalStoreData(constants.chart1CalcualtedData, chartModel);
+
+    populateChart();
+}
+
+function prosessCalculatedData(data) {
+    console.log('prosessCalculatedData() ', data);
+    chartModel = data;
     populateChart();
 }
 
@@ -64,11 +84,11 @@ function populateChart() {
             height: 560
         },
         data: {
-            columns: data,
+            columns: chartModel.data,
             type: 'bar',
             labels: {
                 format: function (v, id, i, j) {
-                    return id == '0' ? parent.installationData.referenceLabel || 'Reference' : years[i];
+                    return id == '0' ? parent.installationData.referenceLabel || 'Reference' : chartModel.years[i];
                 }
             }
         },
@@ -94,37 +114,36 @@ function populateChart() {
     });
 
     setCategories();
-    setSavedAmount();
+    savedAmount();
     expandWhiteBand();
 }
 
 function setCategories() {
     var categoriesHTML = '';
-    for (var i = 0; i < categories.length; i++) {
-        categoriesHTML += '<span class="category" style="width:' + (100 / categories.length) + '%"><h3>' + categories[i] + '</h3></span>';
+    for (var i = 0; i < chartModel.categories.length; i++) {
+        categoriesHTML += '<span class="category" style="width:' + (100 / chartModel.categories.length) + '%"><h3>' + chartModel.categories[i] + '</h3></span>';
     }
     $("#months").html(categoriesHTML);
 }
 
 
-
-function setSavedAmount() {
+function savedAmount() {
     var amountPrefix = $("#amountPrefix");
-    if (savedAmount > 1000000) {
+    if (chartModel.savedAmount > 1000000) {
         amountPrefix.text('GWh');
-        savedAmount = roundToTwo(savedAmount * 0.000001);
+        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000001);
     }
-    else if (savedAmount > 1000) {
+    else if (chartModel.savedAmount > 1000) {
         amountPrefix.text('MWh');
-        savedAmount = roundToTwo(savedAmount * 0.001);
+        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.001);
     }
     else {
         amountPrefix.text('kWh');
-        savedAmount = roundToTwo(savedAmount);
+        chartModel.savedAmount = roundToTwo(chartModel.savedAmount);
     }
 
-    if (savedAmount > 0) {
-        $("#amountSaved").text(savedAmount);
+    if (chartModel.savedAmount > 0) {
+        $("#amountSaved").text(chartModel.savedAmount);
         $("#saved").show();
     }
     else {
