@@ -71,23 +71,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                data.templatesInUse = [
-                    {
-                        name: "yr",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "chart1",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "chart2",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "intro",
-                        timeoutMillis: 5000
-                    }];
+                //data.templatesInUse = [
+                //    {
+                //        name: "yr",
+                //        timeoutMillis: 5000
+                //    },
+                //    {
+                //        name: "chart1",
+                //        timeoutMillis: 5000
+                //    },
+                //    {
+                //        name: "chart2",
+                //        timeoutMillis: 5000
+                //    },
+                //    {
+                //        name: "intro",
+                //        timeoutMillis: 5000
+                //    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
