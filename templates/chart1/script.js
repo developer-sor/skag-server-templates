@@ -12,12 +12,12 @@ $(function () {
         console.log('force fetching for chart1');
         fetchData();
     }
-    else if (hasRecentChartData(constants.chart1CalcualtedData)) {
+    else if (hasRecentData(constants.chart1CalcualtedData)) {
         console.log('getting calcualted data for chart1');
         isFetchingData = false;
         setChartWithLocalstoreData(constants.chart1CalcualtedData, prosessCalculatedData);
     }
-    else if (hasRecentChartData(constants.chartRawdataData)) {
+    else if (hasRecentData(constants.chartRawdataData)) {
         console.log('getting raw data for chart1');
         isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
@@ -62,7 +62,7 @@ function prosessRawData(allRawData) {
         chartModel.savedAmount += (rawData[i].ref - rawData[i].val);
     }
     chartModel.data.push(referenceData, compareData);
-    setChartLocalStoreData(constants.chart1CalcualtedData, chartModel);
+    setLocalStoreData(constants.chart1CalcualtedData, chartModel);
 
     populateChart();
 }

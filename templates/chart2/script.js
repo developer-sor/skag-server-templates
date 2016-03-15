@@ -10,12 +10,12 @@ $(function () {
         console.log('force fetching for chart1');
         fetchData();
     }
-    else if (hasRecentChartData(constants.chart2CalcualtedData)) {
+    else if (hasRecentData(constants.chart2CalcualtedData)) {
         console.log('getting calcualted data for chart2');
         isFetchingData = false;
         setChartWithLocalstoreData(constants.chart2CalcualtedData, prosessCalculatedData);
     }
-    else if (hasRecentChartData(constants.chartRawdataData)) {
+    else if (hasRecentData(constants.chartRawdataData)) {
         console.log('getting raw data for chart2');
         isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
@@ -80,7 +80,7 @@ function processRawTempData(allRawData) {
     chartModel.data.push(chartModel.temp);
     chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
     chartModel.actualMin = Math.min.apply(null, chartModel.temp.slice(1));
-    setChartLocalStoreData(constants.chart2CalcualtedData, chartModel);
+    setLocalStoreData(constants.chart2CalcualtedData, chartModel);
 
     populateChart();
 }

@@ -16,7 +16,7 @@
 //        timeoutMillis: 500000
 //    },
 //    {
-//        name: "slide1",
+//        name: "intro",
 //        timeoutMillis: 500000
 //    }];
 
@@ -71,6 +71,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
+                data.templatesInUse = [
+                    {
+                        name: "yr",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "chart2",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 5000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -85,7 +102,7 @@ var templateController = {
         })
         .fail(function (error) {
             console.log('Error fetching data from server: ', error);
-            if (self.hasValidInstallationData()) {
+            if (hasRecentData(constants.installationData)) {
                 console.log('Backup solution: getting installationdata from localstorage since fetch failed');
                 self.setInstallationBasedOnInstallationData();
             }
@@ -95,26 +112,19 @@ var templateController = {
             }
         });
     },
-    hasRecentInstallationData: function () {
-        var date = window.localStorage.getItem(constants.installationTime);
-
-        var d1 = new Date();
-        var d2 = new Date(d1);
-        d2.setHours(d1.getHours() - constants.InstallationFetchIntervalInHours);
-
-        return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
-    },
     hasValidInstallationData: function () {
-        var tempData = window.localStorage.getItem(constants.installationData);
+        var tempData = getLocalstoreData(constants.installationData);
         if (!tempData) {
             return false;
         }
-        tempData = JSON.parse(tempData);
-        //Checking if required strings is okay
         return !isNullOrEmpty(tempData.description) && !isNullOrEmpty(tempData.backgroundImageURL) && !isNullOrEmpty(tempData.location);
     },
     setInstallationBasedOnInstallationData: function () {
-        var data = JSON.parse(window.localStorage.getItem(constants.installationData));
+        var data = getLocalstoreData(constants.installationData);
+        if (!data) {
+            console.log('setInstallationBasedOnInstallationData() -> local data was non-existing');
+            return false;
+        }
         this.templatesInUse = data.templatesInUse;
         installationData = data;
         this.setBackgroundImage();
@@ -147,7 +157,7 @@ var templateController = {
         console.log('continue force fetching ? ', forceFetch.toString());
     },
     start: function () {
-        if (this.hasRecentInstallationData() && this.hasValidInstallationData() && !forceFetch) {
+        if (hasRecentData(constants.installationData) && this.hasValidInstallationData() && !forceFetch) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
             this.runTemplates();

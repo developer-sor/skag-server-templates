@@ -15,8 +15,8 @@ getTwoDigitDate = function () {
 function createWeatherForecast() {
     var self = this;
 
-    if (hasValidStoredData() && !parent.forceFetch) {
-        setWeatherForecast();
+    if (hasRecentData(constants.yrData) && !parent.forceFetch) {
+        setWeatherForecast(getLocalstoreData(constants.yrData));
         return;
     }
 
@@ -33,14 +33,14 @@ function createWeatherForecast() {
         if (data) {
             console.log("Got vær-data from yr");
             var jsonData = xmlToJson(data);
+            setLocalStoreData(constants.yrData, jsonData);
+
             setWeatherForecast(jsonData);
 
-            window.localStorage.setItem(constants.yrTime, new Date());
-            window.localStorage.setItem(constants.yrData, JSON.stringify(jsonData));
         }
-        else if (!data && self.hasValidStoredData()) {
+        else if (!data && hasRecentData(constants.yrData)) {
             console.log('Backup solution: getting yrdata from localstorage since data is undefined');
-            self.setWeatherForecast(prosessRawData);
+            self.setWeatherForecast(getLocalstoreData(yr.yrData));
         }
         else {
             console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
@@ -49,9 +49,9 @@ function createWeatherForecast() {
     })
     .fail(function (error) {
         console.log('Error fetching data from yr: ', error);
-        if (self.hasValidStoredData()) {
+        if (hasRecentData(constants.yrData)) {
             console.log('Backup solution: getting yrdata from localstorage since fetch failed');
-            self.setWeatherForecast(prosessRawData);
+            self.setWeatherForecast(getLocalstoreData(yr.yrData));
         }
         else {
             console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
@@ -63,26 +63,12 @@ function createWeatherForecast() {
 
 createWeatherForecast();
 
-function hasValidStoredData() {
-    var date = window.localStorage.getItem(constants.yrTime);
-    var d1 = new Date();
-    var d2 = new Date(d1);
-    d2.setHours(d1.getHours() - constants.yrFetchIntervalInHours);
-
-    return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
-}
-
 function setWeatherForecast(jsonData) {
-    this.jsonData = jsonData;
-    if (jsonData === undefined || jsonData === null) {
-        this.jsonData = JSON.parse(window.localStorage.getItem(constants.yrData));
-        console.log("got data from local storage ");
-    }
-
-    $("#yr-credits").html(this.jsonData.weatherdata.credit.link["@attributes"].text);
+    console.log(jsonData);
+    $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
     var weatherHTML = '';
     for (var i = 0; i < 4; i++) {
-        var data = this.jsonData.weatherdata.forecast.tabular.time[i];
+        var data = jsonData.weatherdata.forecast.tabular.time[i];
 
         var from = new Date(data["@attributes"].from).getHours();
         var to = new Date(data["@attributes"].to).getHours();
