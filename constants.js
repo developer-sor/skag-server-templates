@@ -10,7 +10,7 @@ var constants = {
     yrExpireHours: 6,
     chartRawdataTime: 'chartRawdataTime',
     chartRawdataData: 'chartRawdataData',
-    refRawdataExpireHours: 1,
+    chartRawdataExpireHours: 1,
     chart1CalcualtedTime: 'chart1CalcualtedTime',
     chart1CalcualtedData: 'chart1CalcualtedData',
     chart1FetchIntervalInHours: 24,

@@ -1,10 +1,6 @@
 ﻿var isFetchingData = false;
 
 
-function hasValidChartData() {
-    var tempData = window.localStorage.getItem(constants.chartRawdataData);
-    return !isNullOrEmpty(tempData);
-}
 
 function setChartWithLocalstoreData(type, callback) {
     if (!callback) {
@@ -21,10 +17,11 @@ function setChartWithLocalstoreData(type, callback) {
     }
 }
 
-function fetchData(prosessRawData) {
+function fetchData(prosessRawData, type) {
     console.log('fetchData()');
     isFetchingData = true;
     var self = this;
+    var prosessRawData = prosessRawData || self.prosessRawData;
     var installationId = parent.installationData.id;
     var clientKey = parent.installation.clientKey;
 
@@ -48,7 +45,7 @@ function fetchData(prosessRawData) {
         console.log('pinged server');
     });
 
-    var url = constants.api + constants.dataview.replace('{id}', installationId);
+    var url = constants.api+ constants.dataview.replace('{id}', installationId);
     //Fetch data
     $.ajax({
         method: "GET",
@@ -59,33 +56,37 @@ function fetchData(prosessRawData) {
             "clientKey": self.clientKey
         }
     })
-    .done(function (data) {
-        if (data) {
+    .done(function (response) {
+        if (response) {
             console.log("done retrieving data for chart");
-            setLocalStoreData(constants.chartRawdataData, data);
-            self.prosessRawData(data);
-        }
-        else if (!data && self.hasValidChartData()) {
-            console.log('Backup solution: getting raw chartdata from localstorage since fetch failed');
-            self.setChartWithLocalstoreData(prosessRawData);
+            setLocalStoreData(constants.chartRawdataData, response);
+            self.prosessRawData(response);
         }
         else {
-            console.log('Backup solution failed! No chartdata in localstorage and fetch failed, running next slide');
-            parent.templateController.abortSlide(template.name);
+            handleError(type, self.prosessRawData);
         }
     })
     .fail(function (error) {
         console.log('Error fetching data from server: ', error);
-        if (self.hasValidChartData()) {
-            console.log('Backup solution: getting raw chartdata from localstorage since fetch failed');
-            self.setChartWithLocalstoreData(prosessRawData);
-        }
-        else {
-            console.log('Backup solution failed! No chartdata in localstorage and fetch failed, running next slide');
-            parent.templateController.abortSlide(template.name);
-        }
+        handleError(type, self.prosessRawData);
     })
     .always(function () {
         isFetchingData = false;
     });
+}
+
+
+function handleError(type, prosessRawData) {
+    if (hasNonExpiredData(type)) {
+        console.log('Backup solution: getting calculated chartdata from localstorage since fetch failed');
+        self.setChartWithLocalstoreData(type, prosessCalculatedData);
+    }
+    else if (hasNonExpiredData(constants.chartRawdataData)) {
+        console.log('Backup solution: getting raw chartdata from localstorage since fetch failed');
+        self.setChartWithLocalstoreData(constants.chartRawdataData, prosessRawData);
+    }
+    else {
+        console.log('Backup solution failed! No chartdata in localstorage and fetch failed for ' + type + ', running next slide');
+        parent.templateController.abortSlide(template.name);
+    }
 }

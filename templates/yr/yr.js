@@ -36,30 +36,29 @@ function createWeatherForecast() {
             setLocalStoreData(constants.yrData, jsonData);
 
             setWeatherForecast(jsonData);
-
         }
-        else if (!data && hasRecentData(constants.yrData)) {
-            console.log('Backup solution: getting yrdata from localstorage since data is undefined');
-            self.setWeatherForecast(getLocalstoreData(yr.yrData));
-        }
-        else {
-            console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
-            parent.templateController.abortSlide(template.name);
+        else{
+            handleError();
         }
     })
     .fail(function (error) {
         console.log('Error fetching data from yr: ', error);
-        if (hasRecentData(constants.yrData)) {
-            console.log('Backup solution: getting yrdata from localstorage since fetch failed');
-            self.setWeatherForecast(getLocalstoreData(yr.yrData));
-        }
-        else {
-            console.log('Failed to retrieve data from yr. Got no backup data either, aborting slide..');
-            parent.templateController.abortSlide(template.name);
-        }
+        handleError();
     });
 
 };
+
+function handleError() {
+    if (hasNonExpiredData(constants.yrData)) {
+        console.log('Backup solution: getting yrdata from localstorage since fetch failed');
+        self.setWeatherForecast(getLocalstoreData(constants.yrData));
+    }
+    else {
+        console.log('Backup solution failed for the Yr template! No data in localstorage and fetch failed, running next slide');
+        parent.templateController.abortSlide(template.name);
+    }
+}
+
 
 createWeatherForecast();
 

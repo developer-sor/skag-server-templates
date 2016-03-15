@@ -1,16 +1,9 @@
 ﻿
 
-//TODO: Only use when working with single slide
-//var installationData = "";
-//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-//$('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
-//window.localStorage.removeItem(constants.refChartTime);
-//window.localStorage.removeItem(constants.refChartData);
-
 $(function () {
     if (parent.forceFetch) {
         console.log('force fetching for chart1');
-        fetchData();
+        fetchData(null, constants.chart1CalcualtedData);
     }
     else if (hasRecentData(constants.chart1CalcualtedData)) {
         console.log('getting calcualted data for chart1');
@@ -26,7 +19,7 @@ $(function () {
     else {
         //Getting data. See chartLocalstore.js for more
         console.log('running fetchData() for chart1. No valid local data stored');
-        fetchData(prosessRawData);
+        fetchData(null, constants.chart1CalcualtedData);
     }
 
     $("#chartContainer").addClass(parent.installationData.theme + 'Container');

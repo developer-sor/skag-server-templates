@@ -12,7 +12,7 @@
             var date = window.localStorage.getItem(constants.chart1CalcualtedTime);
             var d1 = new Date();
             var d2 = new Date(d1);
-            d2.setHours(d1.getMonth() - constants.chart1FetchIntervalInHours);
+            d2.setHours(d1.getHours() - constants.chart1FetchIntervalInHours);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         case constants.chart2CalcualtedData:
@@ -102,5 +102,43 @@ function setLocalStoreData(type, data) {
         default:
             console.log('Error: setLocalStoreData() -> type not set or invalid');
             return;
+    }
+}
+
+
+function hasNonExpiredData(type) {
+    console.log('hasNonExpiredData() ', type)
+    switch (type) {
+        case constants.chart1CalcualtedData:
+            var date = window.localStorage.getItem(constants.chart1CalcualtedTime);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setHours(d1.getMonth() - constants.chart1ExpireMonths);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
+        case constants.chart2CalcualtedData:
+            var date = window.localStorage.getItem(constants.chart2CalcualtedTime);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setHours(d1.getHours() - constants.chart2ExpireHours);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
+        case constants.chartRawdataData:
+            var date = window.localStorage.getItem(constants.chartRawdataTime);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setHours(d1.getHours() - constants.chartRawdataExpireHours);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
+        case constants.yrData:
+            var date = window.localStorage.getItem(constants.yrTime);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setHours(d1.getHours() - constants.yrExpireHours);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
+        default:
+            console.log('hasNonExpiredData() -> type not set or invalid');
+            return false;
     }
 }
