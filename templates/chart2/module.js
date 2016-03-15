@@ -10,7 +10,7 @@ console.log("Loading plugin ", "chart2");
 var template = {
     name: "chart2",
     canShow: function () {
-        return (hasRecentChartData() && hasValidChartData()) || isFetchingData;
+        return true;
     }
 };
 console.log('attaching module to parent');

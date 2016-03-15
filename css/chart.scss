@@ -110,15 +110,15 @@
 @each $color in $barChartList {
     $i: index($barChartList, $color);
 
-    .c3-chart-bars .c3-chart-bar:nth-child(#{$i}) {
+    .c3-chart-bars .c3-chart-bar:nth-child(#{$i})  {
+        .c3-bar {
+            stroke: $color !important;
+            fill: $color !important;
+        }
         .markedBar {
             stroke: lighten($color, $markedBarLighten) !important;
             fill: lighten($color, $markedBarLighten) !important;
             opacity: 0.7 !important;
-        }
-        .c3-bar {
-            stroke: $color !important;
-            fill: $color !important;
         }
     }
 }

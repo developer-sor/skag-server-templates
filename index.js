@@ -71,11 +71,6 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                data.templatesInUse = [
-                    {
-                        name: "chart1",
-                        timeoutMillis: 5000000
-                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -105,7 +100,7 @@ var templateController = {
 
         var d1 = new Date();
         var d2 = new Date(d1);
-        d2.setHours(d1.getHours() - constants.InstallationRefreshHours);
+        d2.setHours(d1.getHours() - constants.InstallationFetchIntervalInHours);
 
         return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
     },

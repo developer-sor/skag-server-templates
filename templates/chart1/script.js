@@ -25,7 +25,7 @@ $(function () {
     }
     else {
         //Getting data. See chartLocalstore.js for more
-        console.log('else: fetchData() for chart1. No valid local data stored');
+        console.log('running fetchData() for chart1. No valid local data stored');
         fetchData(prosessRawData);
     }
 

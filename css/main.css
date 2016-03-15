@@ -159,77 +159,77 @@ h4 {
   opacity: 0;
   visibility: hidden; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
-  stroke: #1989c1 !important;
-  fill: #1989c1 !important;
-  opacity: 0.7 !important; }
 .c3-chart-bars .c3-chart-bar:nth-child(1) .c3-bar {
   stroke: #136994 !important;
   fill: #136994 !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
-  stroke: #2ea8e5 !important;
-  fill: #2ea8e5 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
+  stroke: #29a6e4 !important;
+  fill: #29a6e4 !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bar {
   stroke: #198dc7 !important;
   fill: #198dc7 !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
-  stroke: #c17419 !important;
-  fill: #c17419 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
+  stroke: #5cbbea !important;
+  fill: #5cbbea !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(3) .c3-bar {
   stroke: #945913 !important;
   fill: #945913 !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
-  stroke: #e5a32e !important;
-  fill: #e5a32e !important;
+.c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
+  stroke: #e48e29 !important;
+  fill: #e48e29 !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(4) .c3-bar {
   stroke: #c78819 !important;
   fill: #c78819 !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
-  stroke: #19c155 !important;
-  fill: #19c155 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
+  stroke: #eab75c !important;
+  fill: #eab75c !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(5) .c3-bar {
   stroke: #139441 !important;
   fill: #139441 !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
-  stroke: #2ee562 !important;
-  fill: #2ee562 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
+  stroke: #29e46c !important;
+  fill: #29e46c !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(6) .c3-bar {
   stroke: #19c74a !important;
   fill: #19c74a !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
-  stroke: #ff3333 !important;
-  fill: #ff3333 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
+  stroke: #5cea84 !important;
+  fill: #5cea84 !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(7) .c3-bar {
   stroke: red !important;
   fill: red !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
-  stroke: #ffff33 !important;
-  fill: #ffff33 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
+  stroke: #ff6666 !important;
+  fill: #ff6666 !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(8) .c3-bar {
   stroke: yellow !important;
   fill: yellow !important; }
-
-.c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
-  stroke: #cc3636 !important;
-  fill: #cc3636 !important;
+.c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
+  stroke: #ffff66 !important;
+  fill: #ffff66 !important;
   opacity: 0.7 !important; }
+
 .c3-chart-bars .c3-chart-bar:nth-child(9) .c3-bar {
   stroke: brown !important;
   fill: brown !important; }
+.c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
+  stroke: #d65f5f !important;
+  fill: #d65f5f !important;
+  opacity: 0.7 !important; }
 
 .topContainer {
   height: 19.5%;

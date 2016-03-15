@@ -67,7 +67,7 @@ function hasValidStoredData() {
     var date = window.localStorage.getItem(constants.yrTime);
     var d1 = new Date();
     var d2 = new Date(d1);
-    d2.setHours(d1.getHours() - constants.yrRefreshHours);
+    d2.setHours(d1.getHours() - constants.yrFetchIntervalInHours);
 
     return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
 }

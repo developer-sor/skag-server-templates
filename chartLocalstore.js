@@ -1,38 +1,37 @@
-﻿var devMode = false;
-var isFetchingData = false;
+﻿var isFetchingData = false;
 
 function hasRecentChartData(type) {
-
+    console.log('hasRecentChartData() ', type)
     switch (type) {
         case constants.chart1CalcualtedData:
             var date = window.localStorage.getItem(constants.chart1CalcualtedTime);
             var d1 = new Date();
             var d2 = new Date(d1);
-            d2.setHours(d1.getMonth() - constants.chart1ExpireMonths);
+            d2.setHours(d1.getMonth() - constants.chart1FetchIntervalInHours);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         case constants.chart2CalcualtedData:
             var date = window.localStorage.getItem(constants.chart2CalcualtedTime);
             var d1 = new Date();
             var d2 = new Date(d1);
-            d2.setHours(d1.getHours() - constants.chart2ExpireHours);
+            d2.setHours(d1.getHours() - constants.chart2FetchIntervalInHours);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         case constants.chartRawdataData:
             var date = window.localStorage.getItem(constants.chartRawdataTime);
             var d1 = new Date();
             var d2 = new Date(d1);
-            d2.setHours(d1.getHours() - constants.refRawdataExpireHours);
+            d2.setHours(d1.getHours() - constants.InstallationFetchIntervalInHours);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         default:
             console.log('hasRecentChartData() -> type not set or invalid');
-            return;
+            return false;
     }
 }
 
 function hasValidChartData() {
-    var tempData = window.localStorage.getItem(constants.refChartData);
+    var tempData = window.localStorage.getItem(constants.chartRawdataData);
     return !isNullOrEmpty(tempData);
 }
 
@@ -83,8 +82,8 @@ function setChartLocalStoreData(type, data) {
             break;
         case constants.chartRawdataData:
             console.log('Setting rawdata for charts');
-            window.localStorage.setItem(constants.refChartTime, new Date());
-            window.localStorage.setItem(constants.refChartData, JSON.stringify(data));
+            window.localStorage.setItem(constants.chartRawdataTime, new Date());
+            window.localStorage.setItem(constants.chartRawdataData, JSON.stringify(data));
             break;
         default:
             console.log('Error: setChartLocalStoreData() -> type not set or invalid');
@@ -93,22 +92,24 @@ function setChartLocalStoreData(type, data) {
 }
 
 function fetchData(prosessRawData) {
+    console.log('fetchData()');
     isFetchingData = true;
     var self = this;
-    var installationId = devMode ? "29" : parent.installationData.id;
-    var clientKey = devMode ? "Birkelid_Songdalen" : parent.installation.clientKey;
+    var installationId = parent.installationData.id;
+    var clientKey = parent.installation.clientKey;
 
     if (!parent.installationData) {
+        console.log('Error: fetchData() -> missing parent.installationData')
         return;
     }
 
-    var url = constants.api + constants.dataview.replace('{id}', installationId);
+    var pingurl = constants.api + constants.ping.replace('{id}', installationId);
 
     //Ping
     $.ajax({
         method: "GET",
         contentType: "application/json",
-        url: url,
+        url: pingurl,
         dataType: 'json',
         headers: {
             "clientKey": self.clientKey
@@ -117,7 +118,7 @@ function fetchData(prosessRawData) {
         console.log('pinged server');
     });
 
-
+    var url = constants.api + constants.dataview.replace('{id}', installationId);
     //Fetch data
     $.ajax({
         method: "GET",

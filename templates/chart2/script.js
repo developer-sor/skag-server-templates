@@ -6,13 +6,25 @@
 //window.localStorage.removeItem(constants.refChartData);
 
 $(function () {
-    if (hasRecentChartData() && hasValidChartData() && !parent.forceFetch) {
+    if (parent.forceFetch) {
+        console.log('force fetching for chart1');
+        fetchData();
+    }
+    else if (hasRecentChartData(constants.chart2CalcualtedData)) {
+        console.log('getting calcualted data for chart2');
+        isFetchingData = false;
+        setChartWithLocalstoreData(constants.chart2CalcualtedData, prosessCalculatedData);
+    }
+    else if (hasRecentChartData(constants.chartRawdataData)) {
+        console.log('getting raw data for chart2');
+        isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
-        setChartWithLocalstoreData(prosessRawData);
+        setChartWithLocalstoreData(constants.chartRawdataData, prosessRawData);
     }
     else {
         //Getting data. See chartLocalstore.js for more
-        fetchData();
+        console.log('running fetchData() for chart2. No valid local data stored');
+        fetchData(prosessRawData);
     }
 
     $("#chartContainer").addClass(parent.installationData.theme + 'Container');
@@ -20,25 +32,25 @@ $(function () {
 });
 
 
-var temp = ['temp'];
-
-var actualMax = 0;
-var actualMin = 0;
-
 var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
-var lastTempDate = null;
 
 var maxAmountOfSensors = 9;
-var calculatedRatio = 0.9;
+var calculatedRatio = 0.85;
 
-var data = [];
-var groups = [];
-//var data = [sensor1, sensor2, temp];
 
 var paddingLeft = 115;
 var indexForMaxSensor = 0;
+
+var chartModel = {
+    data: [],
+    groups: [],
+    lastTempDate: null,
+    actualMax: 0,
+    actualMin: 0,
+    temp : ['temp']
+}
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
@@ -49,41 +61,46 @@ function prosessRawData(allRawData) {
             break;
         }
         var newSensor = [key];
-        groups.push(key);
+        chartModel.groups.push(key);
         for (var y = 0; y < rawData[key].data.length; y++) {
             newSensor.push(rawData[key].data[y].val);
         }
-        data.push(newSensor);
+        chartModel.data.push(newSensor);
     }
-
-    calculatedRatio = 0.85;
     processRawTempData(allRawData);
 }
 
 function processRawTempData(allRawData) {
     var rawTempData = allRawData.subs.temperature.data;
-    var chartLastUpdated  = new Date(rawTempData[rawTempData.length - 1].description);
-    lastTempDate = ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
+    var chartLastUpdated = new Date(rawTempData[rawTempData.length - 1].description);
+    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
     for (var i = 0; i < rawTempData.length ; i++) {
-        temp.push(rawTempData[i].val);
+        chartModel.temp.push(rawTempData[i].val);
     }
-    data.push(temp);
-    actualMax = Math.max.apply(null, temp.slice(1));
-    actualMin = Math.min.apply(null, temp.slice(1));
+    chartModel.data.push(chartModel.temp);
+    chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
+    chartModel.actualMin = Math.min.apply(null, chartModel.temp.slice(1));
+    setChartLocalStoreData(constants.chart2CalcualtedData, chartModel);
 
     populateChart();
 }
 
 
+function prosessCalculatedData(data) {
+    console.log('prosessCalculatedData() ', data);
+    chartModel = data;
+    populateChart();
+}
+
 function findDataAverageValues() {
     //TODO: Erstatte sensors med data fra server
     var maxValue = 0;
-    var amountOfSensors = data.length - 1; //Minus temp sensor?
+    var amountOfSensors = chartModel.data.length - 1; //Minus temp sensor?
     //i = 1 because first cell is text, not number
-    for (var i = 1; i < data[0].length; i++) {
+    for (var i = 1; i < chartModel.data[0].length; i++) {
         var amountToCheckAgainstMax = 0;
         for (var y = 0; y < amountOfSensors; y++) {
-            amountToCheckAgainstMax += Math.round(data[y][i]);
+            amountToCheckAgainstMax += Math.round(chartModel.data[y][i]);
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
@@ -91,7 +108,7 @@ function findDataAverageValues() {
         }
     }
     dataMax = maxValue;
-    dataTwoThirds = Math.round((dataMax*2 ) / 3);
+    dataTwoThirds = Math.round((dataMax * 2) / 3);
     dataOneThird = Math.round(dataMax / 3);
 }
 
@@ -114,13 +131,13 @@ function populateChart() {
             height: 430
         },
         data: {
-            columns: data,
+            columns: chartModel.data,
             type: 'bar',
             types: {
                 temp: 'spline'
             },
             groups: [
-                groups
+                chartModel.groups
             ],
             axes: {
                 temp: 'y2'
@@ -142,12 +159,12 @@ function populateChart() {
             },
             y2: {
                 show: true,
-                max: actualMax + (actualMax - actualMin) * 0.5,
-                min: actualMin - (actualMax - actualMin) * 0.5,
+                max: chartModel.actualMax + (chartModel.actualMax - chartModel.actualMin) * 0.5,
+                min: chartModel.actualMin - (chartModel.actualMax - chartModel.actualMin) * 0.5,
                 tick: {
                     format: function (x) { return x + "C°"; },
                     count: 3,
-                    values: [actualMin, actualMax]
+                    values: [chartModel.actualMin, chartModel.actualMax]
                 }
             },
             x: {
@@ -173,20 +190,17 @@ function populateChart() {
         }
     });
 
-    
+
     markHighestBar();
     makePathGoAllTheWayAndGetLastXY();
-    
-    var refChartTime = window.localStorage.getItem(constants.refChartTime);
-    var chartLastUpdated = new Date(refChartTime);
-    var date = new Date();
+
     ko.applyBindings({
-        groups: groups,
+        groups: chartModel.groups,
         getClass: function (index) {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
         dataMax: dataMax + 'kW',
-        lastNight: lastTempDate
+        lastNight: chartModel.lastTempDate
     });
 
     adjustXTicks();
@@ -204,7 +218,7 @@ function expandWhiteBand() {
 
 function adjustXTicks() {
     //minus 2 pga length vs index samt label
-    var maxLength = (data[0].length - 2);
+    var maxLength = (chartModel.data[0].length - 2);
 
     $(".c3-axis.c3-axis-x line").each(function ($i) {
         if (($i + 1) % 24 == 0) {
@@ -216,7 +230,7 @@ function adjustXTicks() {
     });
 
     var lastNight = $("#lastNight");
-    lastNight.css({ 'margin-right': (lastNight.width() / 2) +10+ 'px' });
+    lastNight.css({ 'margin-right': (lastNight.width() / 2) + 10 + 'px' });
 }
 
 
@@ -228,8 +242,8 @@ function markHighestBar() {
 //Gjøre line graf litt lenger på slutten
 function makePathGoAllTheWayAndGetLastXY() {
     var path = $(".c3-line-temp").first();
-    var data = path.attr('d').split(',');
-    data[data.length - 2] = (parseFloat(data[data.length - 2]) + 20).toString();
-    path.attr('d', data);
+    var pathData = path.attr('d').split(',');
+    pathData[pathData.length - 2] = (parseFloat(pathData[pathData.length - 2]) + 20).toString();
+    path.attr('d', pathData);
 }
 

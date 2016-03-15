@@ -3,7 +3,7 @@
 var constants = {
     installationData: 'installationData',
     installationTime: 'installationTime',
-    InstallationRefreshHours: 1,
+    InstallationFetchIntervalInHours: 1,
     yrTime: 'yrTime',
     yrData: 'yrData',
     yrFetchIntervalInHours: 1,
