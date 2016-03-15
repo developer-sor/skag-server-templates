@@ -17,7 +17,7 @@ else {
 function isNullOrEmpty(varToCheck) {
     if (typeof varToCheck === 'object') {
         console.log('isNullOrEmpty, varToCheck is object.');
-        return varToCheck.length > 1;
+        return false;
     }
 
     if (!varToCheck) {

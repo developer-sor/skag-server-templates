@@ -29,6 +29,7 @@ console.log("Loading index");
 var templateController = {
     templatesInUse: null,
     templates: [],
+    templatesToForceFetchOn: [],
     templateIndex: 0,
     template: null,
     defaultTimeOut: 5000,
@@ -43,6 +44,7 @@ var templateController = {
     setInstallationData: function (data) {
         var self = this
         this.templatesInUse = data.templatesInUse;
+        this.templatesToForceFetchOn = forceFetch ? data.templatesInUse.slice() : this.templatesToForceFetchOn;
         installationData = data;
 
         convertToDataURLviaCanvas(data.backgroundImageURL, function (base64Img) {
@@ -69,11 +71,6 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                data.templatesInUse = [
-                    {
-                        name: "yr",
-                        timeoutMillis: 500000
-                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -125,25 +122,38 @@ var templateController = {
     nextSlide: function (current) {
         var self = this;
         if (current != this.templatesInUse[this.templateIndex].name) {
+            console.log('nextSlide() -> redudandant call. Returning')
             return;
         }
 
         self.templateIndex++;
-        if (self.templateIndex >= self.templatesInUse.length)
+        if (self.templateIndex >= self.templatesInUse.length) {
             self.templateIndex = 0;
+        }
 
         console.log("Should show next slide...", self.templateIndex);
         var template = this.templatesInUse[self.templateIndex];
+
+        if (forceFetch) {
+            console.log('Forcing fetch for', template.name);
+            self.applyForceFetch(template);
+        }
+        
         self.showSlide(template);
     },
+    applyForceFetch: function (template) {
+        this.templatesToForceFetchOn.splice(this.templatesToForceFetchOn.indexOf(template), 1);
+        forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
+        console.log('continue force fetching ? ', forceFetch.toString());
+    },
     start: function () {
-        if (this.hasRecentInstallationData() && this.hasValidInstallationData()) {
+        if (this.hasRecentInstallationData() && this.hasValidInstallationData() && !forceFetch) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
             this.runTemplates();
         }
         else {
-            console.log("Installationdata not retrieved yet or to old. Attempting to fetch from server..");
+            console.log("Installationdata not retrieved yet or to old or fetch is forced. Attempting to fetch from server..");
             this.fetchDataFromServer();
         }
     },
@@ -172,6 +182,7 @@ var templateController = {
                 }, timeoutMillis);
             }
             else {
+                console.log('cant show template, skipping');
                 self.nextSlide(currentTemplate.name);
             }
         });

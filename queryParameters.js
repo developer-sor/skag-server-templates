@@ -15,3 +15,11 @@ if (getParameterByName('clear')) {
         window.localStorage.clear();
     }
 }
+
+var forceFetch = false;
+if (getParameterByName('forceFetch')) {
+    var forceFetch = getParameterByName('forceFetch');
+    if (forceFetch && forceFetch == 'true') {
+        console.log('Forcing fetch of new data');
+    }
+}

@@ -15,7 +15,7 @@ getTwoDigitDate = function () {
 function createWeatherForecast() {
     var self = this;
 
-    if (hasValidStoredData()) {
+    if (hasValidStoredData() && !parent.forceFetch) {
         setWeatherForecast();
         return;
     }

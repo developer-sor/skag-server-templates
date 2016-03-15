@@ -8,7 +8,7 @@
 //window.localStorage.removeItem(constants.refChartData);
 
 $(function () {
-    if (hasRecentChartData() && hasValidChartData()) {
+    if (hasRecentChartData() && hasValidChartData() && !parent.forceFetch) {
         isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(prosessRawData);
@@ -61,7 +61,7 @@ function populateChart() {
             top: 50
         },
         size: {
-            height:560
+            height: 560
         },
         data: {
             columns: data,
@@ -87,6 +87,9 @@ function populateChart() {
             width: {
                 ratio: 0.7,
             }
+        },
+        tooltip: {
+            show: false
         }
     });
 
