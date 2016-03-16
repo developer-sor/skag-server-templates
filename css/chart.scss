@@ -17,7 +17,7 @@
 .darkTheme {
     .c3-chart-texts {
         .c3-text {
-            fill: $lightText !important;
+            fill: $darkText !important;
         }
     }
 }
@@ -57,7 +57,7 @@
 
     .tick {
         text {
-            fill: $barChart2;
+            fill: black;
             font-size: 1.5rem;
         }
 

@@ -74,7 +74,7 @@ function populateChart() {
             top: 50
         },
         size: {
-            height: 560
+            height: 530
         },
         data: {
             columns: chartModel.data,
@@ -132,7 +132,7 @@ function savedAmount() {
     }
     else {
         amountPrefix.text('kWh');
-        chartModel.savedAmount = roundToTwo(chartModel.savedAmount);
+        chartModel.savedAmount = chartModel.savedAmount;
     }
 
     if (chartModel.savedAmount > 0) {
@@ -145,6 +145,6 @@ function savedAmount() {
 }
 
 function expandWhiteBand() {
-    var chartContainer = $("#chartContainer");
+    var chartContainer = $("#chart");
     $("#whiteBand").css({ "top": chartContainer.offset().top + chartContainer.height() + "px" });
 }

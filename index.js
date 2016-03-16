@@ -56,7 +56,8 @@ var templateController = {
         });
     },
     setBackgroundImage: function () {
-        $('#backgroundImage').css({ 'background-image': "url(data:" + parent.installationData.backgroundImage + ")" });
+        $('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+        $('#backgroundOverlay').addClass(installationData.theme+'BackgroundOverlay')
     },
     fetchDataFromServer: function () {
         var self = this;
@@ -71,23 +72,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                //data.templatesInUse = [
-                //    {
-                //        name: "yr",
-                //        timeoutMillis: 500000
-                //    },
-                //    {
-                //        name: "chart2",
-                //        timeoutMillis: 5000
-                //    },
-                //    {
-                //        name: "chart1",
-                //        timeoutMillis: 5000
-                //    },
-                //    {
-                //        name: "intro",
-                //        timeoutMillis: 5000
-                //    }];
+                data.templatesInUse = [
+                    {
+                        name: "chart2",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 5000
+                    },
+                    {
+                        name: "yr",
+                        timeoutMillis: 5000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {

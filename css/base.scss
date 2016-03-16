@@ -88,6 +88,10 @@ h4 {
     }
 }
 
+.lightBackgroundOverlay{
+    background-color: $lightBackgroundOverlay;
+}
+
 .darkTheme {
     p, h1, h2, h3, h4, h5, h6, .themeTextColor, .dayText {
         color: $lightText;
@@ -96,7 +100,21 @@ h4 {
     .textContainer, .darkContainer, .weather {
         background-color: $darkTextContainer !important;
     }
+
+    .chartContainer{
+        background-color: $chartContainer !important;
+    }
 }
+
+.darkBackgroundOverlay{
+    background-color: $darkBackgroundOverlay;
+}
+
+.backgroundOverlay{
+    width: 100%;
+    height: 100%;
+}
+
 
 .italic {
     font-style: italic;

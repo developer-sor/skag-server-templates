@@ -68,10 +68,22 @@ h4 {
 .lightTheme .textContainer, .lightTheme .lightContainer, .lightTheme .weather {
   background-color: rgba(255, 255, 255, 0.5) !important; }
 
+.lightBackgroundOverlay {
+  background-color: rgba(255, 255, 255, 0.15); }
+
 .darkTheme p, .darkTheme h1, .darkTheme h2, .darkTheme h3, .darkTheme h4, .darkTheme h5, .darkTheme h6, .darkTheme .themeTextColor, .darkTheme .dayText {
   color: white; }
 .darkTheme .textContainer, .darkTheme .darkContainer, .darkTheme .weather {
   background-color: rgba(0, 0, 0, 0.5) !important; }
+.darkTheme .chartContainer {
+  background-color: rgba(255, 255, 255, 0.6) !important; }
+
+.darkBackgroundOverlay {
+  background-color: rgba(0, 0, 0, 0.15); }
+
+.backgroundOverlay {
+  width: 100%;
+  height: 100%; }
 
 .italic {
   font-style: italic; }
@@ -113,7 +125,7 @@ h4 {
   fill: black !important; }
 
 .darkTheme .c3-chart-texts .c3-text {
-  fill: white !important; }
+  fill: black !important; }
 
 .c3-chart-lines .c3-chart-line path {
   stroke: #c22323 !important;
@@ -133,7 +145,7 @@ h4 {
     stroke: transparent !important;
     fill: transparent !important; }
   .c3-axis-y .tick text {
-    fill: #198dc7;
+    fill: black;
     font-size: 1.5rem; }
   .c3-axis-y .tick line {
     opacity: 0;
@@ -256,13 +268,11 @@ h4 {
 .chartContainer {
   border-top: 3px solid white;
   position: absolute;
-  top: 19.5%; }
+  top: 19.5%;
+  bottom: 7rem; }
 
-.chartContainer1 {
+.chart1 {
   padding-top: 5px; }
-
-.chartContainer2 {
-  padding-top: 0; }
 
 .chart2MarginFix {
   margin-bottom: -28px; }
@@ -344,8 +354,7 @@ h4 {
 
 .whiteBandGraph2 {
   min-height: 350px;
-  height: auto;
-  padding-top: 28px; }
+  height: auto; }
   .whiteBandGraph2 .sensorRow {
     position: absolute;
     bottom: 130px; }
@@ -444,15 +453,28 @@ h4 {
   .saved .savedText {
     width: 100%;
     height: 100%; }
-    .saved .savedText h2, .saved .savedText h3, .saved .savedText h4 {
-      margin: 0.5rem;
-      color: black; }
+    .saved .savedText h3 {
+      margin: 0rem;
+      color: black;
+      line-height: 2.25rem; }
+    .saved .savedText #amountPrefix {
+      margin-bottom: 0.5rem; }
   .saved .amountSaved {
     color: #198dc7;
     margin: 0; }
 
+.maksTimesforbrukLabel {
+  position: absolute;
+  border-radius: 3px;
+  color: #198dc7;
+  padding: 5px 10px;
+  background-color: white; }
+
 .lastNight {
-  padding-top: 20px;
-  font-size: 2rem; }
+  font-size: 2rem;
+  border-right: 3px solid #198dc7;
+  padding-top: 18px;
+  padding-right: 10px;
+  margin-right: 109px; }
 
 /*# sourceMappingURL=main.css.map */

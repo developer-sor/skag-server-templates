@@ -30,13 +30,14 @@ $(function () {
 var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
+var currentPrefix = 'kW';
 
-var maxAmountOfSensors = 9;
-var calculatedRatio = 0.85;
+var maxAmountOfSensors = 10;
 
 
 var paddingLeft = 115;
 var indexForMaxSensor = 0;
+var chartHeight = 430;
 
 var chartModel = {
     data: [],
@@ -48,6 +49,7 @@ var chartModel = {
 }
 
 function prosessRawData(allRawData) {
+    console.log('prosessRawData() ', allRawData);
     var rawData = allRawData.subs.days.subs;
     var count = 0;
     for (var key in rawData) {
@@ -90,21 +92,38 @@ function prosessCalculatedData(data) {
 function findDataAverageValues() {
     //TODO: Erstatte sensors med data fra server
     var maxValue = 0;
-    var amountOfSensors = chartModel.data.length - 1; //Minus temp sensor?
+    var data = chartModel.data;
+    var amountOfSensors = chartModel.groups.length; //Exclude temp sensor
+    var amountOfDataRows = data[0].length;
     //i = 1 because first cell is text, not number
-    for (var i = 1; i < chartModel.data[0].length; i++) {
+    for (var i = 0; i < amountOfDataRows; i++) { 
         var amountToCheckAgainstMax = 0;
+        
         for (var y = 0; y < amountOfSensors; y++) {
-            amountToCheckAgainstMax += Math.round(chartModel.data[y][i]);
+            //Sjekk at data ikke er null
+            
+            if (data[y][i]) {
+                amountToCheckAgainstMax += data[y][i];
+            }
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
             indexForMaxSensor = i;
         }
     }
-    dataMax = maxValue;
-    dataTwoThirds = Math.round((dataMax * 2) / 3);
-    dataOneThird = Math.round(dataMax / 3);
+    dataMax = Math.round(maxValue);
+
+    //I tilfelle vi møter på større tall
+    if (dataMax > 1000) {
+        dataMax = roundToTwo(dataMax * 0.001);
+        dataTwoThirds = roundToTwo((dataMax * 2) / 3);
+        dataOneThird = roundToTwo(dataMax / 3);
+        currentPrefix = 'MW';
+    }
+    else {
+        dataTwoThirds = Math.round((dataMax * 2) / 3);
+        dataOneThird = Math.round(dataMax / 3);
+    }
 }
 
 function calculateLeftPadding() {
@@ -123,7 +142,7 @@ function populateChart() {
             bottom: -2
         },
         size: {
-            height: 430
+            height: chartHeight
         },
         data: {
             columns: chartModel.data,
@@ -174,7 +193,7 @@ function populateChart() {
         },
         bar: {
             width: {
-                ratio: calculatedRatio,
+                ratio: 0.85
             }
         },
         point: {
@@ -194,7 +213,7 @@ function populateChart() {
         getClass: function (index) {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
-        dataMax: dataMax + 'kW',
+        dataMax: dataMax + currentPrefix,
         lastNight: chartModel.lastTempDate
     });
 
@@ -204,10 +223,9 @@ function populateChart() {
 
 
 function expandWhiteBand() {
-    var chartContainer = $("#chartContainer");
+    var chart = $("#chart");
     var chart2MarginFix = 28;
-    var magicNumber = 3;
-    $("#whiteBand").css({ "top": chartContainer.offset().top + (chartContainer.height()) - (chart2MarginFix - magicNumber) + "px" });
+    $("#whiteBand").css({ "top": chart.offset().top + (chart.height()) - (chart2MarginFix ) + "px" });
     $("#chart").addClass('chart2MarginFix');
 }
 
@@ -223,15 +241,25 @@ function adjustXTicks() {
             $(this).hide();
         }
     });
-
-    var lastNight = $("#lastNight");
-    lastNight.css({ 'margin-right': (lastNight.width() / 2) + 10 + 'px' });
 }
 
 
 //Markerer bar som har høyeste verdi
 function markHighestBar() {
-    $('.c3-bar-' + (indexForMaxSensor - 1)).addClass("markedBar");
+    var highestBars = $('.c3-bar-' + (indexForMaxSensor - 1));
+    highestBars.addClass("markedBar");
+    var firstHighest = highestBars.first();
+    var pathdata = firstHighest.attr('d');
+    var pathDataY = parseInt(pathdata.split(',')[0].replace('M ', '').split('.')[0]);
+    var pathWidht = parseInt(pathdata.split(',')[2].split(' ')[1].replace('L', '').split('.')[0]) - pathDataY;
+    try {
+        var extraMargin = -15;
+        var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
+        maksTimesforbrukLabel.css({ 'top': (pathDataY - maksTimesforbrukLabel.height())  + 'px', 'left': (firstHighest.offset().left - pathWidht - maksTimesforbrukLabel.width() / 2) + 'px' });
+    }
+    catch(e){
+        console.log('calculating markedHighestBars label failed');
+    }
 }
 
 //Gjøre line graf litt lenger på slutten
