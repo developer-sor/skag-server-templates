@@ -64,23 +64,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                //data.templatesInUse = [
-                //    {
-                //        name: "yr",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "chart1",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "intro",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "chart2",
-                //        timeoutMillis: 10000
-                //    }];
+                data.templatesInUse = [
+                    {
+                        name: "yr",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart2",
+                        timeoutMillis: 10000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -158,8 +158,8 @@ var templateController = {
     },
     nextSlide: function () {
         var self = this;
-
-        var template = this.templatesInUse[self.setNextSlideIndex()];
+        self.setNextSlideIndex()
+        var template = this.templatesInUse[self.templateIndex];
         console.log("Should show next slide...", self.templateIndex);
 
         if (forceFetch) {
