@@ -28,19 +28,11 @@ console.log("Loading index");
 
 var templateController = {
     templatesInUse: null,
-    templates: [],
     templatesToForceFetchOn: [],
     templateIndex: 0,
-    template: null,
+    currentActiveIframe: constants.content1,
     defaultTimeOut: 5000,
     failText : 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
-    addTemplates: function (templates) {
-        if (!templates || templates.length == 0) {
-            console.log('addTemplates() -> missing templates');
-            return;
-        }
-        this.templates = this.templates.concat(templates);
-    },
     setInstallationData: function (data) {
         var self = this
         this.templatesInUse = data.templatesInUse;
@@ -72,23 +64,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                data.templatesInUse = [
-                    {
-                        name: "yr",
-                        timeoutMillis: 500000
-                    },
-                    {
-                        name: "chart1",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "intro",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "chart2",
-                        timeoutMillis: 5000
-                    }];
+                //data.templatesInUse = [
+                //    {
+                //        name: "yr",
+                //        timeoutMillis: 10000
+                //    },
+                //    {
+                //        name: "chart1",
+                //        timeoutMillis: 10000
+                //    },
+                //    {
+                //        name: "intro",
+                //        timeoutMillis: 10000
+                //    },
+                //    {
+                //        name: "chart2",
+                //        timeoutMillis: 10000
+                //    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -130,28 +122,6 @@ var templateController = {
         installationData = data;
         this.setBackgroundImage();
     },
-    nextSlide: function (current) {
-        var self = this;
-        if (current != this.templatesInUse[this.templateIndex].name) {
-            console.log('nextSlide() -> redudandant call. Returning')
-            return;
-        }
-
-        self.templateIndex++;
-        if (self.templateIndex >= self.templatesInUse.length) {
-            self.templateIndex = 0;
-        }
-
-        console.log("Should show next slide...", self.templateIndex);
-        var template = this.templatesInUse[self.templateIndex];
-
-        if (forceFetch) {
-            console.log('Forcing fetch for', template.name);
-            self.applyForceFetch(template);
-        }
-        
-        self.showSlide(template);
-    },
     applyForceFetch: function (template) {
         this.templatesToForceFetchOn.splice(this.templatesToForceFetchOn.indexOf(template), 1);
         forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
@@ -170,34 +140,83 @@ var templateController = {
     },
     runTemplates: function () {
         if (this.templatesInUse != null) {
-            this.addTemplates(this.templatesInUse);
             $("#master-header").html(installation.name);
-            this.showSlide();
+            this.showNextSlide('start');
         }
     },
-    abortSlide: function (name) {
-        console.log('aborting slide...');
-        clearTimeout(this.currentNextSlidePromise);
-        this.nextSlide(name);
-    },
-    showSlide: function () {
+    getNextSlideIndex: function () {
         var self = this;
-        var currentTemplate = this.templates[this.templateIndex];
-        $("#content").attr("src", "templates/" + currentTemplate.name + "/index.html").load(function () {
-            console.log(self.template);
-            if (self.template.canShow()) {
-                var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
+        var nextIndex = self.templateIndex + 1;
+        if (nextIndex >= self.templatesInUse.length) {
+            return 0;
+        }
+        return nextIndex;
+    },
+    setNextSlideIndex: function () {
+        var self = this;
+        self.templateIndex = self.getNextSlideIndex();
+    },
+    nextSlide: function () {
+        var self = this;
 
-                clearTimeout(self.currentNextSlidePromise);
-                self.currentNextSlidePromise = setTimeout(function () {
-                    self.nextSlide(currentTemplate.name);
-                }, timeoutMillis);
-            }
-            else {
-                console.log('cant show template, skipping');
-                self.nextSlide(currentTemplate.name);
-            }
-        });
+        var template = this.templatesInUse[self.setNextSlideIndex()];
+        console.log("Should show next slide...", self.templateIndex);
+
+        if (forceFetch) {
+            console.log('Forcing fetch for', template.name);
+            self.applyForceFetch(template);
+        }
+
+        self.showNextSlide();
+    },
+    lazyLoadNextSlide: function (aborted) {
+        var self = this;
+        var currentTemplate = this.templatesInUse[self.getNextSlideIndex()];
+
+        if (!aborted) {
+            this.currentActiveIframe = this.currentActiveIframe === constants.content1 ? constants.content2 : constants.content1;
+        }
+
+        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
+        console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
+    },
+    showNextSlide: function (start) {
+        console.log('showNextSlide() ');
+        var self = this;
+        var currentTemplate = this.templatesInUse[this.templateIndex];
+        var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
+
+        if (start) {
+            $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
+        }
+        else {
+            self.toggleNextIFrame();
+        }
+
+        setTimeout(function () {
+            console.log('time for next slide');
+            self.nextSlide();
+        }, timeoutMillis);
+
+        this.lazyLoadNextSlide();
+    },
+    toggleNextIFrame: function () {
+        $(constants.content1).toggleClass('transparent');
+        $(constants.content2).toggleClass('transparent');
+    },
+    abortSlide: function (name) {
+        var self = this;
+        console.log('aborting slide ' + name + '. Lazy loading next slide');
+        
+        if (this.templatesInUse[this.templateIndex].name == name) {
+            console.log('aborted slide is the active one -> running showNextSlide()')
+            self.showNextSlide();
+        }
+        else {
+            console.log('aborted slide is lazy loading. Attempting to lazy load another one')
+            self.setNextSlideIndex();
+            this.lazyLoadNextSlide(true);
+        }
     }
 }
 

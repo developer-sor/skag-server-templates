@@ -11,5 +11,3 @@ var template = {
     name: "intro",
     canShow: function() { return true; }
 };
-
-parent.templateController.template = template;

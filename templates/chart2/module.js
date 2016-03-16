@@ -13,5 +13,3 @@ var template = {
         return true;
     }
 };
-
-parent.templateController.template = template;

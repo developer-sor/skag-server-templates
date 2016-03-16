@@ -2,23 +2,19 @@
 
 $(function () {
     if (parent.forceFetch) {
-        console.log('force fetching for chart1');
         fetchData(null, constants.chart1CalcualtedData);
     }
     else if (hasRecentData(constants.chart1CalcualtedData)) {
-        console.log('getting calcualted data for chart1');
         isFetchingData = false;
         setChartWithLocalstoreData(constants.chart1CalcualtedData, prosessCalculatedData);
     }
     else if (hasRecentData(constants.chartRawdataData)) {
-        console.log('getting raw data for chart1');
         isFetchingData = false;
         //Setting data based on local storage data. See chartLocalstore.js for more
         setChartWithLocalstoreData(constants.chartRawdataData, prosessRawData);
     }
     else {
         //Getting data. See chartLocalstore.js for more
-        console.log('running fetchData() for chart1. No valid local data stored');
         fetchData(null, constants.chart1CalcualtedData);
     }
 
@@ -61,7 +57,6 @@ function prosessRawData(allRawData) {
 }
 
 function prosessCalculatedData(data) {
-    console.log('prosessCalculatedData() ', data);
     chartModel = data;
     populateChart();
 }

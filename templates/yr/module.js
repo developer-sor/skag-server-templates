@@ -4,5 +4,3 @@ var template = {
     name: "yr",
     canShow: function () { return true;}
 };
-
-parent.templateController.template = template;

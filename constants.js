@@ -23,5 +23,7 @@ var constants = {
     installation: 'installation/{key}',
     client: 'installation/{key}/clients',
     dataview: 'installation/{id}/dataview',
-    ping: 'installation/{id}/ping'
+    ping: 'installation/{id}/ping',
+    content1: '#content1',
+    content2: '#content2'
 }

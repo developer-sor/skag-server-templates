@@ -11,5 +11,3 @@ var template = {
     name: "chart1",
     canShow: function() { return true; }
 };
-
-parent.templateController.template = template;

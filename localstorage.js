@@ -1,5 +1,4 @@
 ﻿function hasRecentData(type) {
-    console.log('hasRecentData() ', type)
     switch (type) {
         case constants.installationData:
             var date = window.localStorage.getItem(constants.installationTime);
@@ -80,22 +79,22 @@ function setLocalStoreData(type, data) {
 
     switch (type) {
         case constants.chart1CalcualtedData:
-            console.log('Setting calculated data for chart1');
+            //console.log('Setting calculated data for chart1');
             window.localStorage.setItem(constants.chart1CalcualtedTime, new Date());
             window.localStorage.setItem(constants.chart1CalcualtedData, JSON.stringify(data));
             break;
         case constants.chart2CalcualtedData:
-            console.log('Setting calculated data for chart2');
+            //console.log('Setting calculated data for chart2');
             window.localStorage.setItem(constants.chart2CalcualtedTime, new Date());
             window.localStorage.setItem(constants.chart2CalcualtedData, JSON.stringify(data));
             break;
         case constants.chartRawdataData:
-            console.log('Setting rawdata for charts');
+            //console.log('Setting rawdata for charts');
             window.localStorage.setItem(constants.chartRawdataTime, new Date());
             window.localStorage.setItem(constants.chartRawdataData, JSON.stringify(data));
             break;
         case constants.yrData:
-            console.log('Setting rawdata for charts');
+            //console.log('Setting rawdata for charts');
             window.localStorage.setItem(constants.yrTime, new Date());
             window.localStorage.setItem(constants.yrData, JSON.stringify(data));
             break;
@@ -107,7 +106,7 @@ function setLocalStoreData(type, data) {
 
 
 function hasNonExpiredData(type) {
-    console.log('hasNonExpiredData() ', type)
+    //console.log('hasNonExpiredData() ', type)
     switch (type) {
         case constants.chart1CalcualtedData:
             var date = window.localStorage.getItem(constants.chart1CalcualtedTime);
