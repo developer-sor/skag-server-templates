@@ -13,5 +13,5 @@ var template = {
         return true;
     }
 };
-console.log('attaching module to parent');
+
 parent.templateController.template = template;

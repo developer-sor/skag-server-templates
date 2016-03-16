@@ -62,11 +62,23 @@ function handleError() {
 
 createWeatherForecast();
 
+
+
 function setWeatherForecast(jsonData) {
-    console.log(jsonData);
     $("#yr-credits").html(jsonData.weatherdata.credit.link["@attributes"].text);
     var weatherHTML = '';
-    for (var i = 0; i < 4; i++) {
+    var firstIndex = 0;
+    var now = new Date();
+
+    //I tilfelle vi bruker gamle data fra localstorage, sørg for at vi begynner på et tidspunkt som er relevant
+    for (var i = 0; i < jsonData.weatherdata.forecast.tabular.time.length; i++) {
+        if (now < new Date(jsonData.weatherdata.forecast.tabular.time[i]["@attributes"].to).getTime()) {
+            firstIndex = i;
+            break;
+        }
+    }
+
+    for (var i = firstIndex; i < (firstIndex+4) ; i++) {
         var data = jsonData.weatherdata.forecast.tabular.time[i];
 
         var from = new Date(data["@attributes"].from).getHours();
@@ -76,7 +88,7 @@ function setWeatherForecast(jsonData) {
         var symbol = data.symbol["@attributes"];
 
         var dayText = '';
-        if (i == 0) {
+        if (i == firstIndex) {
             dayText = 'I dag';
         }
         else if (period === "0") {

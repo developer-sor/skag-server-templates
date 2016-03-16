@@ -9,9 +9,6 @@ if (currentInstallation && !skipForYr) {
         }
     });
 }
-else {
-    console.log('yr template. skipping ajax setup');
-}
 
 
 function isNullOrEmpty(varToCheck) {
