@@ -177,7 +177,7 @@ var templateController = {
             this.currentActiveIframe = this.currentActiveIframe === constants.content1 ? constants.content2 : constants.content1;
         }
 
-        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html").addClass('noTransition').addClass('scaleOut');
+        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
 
         console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
     },
@@ -199,14 +199,12 @@ var templateController = {
             self.nextSlide();
         }, timeoutMillis);
 
-        setTimeout(function () {
-            self.lazyLoadNextSlide();
-        }, 500);
+        self.lazyLoadNextSlide();
 
     },
     toggleNextIFrame: function () {
-        $(constants.content1).removeClass('noTransition').toggleClass('transparent').removeClass('scaleOut');
-        $(constants.content2).removeClass('noTransition').toggleClass('transparent').removeClass('scaleOut');
+        $(constants.content1).toggleClass('transparent');
+        $(constants.content2).toggleClass('transparent');
     },
     abortSlide: function (name) {
         var self = this;
