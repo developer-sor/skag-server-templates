@@ -71,23 +71,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                data.templatesInUse = [
-                    {
-                        name: "yr",
-                        timeoutMillis: 500000
-                    },
-                    {
-                        name: "chart2",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "chart1",
-                        timeoutMillis: 5000
-                    },
-                    {
-                        name: "intro",
-                        timeoutMillis: 5000
-                    }];
+                //data.templatesInUse = [
+                //    {
+                //        name: "yr",
+                //        timeoutMillis: 500000
+                //    },
+                //    {
+                //        name: "chart2",
+                //        timeoutMillis: 5000
+                //    },
+                //    {
+                //        name: "chart1",
+                //        timeoutMillis: 5000
+                //    },
+                //    {
+                //        name: "intro",
+                //        timeoutMillis: 5000
+                //    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -183,6 +183,7 @@ var templateController = {
         var self = this;
         var currentTemplate = this.templates[this.templateIndex];
         $("#content").attr("src", "templates/" + currentTemplate.name + "/index.html").load(function () {
+            console.log(self.template);
             if (self.template.canShow()) {
                 var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
 
