@@ -69,15 +69,38 @@ iframe {
   right: 0;
   bottom: 0;
   margin: 0 !important;
-  padding: 0 !important; }
+  padding: 0 !important;
+  -webkit-transform: scale(1, 1);
+  -moz-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  transform: scale(1, 1);
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease; }
 
 .transparent {
   opacity: 0;
-  /*-webkit-transition: opacity 500ms ease;
-  -moz-transition: opacity 500ms ease;
-  -ms-transition: opacity 500ms ease;
-  -o-transition: opacity 500ms ease;
-  transition: opacity 500ms ease;*/ }
+  -webkit-transform: scale(0.5, 0.5);
+  -moz-transform: scale(0.5, 0.5);
+  -o-transform: scale(0.5, 0.5);
+  -ms-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5); }
+
+.scaleOut {
+  opacity: 0;
+  -webkit-transform: scale(1.5, 1.5);
+  -moz-transform: scale(1.5, 1.5);
+  -o-transform: scale(1.5, 1.5);
+  -ms-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5); }
+
+.noTransition {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none; }
 
 .lightTheme p, .lightTheme h1, .lightTheme h2, .lightTheme h3, .lightTheme h4, .lightTheme h5, .lightTheme h6, .lightTheme .themeTextColor, .lightTheme .dayText {
   color: black; }

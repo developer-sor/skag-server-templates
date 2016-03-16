@@ -64,23 +64,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                //data.templatesInUse = [
-                //    {
-                //        name: "yr",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "chart1",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "intro",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "chart2",
-                //        timeoutMillis: 10000
-                //    }];
+                data.templatesInUse = [
+                    {
+                        name: "yr",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart2",
+                        timeoutMillis: 10000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {
@@ -177,7 +177,8 @@ var templateController = {
             this.currentActiveIframe = this.currentActiveIframe === constants.content1 ? constants.content2 : constants.content1;
         }
 
-        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
+        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html").addClass('noTransition').addClass('scaleOut');
+
         console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
     },
     showNextSlide: function (start) {
@@ -201,8 +202,8 @@ var templateController = {
         this.lazyLoadNextSlide();
     },
     toggleNextIFrame: function () {
-        $(constants.content1).toggleClass('transparent');
-        $(constants.content2).toggleClass('transparent');
+        $(constants.content1).removeClass('noTransition').toggleClass('transparent').removeClass('scaleOut');
+        $(constants.content2).removeClass('noTransition').toggleClass('transparent').removeClass('scaleOut');
     },
     abortSlide: function (name) {
         var self = this;
