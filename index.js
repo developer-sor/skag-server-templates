@@ -32,7 +32,7 @@ var templateController = {
     templateIndex: 0,
     currentActiveIframe: constants.content1,
     defaultTimeOut: 5000,
-    failText : 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
+    failText: 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
     setInstallationData: function (data) {
         var self = this
         this.templatesInUse = data.templatesInUse;
@@ -49,7 +49,7 @@ var templateController = {
     },
     setBackgroundImage: function () {
         $('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
-        $('#backgroundOverlay').addClass(installationData.theme+'BackgroundOverlay')
+        $('#backgroundOverlay').addClass(installationData.theme + 'BackgroundOverlay')
     },
     fetchDataFromServer: function () {
         var self = this;
@@ -199,7 +199,10 @@ var templateController = {
             self.nextSlide();
         }, timeoutMillis);
 
-        this.lazyLoadNextSlide();
+        setTimeout(function () {
+            self.lazyLoadNextSlide();
+        }, 500);
+
     },
     toggleNextIFrame: function () {
         $(constants.content1).removeClass('noTransition').toggleClass('transparent').removeClass('scaleOut');
@@ -208,7 +211,7 @@ var templateController = {
     abortSlide: function (name) {
         var self = this;
         console.log('aborting slide ' + name + '. Lazy loading next slide');
-        
+
         if (this.templatesInUse[this.templateIndex].name == name) {
             console.log('aborted slide is the active one -> running showNextSlide()')
             self.showNextSlide();
