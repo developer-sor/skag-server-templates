@@ -32,6 +32,7 @@ var templateController = {
     templateIndex: 0,
     currentActiveIframe: constants.content1,
     defaultTimeOut: 5000,
+    currentTimeoutPromise: null,
     failText: 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
     setInstallationData: function (data) {
         var self = this
@@ -194,7 +195,8 @@ var templateController = {
             self.toggleNextIFrame();
         }
 
-        setTimeout(function () {
+        clearTimeout(self.currentTimeoutPromise);
+        self.currentTimeoutPromise = setTimeout(function () {
             console.log('time for next slide');
             self.nextSlide();
         }, timeoutMillis);
