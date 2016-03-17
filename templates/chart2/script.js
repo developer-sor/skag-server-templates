@@ -246,10 +246,11 @@ function markHighestBar() {
     var pathdata = firstHighest.attr('d');
     var pathDataY = parseInt(pathdata.split(',')[0].replace('M ', '').split('.')[0]);
     var pathWidht = parseInt(pathdata.split(',')[2].split(' ')[1].replace('L', '').split('.')[0]) - pathDataY;
+    console.log(pathDataY);
     try {
         var extraMargin = -15;
         var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
-        maksTimesforbrukLabel.css({ 'top': (pathDataY - maksTimesforbrukLabel.height())  + 'px', 'left': (firstHighest.offset().left - pathWidht - maksTimesforbrukLabel.width() / 2) + 'px' });
+        maksTimesforbrukLabel.css({ 'top': ($("#topContainer").height() + pathDataY - maksTimesforbrukLabel.height()) + 'px', 'left': (firstHighest.offset().left - pathWidht - maksTimesforbrukLabel.width() / 2) + 'px' });
     }
     catch(e){
         console.log('calculating markedHighestBars label failed');
