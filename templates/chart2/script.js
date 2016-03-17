@@ -34,6 +34,7 @@ var maxAmountOfSensors = 10;
 var paddingLeft = 115;
 var indexForMaxSensor = 0;
 var chartHeight = 430;
+var now = new Date();
 
 var chartModel = {
     data: [],
@@ -55,7 +56,9 @@ function prosessRawData(allRawData) {
         var newSensor = [key];
         chartModel.groups.push(key);
         for (var y = 0; y < rawData[key].data.length; y++) {
-            newSensor.push(rawData[key].data[y].val);
+            if (new Date(rawData[key].data[y].description).getTime() <= now.getTime()) {
+                newSensor.push(rawData[key].data[y].val);
+            }
         }
         chartModel.data.push(newSensor);
     }
@@ -64,11 +67,17 @@ function prosessRawData(allRawData) {
 
 function processRawTempData(allRawData) {
     var rawTempData = allRawData.subs.temperature.data;
-    var chartLastUpdated = new Date(rawTempData[rawTempData.length - 1].description);
-    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate() - 1)).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
+    
     for (var i = 0; i < rawTempData.length ; i++) {
-        chartModel.temp.push(rawTempData[i].val);
+        if (new Date(rawTempData[i].description).getTime() <= now.getTime()) {
+            chartModel.temp.push(rawTempData[i].val);
+        }
     }
+
+    var chartLastUpdated = new Date(rawTempData[chartModel.temp.length - 1].description);
+    console.log(chartLastUpdated);
+    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
+
     chartModel.data.push(chartModel.temp);
     chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
     chartModel.actualMin = Math.min.apply(null, chartModel.temp.slice(1));
@@ -246,7 +255,6 @@ function markHighestBar() {
     var pathdata = firstHighest.attr('d');
     var pathDataY = parseInt(pathdata.split(',')[0].replace('M ', '').split('.')[0]);
     var pathWidht = parseInt(pathdata.split(',')[2].split(' ')[1].replace('L', '').split('.')[0]) - pathDataY;
-    console.log(pathDataY);
     try {
         var extraMargin = -15;
         var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
