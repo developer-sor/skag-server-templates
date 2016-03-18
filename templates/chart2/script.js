@@ -253,12 +253,18 @@ function markHighestBar() {
     highestBars.addClass("markedBar");
     var firstHighest = highestBars.first();
     var pathdata = firstHighest.attr('d');
-    var pathDataY = parseInt(pathdata.split(',')[0].replace('M ', '').split('.')[0]);
-    var pathWidht = parseInt(pathdata.split(',')[2].split(' ')[1].replace('L', '').split('.')[0]) - pathDataY;
+    var paths = pathdata.split(',');
+    var pathDataY = parseInt(paths[paths.length - 1].replace(' z', '').split('.')[0]);
+
+    var pathWidht = parseInt(paths[2].split(' ')[1].replace('L', '').split('.')[0]) - parseInt(paths[0].split(' ')[1].replace('L', '').split('.')[0]);
+
+    var topContainerHeight = $("#topContainer").height();
+    var spaceBetweenTopOfBarAndChartTop = chartHeight - pathDataY;
+    console.log(topContainerHeight)
     try {
         var extraMargin = -15;
         var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
-        maksTimesforbrukLabel.css({ 'top': ($("#topContainer").height() + pathDataY - maksTimesforbrukLabel.height()) + 'px', 'left': (firstHighest.offset().left - pathWidht - maksTimesforbrukLabel.width() / 2) + 'px' });
+        maksTimesforbrukLabel.css({ 'top': (topContainerHeight + spaceBetweenTopOfBarAndChartTop) + 'px', 'left': (firstHighest.offset().left - (pathWidht/2) - maksTimesforbrukLabel.width() / 2) + 'px' });
     }
     catch(e){
         console.log('calculating markedHighestBars label failed');
