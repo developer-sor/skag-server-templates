@@ -76,12 +76,18 @@
             margin-top: 2.5rem;
             text-align: center;
             border: 3px solid white;
-            height: 80%;
+            height: 83%;
             display: flex;
             align-items: center;
             justify-content: center;
-            .time, .temp{
+
+            .time, .temp {
                 margin: 0 !important;
+            }
+
+            .temp {
+                font-size: 6rem;
+                line-height: 8rem;
             }
         }
     }
@@ -288,7 +294,7 @@
     }
 }
 
-.maksTimesforbrukLabel{
+.maksTimesforbrukLabel {
     position: absolute;
     border-radius: 3px;
     color: $barChart2;
