@@ -81,6 +81,11 @@
             align-items: center;
             justify-content: center;
 
+            .symbol img{
+                max-width: 100%;
+                height: auto;
+            }
+
             .time, .temp {
                 margin: 0 !important;
             }

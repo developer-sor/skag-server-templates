@@ -345,6 +345,9 @@ iframe {
       display: flex;
       align-items: center;
       justify-content: center; }
+      .weatherForecast .weatherWrapper .weather .symbol img {
+        max-width: 100%;
+        height: auto; }
       .weatherForecast .weatherWrapper .weather .time, .weatherForecast .weatherWrapper .weather .temp {
         margin: 0 !important; }
       .weatherForecast .weatherWrapper .weather .temp {
