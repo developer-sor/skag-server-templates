@@ -96,7 +96,7 @@ var templateController = {
         })
         .fail(function (error) {
             console.log('Error fetching data from server: ', error);
-            if (hasRecentData(constants.installationData)) {
+            if (self.hasValidInstallationData()) {
                 console.log('Backup solution: getting installationdata from localstorage since fetch failed');
                 self.setInstallationBasedOnInstallationData();
             }
