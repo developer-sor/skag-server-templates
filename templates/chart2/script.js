@@ -42,7 +42,7 @@ var chartModel = {
     lastTempDate: null,
     actualMax: 0,
     actualMin: 0,
-    temp : ['temp']
+    temp: ['temp']
 }
 
 function prosessRawData(allRawData) {
@@ -56,7 +56,7 @@ function prosessRawData(allRawData) {
         var newSensor = [key];
         chartModel.groups.push(key);
         for (var y = 0; y < rawData[key].data.length; y++) {
-            if (new Date(rawData[key].data[y].description).getTime() <= now.getTime()) {
+            if (new Date(rawData[key].data[y].description + 'Z').getTime() <= now.getTime()) {
                 newSensor.push(rawData[key].data[y].val);
             }
         }
@@ -67,15 +67,16 @@ function prosessRawData(allRawData) {
 
 function processRawTempData(allRawData) {
     var rawTempData = allRawData.subs.temperature.data;
-    
+
     for (var i = 0; i < rawTempData.length ; i++) {
-        if (new Date(rawTempData[i].description).getTime() <= now.getTime()) {
+        if (new Date(rawTempData[i].description + 'Z').getTime() <= now.getTime()) {
             chartModel.temp.push(rawTempData[i].val);
         }
     }
-
+    console.log(now.getTime());
+    console.log(rawTempData[chartModel.data[0].length - 2].description);
     var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
-    console.log('chartLastUpdated ',chartLastUpdated);
+    console.log('chartLastUpdated ', chartLastUpdated);
     chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
 
     chartModel.data.push(chartModel.temp);
@@ -98,13 +99,14 @@ function findDataAverageValues() {
     var data = chartModel.data;
     var amountOfSensors = chartModel.groups.length; //Exclude temp sensor
     var amountOfDataRows = data[0].length;
+    console.log('amountOfDataRows ', amountOfDataRows);
     //i = 1 because first cell is text, not number
-    for (var i = 0; i < amountOfDataRows; i++) { 
+    for (var i = 0; i < amountOfDataRows; i++) {
         var amountToCheckAgainstMax = 0;
-        
+
         for (var y = 0; y < amountOfSensors; y++) {
             //Sjekk at data ikke er null
-            
+
             if (data[y][i]) {
                 amountToCheckAgainstMax += data[y][i];
             }
@@ -228,7 +230,7 @@ function populateChart() {
 function expandWhiteBand() {
     var chart = $("#chart");
     var chart2MarginFix = 28;
-    $("#whiteBand").css({ "top": chart.offset().top + (chart.height()) - (chart2MarginFix ) + "px" });
+    $("#whiteBand").css({ "top": chart.offset().top + (chart.height()) - (chart2MarginFix) + "px" });
     $("#chart").addClass('chart2MarginFix');
 }
 
@@ -261,11 +263,11 @@ function markHighestBar() {
     var topContainerHeight = $("#topContainer").height();
     var spaceBetweenTopOfBarAndChartTop = chartHeight - pathDataY;
     try {
-        var extraMargin = -15;
         var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
-        maksTimesforbrukLabel.css({ 'top': (topContainerHeight + spaceBetweenTopOfBarAndChartTop) + 'px', 'left': (firstHighest.offset().left - (pathWidht/2) - maksTimesforbrukLabel.width() / 2) + 'px' });
+
+        maksTimesforbrukLabel.css({ 'top': (topContainerHeight + spaceBetweenTopOfBarAndChartTop + (maksTimesforbrukLabel.height() - 10)) + 'px', 'left': (firstHighest.offset().left - (pathWidht / 2) - 1 - maksTimesforbrukLabel.width() / 2) + 'px' });
     }
-    catch(e){
+    catch (e) {
         console.log('calculating markedHighestBars label failed');
     }
 }
