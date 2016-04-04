@@ -1,3 +1,27 @@
+@charset "UTF-8";
+/*Klokke			#1c2d66 (laugstol profil farge, også på svart mal)
+— Graf en uke
+Graf01			#1c2d66 (bunnen, alle graf-farger brukes også på svart mal)
+Graf02			#1c518a
+Graf03			#1b81bd
+Graf04			#1ba4e1 (laugstol profil farge)
+Graf05			#54b5b5
+Graf06			#a3cc77
+Graf07			#dcdc4a (laugstol profil farge)
+Graf08			#ffce55 (laugstol profil farge)
+Graf09			#d9ad3d
+Graf10			#b28924
+Graf labels		#1c2d66t
+Graf labels		#ffffff (mørk mal)
+Graf “Maks"		#1c2d66 (lys mal)
+Graf “Maks”		#000000 (mørk mal)
+Graf temp		#b22424
+Graf temp labels 	#b22424 (lys mal)
+Graf temp labels 	#fff (mørk mal)
+— Graf 3-4 mnd
+Graf normal		#1c2d66
+Graf nå			#1ba4e1
+Spart tall			#1ba4e1*/
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -157,14 +181,64 @@ iframe {
   padding: 0 10%;
   color: #c22323; }
 
+/*Klokke			#1c2d66 (laugstol profil farge, også på svart mal)
+— Graf en uke
+Graf01			#1c2d66 (bunnen, alle graf-farger brukes også på svart mal)
+Graf02			#1c518a
+Graf03			#1b81bd
+Graf04			#1ba4e1 (laugstol profil farge)
+Graf05			#54b5b5
+Graf06			#a3cc77
+Graf07			#dcdc4a (laugstol profil farge)
+Graf08			#ffce55 (laugstol profil farge)
+Graf09			#d9ad3d
+Graf10			#b28924
+Graf labels		#1c2d66t
+Graf labels		#ffffff (mørk mal)
+Graf “Maks"		#1c2d66 (lys mal)
+Graf “Maks”		#000000 (mørk mal)
+Graf temp		#b22424
+Graf temp labels 	#b22424 (lys mal)
+Graf temp labels 	#fff (mørk mal)
+— Graf 3-4 mnd
+Graf normal		#1c2d66
+Graf nå			#1ba4e1
+Spart tall			#1ba4e1*/
+/*Klokke			#1c2d66 (laugstol profil farge, også på svart mal)
+— Graf en uke
+Graf01			#1c2d66 (bunnen, alle graf-farger brukes også på svart mal)
+Graf02			#1c518a
+Graf03			#1b81bd
+Graf04			#1ba4e1 (laugstol profil farge)
+Graf05			#54b5b5
+Graf06			#a3cc77
+Graf07			#dcdc4a (laugstol profil farge)
+Graf08			#ffce55 (laugstol profil farge)
+Graf09			#d9ad3d
+Graf10			#b28924
+Graf labels		#1c2d66t
+Graf labels		#ffffff (mørk mal)
+Graf “Maks"		#1c2d66 (lys mal)
+Graf “Maks”		#000000 (mørk mal)
+Graf temp		#b22424
+Graf temp labels 	#b22424 (lys mal)
+Graf temp labels 	#fff (mørk mal)
+— Graf 3-4 mnd
+Graf normal		#1c2d66
+Graf nå			#1ba4e1
+Spart tall			#1ba4e1*/
 .chart {
   width: 100%; }
 
 .lightTheme .c3-chart-texts .c3-text {
   fill: black !important; }
+.lightTheme .c3-axis-y .tick text {
+  fill: #1c2d66; }
 
 .darkTheme .c3-chart-texts .c3-text {
   fill: black !important; }
+.darkTheme .c3-axis-y .tick text {
+  fill: white; }
 
 .c3-chart-lines .c3-chart-line path {
   stroke: #c22323 !important;
@@ -184,7 +258,6 @@ iframe {
     stroke: transparent !important;
     fill: transparent !important; }
   .c3-axis-y .tick text {
-    fill: black;
     font-size: 1.5rem; }
   .c3-axis-y .tick line {
     opacity: 0;
@@ -194,10 +267,10 @@ iframe {
   stroke: transparent !important;
   fill: transparent !important; }
 .c3-axis-x .tick text {
-  fill: #198dc7;
+  fill: #1ba4e1;
   font-size: 2.5rem; }
 .c3-axis-x .tick line {
-  stroke: #198dc7;
+  stroke: #1ba4e1;
   stroke-width: 2px; }
 
 .c3-axis-y2 path {
@@ -210,76 +283,100 @@ iframe {
   opacity: 0;
   visibility: hidden; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(1) .c3-bar {
-  stroke: #136994 !important;
-  fill: #136994 !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
-  stroke: #29a6e4 !important;
-  fill: #29a6e4 !important;
+.chart1 .c3-chart-bars .c3-chart-bar:nth-child(1) .c3-bar {
+  stroke: #1c2d66 !important;
+  fill: #1c2d66 !important; }
+.chart1 .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
+  stroke: #3250b6 !important;
+  fill: #3250b6 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bar {
-  stroke: #198dc7 !important;
-  fill: #198dc7 !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
-  stroke: #5cbbea !important;
-  fill: #5cbbea !important;
+.chart1 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bar {
+  stroke: #1ba4e1 !important;
+  fill: #1ba4e1 !important; }
+.chart1 .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
+  stroke: #74c9ee !important;
+  fill: #74c9ee !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(3) .c3-bar {
-  stroke: #945913 !important;
-  fill: #945913 !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
-  stroke: #e48e29 !important;
-  fill: #e48e29 !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(1) .c3-bar {
+  stroke: #1c2d66 !important;
+  fill: #1c2d66 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
+  stroke: #3250b6 !important;
+  fill: #3250b6 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(4) .c3-bar {
-  stroke: #c78819 !important;
-  fill: #c78819 !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
-  stroke: #eab75c !important;
-  fill: #eab75c !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bar {
+  stroke: #1c518a !important;
+  fill: #1c518a !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
+  stroke: #3683d6 !important;
+  fill: #3683d6 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(5) .c3-bar {
-  stroke: #139441 !important;
-  fill: #139441 !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
-  stroke: #29e46c !important;
-  fill: #29e46c !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(3) .c3-bar {
+  stroke: #1b81bd !important;
+  fill: #1b81bd !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
+  stroke: #57b2e7 !important;
+  fill: #57b2e7 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(6) .c3-bar {
-  stroke: #19c74a !important;
-  fill: #19c74a !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
-  stroke: #5cea84 !important;
-  fill: #5cea84 !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(4) .c3-bar {
+  stroke: #1ba4e1 !important;
+  fill: #1ba4e1 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
+  stroke: #74c9ee !important;
+  fill: #74c9ee !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(7) .c3-bar {
-  stroke: red !important;
-  fill: red !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
-  stroke: #ff6666 !important;
-  fill: #ff6666 !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(5) .c3-bar {
+  stroke: #54b5b5 !important;
+  fill: #54b5b5 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
+  stroke: #9bd4d4 !important;
+  fill: #9bd4d4 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(8) .c3-bar {
-  stroke: yellow !important;
-  fill: yellow !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
-  stroke: #ffff66 !important;
-  fill: #ffff66 !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(6) .c3-bar {
+  stroke: #a3cc77 !important;
+  fill: #a3cc77 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
+  stroke: #d5e8c1 !important;
+  fill: #d5e8c1 !important;
   opacity: 0.7 !important; }
 
-.c3-chart-bars .c3-chart-bar:nth-child(9) .c3-bar {
-  stroke: brown !important;
-  fill: brown !important; }
-.c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
-  stroke: #d65f5f !important;
-  fill: #d65f5f !important;
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(7) .c3-bar {
+  stroke: #dcdc4a !important;
+  fill: #dcdc4a !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
+  stroke: #eded9f !important;
+  fill: #eded9f !important;
+  opacity: 0.7 !important; }
+
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(8) .c3-bar {
+  stroke: #ffce55 !important;
+  fill: #ffce55 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
+  stroke: #ffebbb !important;
+  fill: #ffebbb !important;
+  opacity: 0.7 !important; }
+
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(9) .c3-bar {
+  stroke: #d9ad3d !important;
+  fill: #d9ad3d !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
+  stroke: #ead192 !important;
+  fill: #ead192 !important;
+  opacity: 0.7 !important; }
+
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(10) .c3-bar {
+  stroke: #b28924 !important;
+  fill: #b28924 !important; }
+.chart2 .c3-chart-bars .c3-chart-bar:nth-child(10) .markedBar {
+  stroke: #deb95e !important;
+  fill: #deb95e !important;
   opacity: 0.7 !important; }
 
 .topContainer {
@@ -380,7 +477,7 @@ iframe {
     font-size: 1.5rem;
     line-height: 30px; }
   .whiteBand .time {
-    color: black !important;
+    color: #1c2d66 !important;
     line-height: 65px;
     font-size: 65px; }
   .whiteBand .whiteBandRow {
@@ -434,23 +531,25 @@ iframe {
           margin-left: -2.25rem;
           left: -1rem; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel1 {
-          background-color: #136994; }
+          background-color: #1c2d66; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel2 {
-          background-color: #198dc7; }
+          background-color: #1c518a; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel3 {
-          background-color: #945913; }
+          background-color: #1b81bd; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel4 {
-          background-color: #c78819; }
+          background-color: #1ba4e1; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel5 {
-          background-color: #139441; }
+          background-color: #54b5b5; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel6 {
-          background-color: #19c74a; }
+          background-color: #a3cc77; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel7 {
-          background-color: red; }
+          background-color: #dcdc4a; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel8 {
-          background-color: yellow; }
+          background-color: #ffce55; }
         .whiteBandGraph2 .sensors .sensor h4 .sensorLabel9 {
-          background-color: brown; }
+          background-color: #d9ad3d; }
+        .whiteBandGraph2 .sensors .sensor h4 .sensorLabel10 {
+          background-color: #b28924; }
 
 .saved {
   text-align: center;
@@ -507,13 +606,13 @@ iframe {
     .saved .savedText #amountPrefix {
       margin-bottom: 0.5rem; }
   .saved .amountSaved {
-    color: #198dc7;
+    color: #1ba4e1;
     margin: 0; }
 
 .maksTimesforbrukLabel {
   position: absolute;
   border-radius: 3px;
-  color: #198dc7;
+  color: #1c2d66;
   padding: 5px 10px;
   background-color: white; }
   .maksTimesforbrukLabel:after {
@@ -530,7 +629,7 @@ iframe {
 
 .lastNight {
   font-size: 2rem;
-  border-right: 3px solid #198dc7;
+  border-right: 3px solid #1ba4e1;
   padding-top: 18px;
   padding-right: 10px;
   margin-right: 109px; }

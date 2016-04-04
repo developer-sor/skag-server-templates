@@ -89,7 +89,6 @@
             .time, .temp {
                 margin: 0 !important;
             }
-
             .temp {
                 font-size: 6rem;
                 line-height: 8rem;
@@ -137,7 +136,7 @@
     }
 
     .time {
-        color: black !important;
+        color: $barChart1 !important;
         line-height: 65px;
         font-size: 65px;
     }
@@ -217,8 +216,8 @@
                     left: -1rem;
                 }
 
-                @each $color in $barChartList {
-                    $i: index($barChartList, $color);
+                @each $color in $barChartList2 {
+                    $i: index($barChartList2, $color);
 
                     .sensorLabel#{$i} {
                         background-color: $color;
@@ -294,7 +293,7 @@
     }
 
     .amountSaved {
-        color: $barChart2;
+        color: $barChart4;
         margin: 0;
     }
 }
@@ -302,7 +301,7 @@
 .maksTimesforbrukLabel {
     position: absolute;
     border-radius: 3px;
-    color: $barChart2;
+    color: $barChart1;
     padding: 5px 10px;
     background-color: white;
 
@@ -322,7 +321,7 @@
 
 .lastNight {
     font-size: 2rem;
-    border-right: 3px solid $barChart2;
+    border-right: 3px solid $barChart4;
     padding-top: 18px;
     padding-right: 10px;
     margin-right: 109px;

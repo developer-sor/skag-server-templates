@@ -7,20 +7,47 @@ $darkTextContainer: hsla(0, 0%, 0%, 0.5);
 $darkBackgroundOverlay: hsla(0, 0%, 0%, 0.15);
 $chartContainer: hsla(0, 0%, 100%, 0.6);
 
-$barChart1 :#136994;
-$barChart2 :#198dc7;
-$barChart3: #945913;
-$barChart4: #c78819;
-$barChart5: #139441;
-$barChart6: #19c74a;
-$barChart7: red;
-$barChart8: yellow;
-$barChart9: brown;
+$barChart1 :#1c2d66;
+$barChart2 :#1c518a;
+$barChart3: #1b81bd;
+$barChart4: #1ba4e1;
+$barChart5: #54b5b5;
+$barChart6: #a3cc77;
+$barChart7: #dcdc4a;
+$barChart8: #ffce55;
+$barChart9: #d9ad3d;
+$barChart10: #b28924;
 
-$barChartList: $barChart1 $barChart2 $barChart3 $barChart4 $barChart5 $barChart6 $barChart7 $barChart8 $barChart9;
+$barChartList1: $barChart1 $barChart4;
+$barChartList2: $barChart1 $barChart2 $barChart3 $barChart4 $barChart5 $barChart6 $barChart7 $barChart8 $barChart9 $barChart10;
 
 $barChartSpline1: #c22323;
 $savedRotation: 15deg;
 $markedBarLighten: 20%;
 
 $backgroundBlurSize: 5px;
+
+/*Klokke			#1c2d66 (laugstol profil farge, også på svart mal)
+— Graf en uke
+Graf01			#1c2d66 (bunnen, alle graf-farger brukes også på svart mal)
+Graf02			#1c518a
+Graf03			#1b81bd
+Graf04			#1ba4e1 (laugstol profil farge)
+Graf05			#54b5b5
+Graf06			#a3cc77
+Graf07			#dcdc4a (laugstol profil farge)
+Graf08			#ffce55 (laugstol profil farge)
+Graf09			#d9ad3d
+Graf10			#b28924
+Graf labels		#1c2d66t
+Graf labels		#ffffff (mørk mal)
+Graf “Maks"		#1c2d66 (lys mal)
+Graf “Maks”		#000000 (mørk mal)
+Graf temp		#b22424
+Graf temp labels 	#b22424 (lys mal)
+Graf temp labels 	#fff (mørk mal)
+— Graf 3-4 mnd
+Graf normal		#1c2d66
+Graf nå			#1ba4e1
+Spart tall			#1ba4e1*/
+

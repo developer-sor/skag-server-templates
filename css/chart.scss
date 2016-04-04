@@ -12,12 +12,24 @@
             fill: $darkText !important;
         }
     }
+
+    .c3-axis-y {
+        .tick text {
+            fill: $barChart1;
+        }
+    }
 }
 
 .darkTheme {
     .c3-chart-texts {
         .c3-text {
             fill: $darkText !important;
+        }
+    }
+
+    .c3-axis-y {
+        .tick text {
+            fill: $lightText;
         }
     }
 }
@@ -57,7 +69,6 @@
 
     .tick {
         text {
-            fill: black;
             font-size: 1.5rem;
         }
 
@@ -77,12 +88,12 @@
 
     .tick {
         text {
-            fill: $barChart2;
+            fill: $barChart4;
             font-size: 2.5rem;
         }
 
         line {
-            stroke: $barChart2;
+            stroke: $barChart4;
             stroke-width: 2px;
         }
     }
@@ -107,18 +118,41 @@
     }
 }
 
-@each $color in $barChartList {
-    $i: index($barChartList, $color);
+@each $color in $barChartList1 {
+    $i: index($barChartList1, $color);
 
-    .c3-chart-bars .c3-chart-bar:nth-child(#{$i})  {
-        .c3-bar {
-            stroke: $color !important;
-            fill: $color !important;
+    .chart1 {
+        .c3-chart-bars .c3-chart-bar:nth-child(#{$i}) {
+            .c3-bar {
+                stroke: $color !important;
+                fill: $color !important;
+            }
+
+            .markedBar {
+                stroke: lighten($color, $markedBarLighten) !important;
+                fill: lighten($color, $markedBarLighten) !important;
+                opacity: 0.7 !important;
+            }
         }
-        .markedBar {
-            stroke: lighten($color, $markedBarLighten) !important;
-            fill: lighten($color, $markedBarLighten) !important;
-            opacity: 0.7 !important;
+    }
+}
+
+
+@each $color in $barChartList2 {
+    $i: index($barChartList2, $color);
+
+    .chart2 {
+        .c3-chart-bars .c3-chart-bar:nth-child(#{$i}) {
+            .c3-bar {
+                stroke: $color !important;
+                fill: $color !important;
+            }
+
+            .markedBar {
+                stroke: lighten($color, $markedBarLighten) !important;
+                fill: lighten($color, $markedBarLighten) !important;
+                opacity: 0.7 !important;
+            }
         }
     }
 }

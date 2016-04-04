@@ -67,7 +67,7 @@ var templateController = {
             if (data) {
                 //data.templatesInUse = [
                 //    {
-                //        name: "yr",
+                //        name: "chart2",
                 //        timeoutMillis: 10000000
                 //    },
                 //    {
@@ -75,11 +75,11 @@ var templateController = {
                 //        timeoutMillis: 10000
                 //    },
                 //    {
-                //        name: "chart1",
+                //        name: "yr",
                 //        timeoutMillis: 10000
                 //    },
                 //    {
-                //        name: "chart2",
+                //        name: "chart1",
                 //        timeoutMillis: 10000
                 //    }];
                 self.setInstallationData(data);

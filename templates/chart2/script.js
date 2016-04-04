@@ -158,6 +158,7 @@ function populateChart() {
             groups: [
                 chartModel.groups
             ],
+            order: null,
             axes: {
                 temp: 'y2'
             }
