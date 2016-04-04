@@ -81,7 +81,7 @@
             align-items: center;
             justify-content: center;
 
-            .symbol img{
+            .symbol img {
                 max-width: 100%;
                 height: auto;
             }
@@ -305,6 +305,19 @@
     color: $barChart2;
     padding: 5px 10px;
     background-color: white;
+
+    &:after {
+        content: ".";
+        color: transparent;
+        width: 0px;
+        height: 0px;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-top: 10px solid white;
+        position: absolute;
+        margin-top: 23px;
+        margin-left: -50%;
+    }
 }
 
 .lastNight {

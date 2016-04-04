@@ -260,7 +260,6 @@ function markHighestBar() {
 
     var topContainerHeight = $("#topContainer").height();
     var spaceBetweenTopOfBarAndChartTop = chartHeight - pathDataY;
-    console.log(topContainerHeight)
     try {
         var extraMargin = -15;
         var maksTimesforbrukLabel = $("#maksTimesforbrukLabel");
