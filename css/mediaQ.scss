@@ -1,0 +1,66 @@
+﻿@import "variables.scss";
+
+
+
+@media screen and (max-height: 1079px) {
+    .saved {
+        top: 5rem;
+        right: 1rem;
+        width: 15rem;
+        height: 15rem;
+
+
+        .savedText {
+            h3 {
+                line-height: 2rem;
+            }
+
+            #amountPrefix {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+
+
+
+    .whiteBandGraph2 {
+        min-height: 320px;
+        height: auto;
+
+        .timeUsage {
+            h1 {
+                font-size: 5rem;
+            }
+        }
+
+        .sensors {
+            .sensor {
+                h4 {
+                    padding-left: 2rem;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+    .whiteBand {
+        bottom: 0;
+    }
+
+
+    .weatherForecast {
+        margin-bottom: 2.5rem;
+        .weatherWrapper {
+            .weather {
+                margin-top: 0;
+                .temp {
+                    font-size: 5rem;
+                    line-height: 5rem;
+                }
+                .time{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}

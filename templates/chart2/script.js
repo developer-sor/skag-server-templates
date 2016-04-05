@@ -33,7 +33,7 @@ var maxAmountOfSensors = 10;
 
 var paddingLeft = 115;
 var indexForMaxSensor = 0;
-var chartHeight = 430;
+var chartHeight = getChartHeight();
 var now = new Date();
 
 var chartModel = {
@@ -43,6 +43,10 @@ var chartModel = {
     actualMax: 0,
     actualMin: 0,
     temp: ['temp']
+}
+
+function getChartHeight() {
+    return (window.innerHeight / 100) * 39.8;
 }
 
 function prosessRawData(allRawData) {

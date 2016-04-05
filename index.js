@@ -65,23 +65,23 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
-                //data.templatesInUse = [
-                //    {
-                //        name: "chart1",
-                //        timeoutMillis: 10000000
-                //    },
-                //    {
-                //        name: "intro",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "yr",
-                //        timeoutMillis: 10000
-                //    },
-                //    {
-                //        name: "chart2",
-                //        timeoutMillis: 10000
-                //    }];
+                data.templatesInUse = [
+                    {
+                        name: "yr",
+                        timeoutMillis: 10000000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "yr",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 10000
+                    }];
                 self.setInstallationData(data);
             }
             else if (!data && self.hasValidInstallationData()) {

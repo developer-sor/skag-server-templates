@@ -172,7 +172,6 @@
 
     .sensorRow {
         position: absolute;
-        bottom: 130px;
     }
 
     .logoRow {
@@ -326,3 +325,6 @@
     padding-right: 10px;
     margin-right: 109px;
 }
+
+
+@import "mediaQ.scss";

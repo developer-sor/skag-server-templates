@@ -61,6 +61,9 @@ function prosessCalculatedData(data) {
     populateChart();
 }
 
+function getChartHeight() {
+    return (window.innerHeight / 100) * 49;
+}
 
 function populateChart() {
     var chart = c3.generate({
@@ -69,7 +72,7 @@ function populateChart() {
             top: 50
         },
         size: {
-            height: 530
+            height: getChartHeight()
         },
         data: {
             columns: chartModel.data,
