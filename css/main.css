@@ -139,7 +139,7 @@ iframe {
 .darkTheme .textContainer, .darkTheme .darkContainer, .darkTheme .weather {
   background-color: rgba(0, 0, 0, 0.5) !important; }
 .darkTheme .chartContainer {
-  background-color: rgba(255, 255, 255, 0.6) !important; }
+  background-color: rgba(255, 255, 255, 0.5) !important; }
 
 .darkBackgroundOverlay {
   background-color: rgba(0, 0, 0, 0.15); }
@@ -234,10 +234,14 @@ Spart tall			#1ba4e1*/
   fill: black !important; }
 .lightTheme .c3-axis-y .tick text {
   fill: #1c2d66; }
+.lightTheme .c3-axis-y2 .tick text {
+  fill: #c22323; }
 
 .darkTheme .c3-chart-texts .c3-text {
   fill: black !important; }
 .darkTheme .c3-axis-y .tick text {
+  fill: white; }
+.darkTheme .c3-axis-y2 .tick text {
   fill: white; }
 
 .c3-chart-lines .c3-chart-line path {
@@ -277,7 +281,6 @@ Spart tall			#1ba4e1*/
   stroke: transparent !important;
   fill: transparent !important; }
 .c3-axis-y2 .tick text {
-  fill: #c22323;
   font-size: 1.5rem; }
 .c3-axis-y2 .tick line {
   opacity: 0;

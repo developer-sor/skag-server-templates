@@ -18,6 +18,12 @@
             fill: $barChart1;
         }
     }
+
+    .c3-axis-y2 {
+        .tick text {
+            fill: $barChartSpline1;
+        }
+    }
 }
 
 .darkTheme {
@@ -28,6 +34,12 @@
     }
 
     .c3-axis-y {
+        .tick text {
+            fill: $lightText;
+        }
+    }
+
+    .c3-axis-y2 {
         .tick text {
             fill: $lightText;
         }
@@ -107,7 +119,6 @@
 
     .tick {
         text {
-            fill: $barChartSpline1;
             font-size: 1.5rem;
         }
 
