@@ -77,8 +77,7 @@ function processRawTempData(allRawData) {
             chartModel.temp.push(rawTempData[i].val);
         }
     }
-    var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description + 'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
-    console.log('chartLastUpdated ', chartLastUpdated);
+    var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description +'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
     chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
 
     chartModel.data.push(chartModel.temp);
@@ -214,7 +213,7 @@ function populateChart() {
 
     markHighestBar();
     makePathGoAllTheWayAndGetLastXY();
-
+    console.log(chartModel.lastTempDate);
     ko.applyBindings({
         groups: chartModel.groups,
         getClass: function (index) {
