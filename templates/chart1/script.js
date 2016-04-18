@@ -4,7 +4,7 @@ $(function () {
     if (parent.forceFetch) {
         fetchData(null, constants.chart1CalcualtedData);
     }
-    else if (hasRecentData(constants.chart1CalcualtedData)) {
+    else if (hasRecentData(constants.chart1CalcualtedData) && hasRecentData(constants.chartRawdataData)) {
         isFetchingData = false;
         setChartWithLocalstoreData(constants.chart1CalcualtedData, prosessCalculatedData);
     }
