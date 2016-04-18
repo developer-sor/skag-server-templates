@@ -140,7 +140,7 @@ var templateController = {
         }
     },
     runTemplates: function () {
-        if (this.templatesInUse != null) {
+        if (this.templatesInUse !== null) {
             $("#master-header").html(installation.name);
             this.showNextSlide('start');
         }

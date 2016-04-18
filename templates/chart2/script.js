@@ -103,7 +103,6 @@ function findDataAverageValues() {
     var data = chartModel.data;
     var amountOfSensors = chartModel.groups.length; //Exclude temp sensor
     var amountOfDataRows = data[0].length;
-    console.log('amountOfDataRows ', amountOfDataRows);
     //i = 1 because first cell is text, not number
     for (var i = 0; i < amountOfDataRows; i++) {
         var amountToCheckAgainstMax = 0;
