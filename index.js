@@ -122,6 +122,7 @@ var templateController = {
         this.templatesInUse = data.templatesInUse;
         installationData = data;
         this.setBackgroundImage();
+        this.runTemplates();
     },
     applyForceFetch: function (template) {
         this.templatesToForceFetchOn.splice(this.templatesToForceFetchOn.indexOf(template), 1);
@@ -132,7 +133,7 @@ var templateController = {
         if (hasRecentData(constants.installationData) && this.hasValidInstallationData() && !forceFetch) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
-            this.runTemplates();
+            
         }
         else {
             console.log("Installationdata not retrieved yet or to old or fetch is forced. Attempting to fetch from server..");
