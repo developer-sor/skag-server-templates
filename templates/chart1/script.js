@@ -132,7 +132,7 @@ function savedAmount() {
         amountPrefix.text('kWh');
         chartModel.savedAmount = chartModel.savedAmount;
     }
-
+    console.log(chartModel.savedAmount);
     if (chartModel.savedAmount > 0) {
         $("#amountSaved").text(chartModel.savedAmount);
         $("#saved").show();

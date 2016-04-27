@@ -86,9 +86,18 @@
                 height: auto;
             }
 
+            .Cchar {
+                font-size: 4rem;
+            }
+
+            .Cchar:first-of-type {
+                vertical-align: text-top;
+            }
+
             .time, .temp {
                 margin: 0 !important;
             }
+
             .temp {
                 font-size: 6rem;
                 line-height: 8rem;

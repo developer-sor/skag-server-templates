@@ -160,8 +160,10 @@
             }
 
             .markedBar {
-                stroke: lighten($color, $markedBarLighten) !important;
-                fill: lighten($color, $markedBarLighten) !important;
+                /*stroke: lighten($color, $markedBarLighten) !important;
+                fill: lighten($color, $markedBarLighten) !important;*/
+                stroke: $barChartSpline1 !important;
+                fill: $barChartSpline1 !important;
                 opacity: 0.7 !important;
             }
         }

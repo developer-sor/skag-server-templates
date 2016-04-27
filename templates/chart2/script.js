@@ -32,7 +32,6 @@ var maxAmountOfSensors = 10;
 
 
 var paddingLeft = 115;
-var indexForMaxSensor = 0;
 var chartHeight = getChartHeight();
 var now = new Date();
 
@@ -42,7 +41,9 @@ var chartModel = {
     lastTempDate: null,
     actualMax: 0,
     actualMin: 0,
-    temp: ['temp']
+    temp: ['temp'],
+    dataDates: ['datelabel'],
+    indexForMaxSensor: 0
 }
 
 function getChartHeight() {
@@ -62,6 +63,9 @@ function prosessRawData(allRawData) {
         for (var y = 0; y < rawData[key].data.length; y++) {
             if (new Date(rawData[key].data[y].description + 'Z').getTime() <= now.getTime()) {
                 newSensor.push(rawData[key].data[y].val);
+                if (count === 1) {
+                    chartModel.dataDates.push(rawData[key].data[y].description + 'Z');
+                }
             }
         }
         chartModel.data.push(newSensor);
@@ -77,7 +81,7 @@ function processRawTempData(allRawData) {
             chartModel.temp.push(rawTempData[i].val);
         }
     }
-    var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description +'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
+    var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description + 'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
     chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
 
     chartModel.data.push(chartModel.temp);
@@ -106,16 +110,17 @@ function findDataAverageValues() {
 
         for (var y = 0; y < amountOfSensors; y++) {
             //Sjekk at data ikke er null
-
             if (data[y][i]) {
                 amountToCheckAgainstMax += data[y][i];
             }
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
-            indexForMaxSensor = i;
+            chartModel.indexForMaxSensor = i;
         }
     }
+    var maxUsageDate = new Date(chartModel.dataDates[chartModel.indexForMaxSensor]);
+    chartModel.dataDates[chartModel.indexForMaxSensor] = ('0' + (maxUsageDate.getDate())).slice(-2) + "." + ('0' + (maxUsageDate.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(maxUsageDate)
     dataMax = Math.round(maxValue);
 
     //I tilfelle vi møter på større tall
@@ -190,7 +195,7 @@ function populateChart() {
             x: {
                 show: true,
                 tick: {
-                    format: function (x) { if (x == 0 || x == 24) { return "" }; }
+                    format: function (x) { if (x === 0 || x === 24) { return "" }; }
                 }
             },
             x2: {
@@ -213,14 +218,14 @@ function populateChart() {
 
     markHighestBar();
     makePathGoAllTheWayAndGetLastXY();
-    console.log(chartModel.lastTempDate);
     ko.applyBindings({
         groups: chartModel.groups,
         getClass: function (index) {
             return 'sensorLabel' + (this.groups.indexOf(index) + 1);
         },
         dataMax: dataMax + currentPrefix,
-        lastNight: chartModel.lastTempDate
+        lastNight: chartModel.lastTempDate,
+        maxMeasuredDate: chartModel.dataDates[chartModel.indexForMaxSensor]
     });
 
     adjustXTicks();
@@ -240,7 +245,7 @@ function adjustXTicks() {
     var maxLength = (chartModel.data[0].length - 2);
 
     $(".c3-axis.c3-axis-x line").each(function ($i) {
-        if (($i + 1) % 24 == 0) {
+        if (($i + 1) % 24 === 0) {
             $(this).attr('y2', 12);
         }
         else {
@@ -252,7 +257,7 @@ function adjustXTicks() {
 
 //Markerer bar som har høyeste verdi
 function markHighestBar() {
-    var highestBars = $('.c3-bar-' + (indexForMaxSensor - 1));
+    var highestBars = $('.c3-bar-' + (chartModel.indexForMaxSensor - 1));
     highestBars.addClass("markedBar");
     var firstHighest = highestBars.first();
     var pathdata = firstHighest.attr('d');

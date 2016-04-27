@@ -33,7 +33,7 @@ html, body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   position: relative;
-  /*overflow: hidden;*/ }
+  overflow: hidden; }
 
 #backgroundImage {
   position: fixed;
@@ -306,80 +306,100 @@ Spart tall			#1ba4e1*/
   stroke: #1c2d66 !important;
   fill: #1c2d66 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(1) .markedBar {
-  stroke: #3250b6 !important;
-  fill: #3250b6 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(2) .c3-bar {
   stroke: #1c518a !important;
   fill: #1c518a !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(2) .markedBar {
-  stroke: #3683d6 !important;
-  fill: #3683d6 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(3) .c3-bar {
   stroke: #1b81bd !important;
   fill: #1b81bd !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(3) .markedBar {
-  stroke: #57b2e7 !important;
-  fill: #57b2e7 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(4) .c3-bar {
   stroke: #1ba4e1 !important;
   fill: #1ba4e1 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(4) .markedBar {
-  stroke: #74c9ee !important;
-  fill: #74c9ee !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(5) .c3-bar {
   stroke: #54b5b5 !important;
   fill: #54b5b5 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(5) .markedBar {
-  stroke: #9bd4d4 !important;
-  fill: #9bd4d4 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(6) .c3-bar {
   stroke: #a3cc77 !important;
   fill: #a3cc77 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(6) .markedBar {
-  stroke: #d5e8c1 !important;
-  fill: #d5e8c1 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(7) .c3-bar {
   stroke: #dcdc4a !important;
   fill: #dcdc4a !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(7) .markedBar {
-  stroke: #eded9f !important;
-  fill: #eded9f !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(8) .c3-bar {
   stroke: #ffce55 !important;
   fill: #ffce55 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(8) .markedBar {
-  stroke: #ffebbb !important;
-  fill: #ffebbb !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(9) .c3-bar {
   stroke: #d9ad3d !important;
   fill: #d9ad3d !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(9) .markedBar {
-  stroke: #ead192 !important;
-  fill: #ead192 !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(10) .c3-bar {
   stroke: #b28924 !important;
   fill: #b28924 !important; }
 .chart2 .c3-chart-bars .c3-chart-bar:nth-child(10) .markedBar {
-  stroke: #deb95e !important;
-  fill: #deb95e !important;
+  /*stroke: lighten($color, $markedBarLighten) !important;
+  fill: lighten($color, $markedBarLighten) !important;*/
+  stroke: #c22323 !important;
+  fill: #c22323 !important;
   opacity: 0.7 !important; }
 
 .topContainer {
@@ -448,6 +468,10 @@ Spart tall			#1ba4e1*/
       .weatherForecast .weatherWrapper .weather .symbol img {
         max-width: 100%;
         height: auto; }
+      .weatherForecast .weatherWrapper .weather .Cchar {
+        font-size: 4rem; }
+      .weatherForecast .weatherWrapper .weather .Cchar:first-of-type {
+        vertical-align: text-top; }
       .weatherForecast .weatherWrapper .weather .time, .weatherForecast .weatherWrapper .weather .temp {
         margin: 0 !important; }
       .weatherForecast .weatherWrapper .weather .temp {
