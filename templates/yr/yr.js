@@ -96,7 +96,7 @@ function setWeatherForecast(jsonData) {
         }
 
         var symbolHTML = '<div class="symbol"><img src="b350/' + symbol.var + '.png" alt="weatherSymbol"></div>';
-        var tempHTML = '<h1 class="temp">' + temp + '<span class="Cchar">&deg</span><span class="Cchar">C</span></h1>'
+        var tempHTML = '<h1 class="temp">' + temp + '<span class="Cchar">C</span><span class="Cchar">&deg</span></h1>'
         var timeHTML = '<h2 class="time">kl ' + ('0' + from).slice(-2) + '-' + ('0' + to).slice(-2) + '</h3>';
         weatherHTML += '<div class="weatherWrapper floatLeft"><h2 class="dayText">' + dayText + '</h2><div class="weather lightContainer"><div>' + symbolHTML + tempHTML + timeHTML + '</div></div></div>'
     }
