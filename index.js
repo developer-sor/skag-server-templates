@@ -33,9 +33,10 @@ var templateController = {
     currentActiveIframe: constants.content1,
     defaultTimeOut: 5000,
     currentTimeoutPromise: null,
+    started: false,
     failText: 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
     setInstallationData: function (data) {
-        var self = this
+        var self = this;
         this.templatesInUse = data.templatesInUse;
         this.templatesToForceFetchOn = forceFetch ? data.templatesInUse.slice() : this.templatesToForceFetchOn;
         installationData = data;
@@ -129,19 +130,22 @@ var templateController = {
         forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
         console.log('continue force fetching ? ', forceFetch.toString());
     },
-    start: function () {
+    checkForValidDataOrFetch() {
         if (hasRecentData(constants.installationData) && this.hasValidInstallationData() && !forceFetch) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
-            
         }
         else {
             console.log("Installationdata not retrieved yet or to old or fetch is forced. Attempting to fetch from server..");
             this.fetchDataFromServer();
         }
     },
+    start: function () {
+        this.checkForValidDataOrFetch();
+    },
     runTemplates: function () {
-        if (this.templatesInUse !== null) {
+        if (this.templatesInUse !== null && !this.started) {
+            this.started = true;
             $("#master-header").html(installation.name);
             this.showNextSlide('start');
         }
@@ -160,7 +164,8 @@ var templateController = {
     },
     nextSlide: function () {
         var self = this;
-        self.setNextSlideIndex()
+        self.checkForValidDataOrFetch();
+        self.setNextSlideIndex();
         var template = this.templatesInUse[self.templateIndex];
         console.log("Should show next slide...", self.templateIndex);
 
@@ -214,11 +219,11 @@ var templateController = {
         console.log('aborting slide ' + name + '. Lazy loading next slide');
 
         if (this.templatesInUse[this.templateIndex].name == name) {
-            console.log('aborted slide is the active one -> running showNextSlide()')
+            console.log('aborted slide is the active one -> running showNextSlide()');
             self.showNextSlide();
         }
         else {
-            console.log('aborted slide is lazy loading. Attempting to lazy load another one')
+            console.log('aborted slide is lazy loading. Attempting to lazy load another one');
             self.setNextSlideIndex();
             this.lazyLoadNextSlide(true);
         }

@@ -187,7 +187,7 @@ function populateChart() {
                 max: chartModel.actualMax + (chartModel.actualMax - chartModel.actualMin) * 0.5,
                 min: chartModel.actualMin - (chartModel.actualMax - chartModel.actualMin) * 0.5,
                 tick: {
-                    format: function (x) { return x + "C°"; },
+                    format: function (x) { return x + "°C"; },
                     count: 3,
                     values: [chartModel.actualMin, chartModel.actualMax]
                 }
