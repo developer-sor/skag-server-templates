@@ -51,17 +51,17 @@ function prosessRawData(allRawData) {
         var currentDate = new Date();
         chartModel.years.push(currentDate.getMonth() + 1 >= rawData[i].ind ? currentDate.getFullYear() : currentDate.getFullYear() - 1);
         
-        var referenceDataAdjusted = rawData[i].ref;
-        var actualData = rawData[i].val;
+        var referenceValue = rawData[i].ref;
+        var actualValue = rawData[i].val;
 
-        referenceData.push(referenceDataAdjusted);
-        compareData.push(actualData);
+        referenceData.push(referenceValue);
+        compareData.push(actualValue);
 
-        chartModel.savedAmount += (referenceDataAdjusted - actualData);
+        chartModel.savedAmount += (referenceValue - actualValue);
 
         console.log(rawData[i]);
         //Kun for console log purpose
-        totalRef += referenceDataAdjusted;
+        totalRef += referenceValue;
         totalActual += rawData[i].val;
         //
     }
