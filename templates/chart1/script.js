@@ -39,17 +39,35 @@ function prosessRawData(allRawData) {
     var referenceData = [chartModel.referenceLabel];
     var compareData = [chartModel.compareLabelDefault];
 
+    //Kun for console log purpose
+    var totalRef = 0;
+    var totalActual = 0;
+    //
+
     for (var i = 0; i < rawData.length; i++) {
         chartModel.categories.push(rawData[i].description);
 
         var currentDate = new Date();
         chartModel.years.push(currentDate.getMonth() + 1 >= rawData[i].ind ? currentDate.getFullYear() : currentDate.getFullYear() - 1);
+        
+        var referenceDataAdjusted = rawData[i].ref;
+        var actualData = rawData[i].val;
 
-        referenceData.push(rawData[i].ref);
-        compareData.push(rawData[i].val);
+        referenceData.push(referenceDataAdjusted);
+        compareData.push(actualData);
 
-        chartModel.savedAmount += (rawData[i].ref - rawData[i].val);
+        chartModel.savedAmount += (referenceDataAdjusted - actualData);
+
+        console.log(rawData[i]);
+        //Kun for console log purpose
+        totalRef += referenceDataAdjusted;
+        totalActual += rawData[i].val;
+        //
     }
+
+    console.log('Totaltverdi av "ref" data sammenlagt: ', totalRef);
+    console.log('Totaltverdi av "val" data sammenlagt: ', totalActual);
+
     chartModel.data.push(referenceData, compareData);
     setLocalStoreData(constants.chart1CalcualtedData, chartModel);
 
@@ -120,19 +138,19 @@ function setCategories() {
 
 function savedAmount() {
     var amountPrefix = $("#amountPrefix");
-    if (chartModel.savedAmount > 1000000) {
+    if (chartModel.savedAmount > 1000000000) {
         amountPrefix.text('GWh');
-        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000001);
+        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000000001);
     }
-    else if (chartModel.savedAmount > 1000) {
+    else if (chartModel.savedAmount > 1000000) {
         amountPrefix.text('MWh');
-        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.001);
+        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000001);
     }
     else {
         amountPrefix.text('kWh');
         chartModel.savedAmount = chartModel.savedAmount;
     }
-    console.log(chartModel.savedAmount);
+    console.log('Totalt innspart ', chartModel.savedAmount + ' ' + amountPrefix.text());
     if (chartModel.savedAmount > 0) {
         $("#amountSaved").text(chartModel.savedAmount);
         $("#saved").show();

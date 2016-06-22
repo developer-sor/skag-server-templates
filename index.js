@@ -80,7 +80,7 @@ var templateController = {
                 //        timeoutMillis: 10000
                 //    },
                 //    {
-                //        name: "chart1",
+                //        name: "chart2",
                 //        timeoutMillis: 10000
                 //    }];
                 self.setInstallationData(data);
