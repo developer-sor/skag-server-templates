@@ -43,6 +43,7 @@ function prosessRawData(allRawData) {
     var totalRef = 0;
     var totalActual = 0;
     //
+    console.log(rawData);
 
     for (var i = 0; i < rawData.length; i++) {
         chartModel.categories.push(rawData[i].description);
@@ -138,17 +139,17 @@ function setCategories() {
 
 function savedAmount() {
     var amountPrefix = $("#amountPrefix");
-    if (chartModel.savedAmount > 1000000000) {
+    if (chartModel.savedAmount > 100000000000) {
         amountPrefix.text('GWh');
-        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000000001);
+        chartModel.savedAmount = Math.round(chartModel.savedAmount * 0.000000001);
     }
-    else if (chartModel.savedAmount > 1000000) {
+    else if (chartModel.savedAmount > 100000000) {
         amountPrefix.text('MWh');
-        chartModel.savedAmount = roundToTwo(chartModel.savedAmount * 0.000001);
+        chartModel.savedAmount = Math.round(chartModel.savedAmount * 0.000001);
     }
     else {
         amountPrefix.text('kWh');
-        chartModel.savedAmount = chartModel.savedAmount;
+        chartModel.savedAmount = Math.round(chartModel.savedAmount * 0.001);
     }
     console.log('Totalt innspart ', chartModel.savedAmount + ' ' + amountPrefix.text());
     if (chartModel.savedAmount > 0) {
