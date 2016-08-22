@@ -44,7 +44,7 @@ var chartModel = {
     temp: ['temp'],
     dataDates: ['datelabel'],
     indexForMaxSensor: 0
-}
+};
 
 function getChartHeight() {
     return (window.innerHeight / 100) * 39.8;
@@ -82,7 +82,7 @@ function processRawTempData(allRawData) {
         }
     }
     var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description + 'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
-    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated)
+    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated);
 
     chartModel.data.push(chartModel.temp);
     chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
@@ -120,7 +120,7 @@ function findDataAverageValues() {
         }
     }
     var maxUsageDate = new Date(chartModel.dataDates[chartModel.indexForMaxSensor]);
-    chartModel.dataDates[chartModel.indexForMaxSensor] = ('0' + (maxUsageDate.getDate())).slice(-2) + "." + ('0' + (maxUsageDate.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(maxUsageDate)
+    chartModel.dataDates[chartModel.indexForMaxSensor] = ('0' + (maxUsageDate.getDate())).slice(-2) + "." + ('0' + (maxUsageDate.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(maxUsageDate);
     dataMax = Math.round(maxValue);
 
     //I tilfelle vi møter på større tall
@@ -195,7 +195,7 @@ function populateChart() {
             x: {
                 show: true,
                 tick: {
-                    format: function (x) { if (x === 0 || x === 24) { return "" }; }
+                    format: function (x) { if (x === 0 || x === 24) { return ""; } }
                 }
             },
             x2: {
@@ -237,12 +237,12 @@ function expandWhiteBand() {
     var chart = $("#chart");
     var chart2MarginFix = 28;
     $("#whiteBand").css({ "top": chart.offset().top + (chart.height()) - (chart2MarginFix) + "px" });
-    $("#chart").addClass('chart2MarginFix');
+    chart.addClass('chart2MarginFix');
 }
 
 function adjustXTicks() {
     //minus 2 pga length vs index samt label
-    var maxLength = (chartModel.data[0].length - 2);
+    /*var maxLength = (chartModel.data[0].length - 2);*/
 
     $(".c3-axis.c3-axis-x line").each(function ($i) {
         if (($i + 1) % 24 === 0) {

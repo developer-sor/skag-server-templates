@@ -31,7 +31,7 @@ var chartModel = {
     years : [],
     data : [],
     savedAmount : 0
-}
+};
 
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.months.data;

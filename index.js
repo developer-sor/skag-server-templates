@@ -131,7 +131,7 @@ var templateController = {
         console.log('continue force fetching ? ', forceFetch.toString());
     },
     checkForValidDataOrFetch: function() {
-        if (hasRecentData(constants.installationData) && this.hasValidInstallationData() && !forceFetch) {
+        if (hasRecentData(constants.installationData) && this.hasValidInstallationData()) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
         }
@@ -141,7 +141,12 @@ var templateController = {
         }
     },
     start: function () {
-        this.checkForValidDataOrFetch();
+        if(forceFetch){
+            this.fetchDataFromServer();
+        }
+        else{
+            this.checkForValidDataOrFetch();
+        }
     },
     runTemplates: function () {
         if (this.templatesInUse !== null && !this.started) {
@@ -228,5 +233,5 @@ var templateController = {
             this.lazyLoadNextSlide(true);
         }
     }
-}
+};
 
