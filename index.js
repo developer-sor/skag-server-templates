@@ -130,7 +130,7 @@ var templateController = {
         forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
         console.log('continue force fetching ? ', forceFetch.toString());
     },
-    checkForValidDataOrFetch() {
+    checkForValidDataOrFetch: function() {
         if (hasRecentData(constants.installationData) && this.hasValidInstallationData() && !forceFetch) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
