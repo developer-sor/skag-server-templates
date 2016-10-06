@@ -66,6 +66,9 @@ var templateController = {
         })
         .done(function (data) {
             if (data) {
+                //Hide error message if this is showing
+                $("#message").hide();
+
                 /*data.templatesInUse = [
                    {
                        name: "chart2",
@@ -92,6 +95,8 @@ var templateController = {
             else {
                 console.log(self.failText);
                 $("#message").show().text(self.failText);
+                //Retry fetch until we get data
+                self.start();
             }
 
         })
@@ -104,6 +109,8 @@ var templateController = {
             else {
                 console.log(self.failText);
                 $("#message").show().text(self.failText);
+                //Retry fetch until network is back
+                self.start();
             }
         });
     },
