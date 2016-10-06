@@ -34,7 +34,7 @@ var templateController = {
     defaultTimeOut: 5000,
     currentTimeoutPromise: null,
     started: false,
-    failText: 'Backup solution failed! No installationdata from server or in local storage. Connect to internet and refresh page',
+    failText: 'Backup solution failed! No installationdata from server or in local storage. Connect the device to the internet',
     setInstallationData: function (data) {
         var self = this;
         this.templatesInUse = data.templatesInUse;
