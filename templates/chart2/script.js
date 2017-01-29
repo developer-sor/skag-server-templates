@@ -43,7 +43,8 @@ var chartModel = {
     actualMin: 0,
     temp: ['temp'],
     dataDates: ['datelabel'],
-    indexForMaxSensor: 0
+    indexForMaxSensor: 0,
+    showTemp: true
 };
 
 function getChartHeight() {
@@ -53,7 +54,9 @@ function getChartHeight() {
 function prosessRawData(allRawData) {
     var rawData = allRawData.subs.days.subs;
     var count = 0;
+    var firstKey = "";
     for (var key in rawData) {
+        firstKey = count === 0 ? key : firstKey;
         count++;
         if (count > maxAmountOfSensors) {
             break;
@@ -70,28 +73,52 @@ function prosessRawData(allRawData) {
         }
         chartModel.data.push(newSensor);
     }
+
+    //ser gjennom det første datasettet og setter bruker siste dato vi har data herfra til å sette en backupdato i tilfelle tempdata ikke er angitt, 
+    //for å kunne vise denne datoen rett under grafen
+    setBackupDateForLastTempDate(rawData[firstKey].data);
+    
     processRawTempData(allRawData);
 }
 
-function processRawTempData(allRawData) {
-    var rawTempData = allRawData.subs.temperature.data;
-
-    for (var i = 0; i < rawTempData.length ; i++) {
-        if (new Date(rawTempData[i].description + 'Z').getTime() <= now.getTime()) {
-            chartModel.temp.push(rawTempData[i].val);
+function setBackupDateForLastTempDate(dataSet) {
+    for (var i = dataSet.length; i > 0; i--) {
+        if (dataSet[i - 1].val) {
+            chartModel.lastTempDate = modifyLastTempDateWithClock(new Date(dataSet[i - 1].description + 'Z'));
+            break;
         }
     }
-    var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description + 'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
-    chartModel.lastTempDate = ('0' + (chartLastUpdated.getDate())).slice(-2) + "." + ('0' + (chartLastUpdated.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(chartLastUpdated);
+}
 
-    chartModel.data.push(chartModel.temp);
-    chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
-    chartModel.actualMin = Math.min.apply(null, chartModel.temp.slice(1));
-    setLocalStoreData(constants.chart2CalcualtedData, chartModel);
+function processRawTempData(allRawData) {
+    
+    if (allRawData.subs.temperature) {
+        var rawTempData = allRawData.subs.temperature.data;
+
+        for (var i = 0; i < rawTempData.length ; i++) {
+            if (new Date(rawTempData[i].description + 'Z').getTime() <= now.getTime()) {
+                chartModel.temp.push(rawTempData[i].val);
+            }
+        }
+        var chartLastUpdated = new Date(rawTempData[chartModel.data[0].length - 2].description + 'Z'); //-2 pga chartModel.data[0] har en label som ligger først i arrayet
+        chartModel.lastTempDate = modifyLastTempDateWithClock(chartLastUpdated);
+
+        chartModel.data.push(chartModel.temp);
+        chartModel.actualMax = Math.max.apply(null, chartModel.temp.slice(1));
+        chartModel.actualMin = Math.min.apply(null, chartModel.temp.slice(1));
+        setLocalStoreData(constants.chart2CalcualtedData, chartModel);
+    }
+    else {
+        chartModel.showTemp = false;
+    }
+   
 
     populateChart();
 }
 
+function modifyLastTempDateWithClock(lastTempDate) {
+    return ('0' + (lastTempDate.getDate())).slice(-2) + "." + ('0' + (lastTempDate.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(lastTempDate);
+}
 
 function prosessCalculatedData(data) {
     chartModel = data;
@@ -137,7 +164,8 @@ function findDataAverageValues() {
 }
 
 function calculateLeftPadding() {
-    paddingLeft = (dataMax.toString().length * 28) + 50;
+    var temperaturLabelWidth = 50;
+    paddingLeft = (dataMax.toString().length * 28) + (chartModel.showTemp ? temperaturLabelWidth : 0);
 }
 
 function populateChart() {
@@ -173,6 +201,7 @@ function populateChart() {
         },
         axis: {
             y: {
+                show: chartModel.showTemp,
                 padding: {
                     top: 100
                 },
@@ -183,7 +212,7 @@ function populateChart() {
                 }
             },
             y2: {
-                show: true,
+                show: chartModel.showTemp,
                 max: chartModel.actualMax + (chartModel.actualMax - chartModel.actualMin) * 0.5,
                 min: chartModel.actualMin - (chartModel.actualMax - chartModel.actualMin) * 0.5,
                 tick: {
@@ -217,7 +246,9 @@ function populateChart() {
 
 
     markHighestBar();
-    makePathGoAllTheWayAndGetLastXY();
+    if (chartModel.showTemp) {
+        makePathGoAllTheWayAndGetLastXY();
+    }
     ko.applyBindings({
         groups: chartModel.groups,
         getClass: function (index) {
