@@ -147,7 +147,6 @@ function findDataAverageValues() {
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
-            console.log(maxValue);
             chartModel.indexForMaxSensor = i;
         }
     }
@@ -160,7 +159,7 @@ function findDataAverageValues() {
     //Verdier for bruk i grafen (må være full verdi)
     dataMaxFullValue = dataMax;
     dataTwoThirdsFullValue = dataTwoThirds;
-    dataOneThird = roundToTwo;
+    dataOneThirdFullValue = dataOneThird;
 
     //I tilfelle vi møter på større tall
     currentPrefix = dataMax > 1000 ? 'MW' : currentPrefix;
