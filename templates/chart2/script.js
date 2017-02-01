@@ -26,6 +26,10 @@ $(function () {
 var dataMax = 0;
 var dataTwoThirds = 0;
 var dataOneThird = 0;
+var dataMaxFullValue = 0;
+var dataTwoThirdsFullValue = 0;
+var dataOneThirdFullValue = 0;
+
 var currentPrefix = 'kW';
 
 var maxAmountOfSensors = 10;
@@ -143,6 +147,7 @@ function findDataAverageValues() {
         }
         if (amountToCheckAgainstMax > maxValue) {
             maxValue = amountToCheckAgainstMax;
+            console.log(maxValue);
             chartModel.indexForMaxSensor = i;
         }
     }
@@ -150,28 +155,38 @@ function findDataAverageValues() {
     chartModel.dataDates[chartModel.indexForMaxSensor] = ('0' + (maxUsageDate.getDate())).slice(-2) + "." + ('0' + (maxUsageDate.getMonth() + 1)).slice(-2) + " kl " + getTwoDigitClock(maxUsageDate);
     dataMax = Math.round(maxValue);
 
+    calculateDataValues();
+
+    //Verdier for bruk i grafen (må være full verdi)
+    dataMaxFullValue = dataMax;
+    dataTwoThirdsFullValue = dataTwoThirds;
+    dataOneThird = roundToTwo;
+
     //I tilfelle vi møter på større tall
-    if (dataMax > 1000) {
-        dataMax = roundToTwo(dataMax * 0.001);
-        dataTwoThirds = roundToTwo((dataMax * 2) / 3);
-        dataOneThird = roundToTwo(dataMax / 3);
-        currentPrefix = 'MW';
-    }
-    else {
-        dataTwoThirds = Math.round((dataMax * 2) / 3);
-        dataOneThird = Math.round(dataMax / 3);
-    }
+    currentPrefix = dataMax > 1000 ? 'MW' : currentPrefix;
+
+    dataMax = roundDataValueBasedOnPrefix(dataMax);
+    dataTwoThirds = roundDataValueBasedOnPrefix(dataTwoThirds);
+    dataOneThird = roundDataValueBasedOnPrefix(dataOneThird);
+}
+
+function calculateDataValues(){
+    dataTwoThirds = Math.round((dataMax * 2) / 3);
+    dataOneThird = Math.round(dataMax / 3);
+}
+
+function roundDataValueBasedOnPrefix(dataValue) {
+    return currentPrefix === 'MW' ? roundToTwo(dataValue * 0.001) : dataValue;
 }
 
 function calculateLeftPadding() {
     var temperaturLabelWidth = 50;
-    paddingLeft = (dataMax.toString().length * 28) + (chartModel.showTemp ? temperaturLabelWidth : 0);
+    paddingLeft = (dataMax.toString().length * 28) + temperaturLabelWidth;
 }
 
 function populateChart() {
     findDataAverageValues();
     calculateLeftPadding();
-
     var chart = c3.generate({
         bindto: '#chart',
         padding: {
@@ -206,9 +221,9 @@ function populateChart() {
                     top: 100
                 },
                 tick: {
-                    format: function (x) { return " " + x + "kW -"; },
+                    format: function (x) { return " " + roundDataValueBasedOnPrefix(x) + currentPrefix + " -"; },
                     count: 3,
-                    values: [dataOneThird, dataTwoThirds, dataMax]
+                    values: [dataOneThirdFullValue, dataTwoThirdsFullValue, dataMaxFullValue]
                 }
             },
             y2: {
