@@ -19,7 +19,7 @@ var constants = {
     chart2CalcualtedData: 'chart2CalcualtedData',
     chart2FetchIntervalInMinutes: 30,
     chart2ExpireHours: 24,
-    api: 'http://ec2-52-57-114-42.eu-central-1.compute.amazonaws.com/api/',
+    api: 'http://ec2-52-57-163-201.eu-central-1.compute.amazonaws.com/api/',
     installation: 'installation/{key}',
     client: 'installation/{key}/clients',
     dataview: 'installation/{id}/dataview',
