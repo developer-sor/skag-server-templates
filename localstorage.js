@@ -1,4 +1,4 @@
-﻿function hasRecentData(type) {
+﻿function hasRecentData(type, infoslideId) {
     switch (type) {
         case constants.installationData:
             var date = window.localStorage.getItem(constants.installationTime);
@@ -35,6 +35,13 @@
             d2.setMinutes(d1.getMinutes() - constants.yrFetchIntervalInMinutes);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
+        case constants.informasjonData:
+            var date = window.localStorage.getItem(constants.informasjonTime+infoslideId);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setMinutes(d1.getMinutes() - constants.informasjonFetchIntervalInMinutes);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
         default:
             console.log('hasRecentData() -> type not set or invalid');
             return false;
@@ -42,7 +49,7 @@
 }
 
 
-function getLocalstoreData(type) {
+function getLocalstoreData(type, infoslideId) {
     var data = null;
     var ls = null;
     switch (type) {
@@ -61,6 +68,9 @@ function getLocalstoreData(type) {
         case constants.yrData:
             ls = window.localStorage.getItem(constants.yrData);
             break;
+        case constants.informasjonData:
+            ls = window.localStorage.getItem(constants.informasjonData+infoslideId);
+            break;
         default:
             console.log('Error: setChartWithLocalstoreData() -> type not set or invalid');
             break;
@@ -71,7 +81,7 @@ function getLocalstoreData(type) {
     return data;
 }
 
-function setLocalStoreData(type, data) {
+function setLocalStoreData(type, data, infoslideId) {
     if (!data) {
         console.log('Error: setLocalStoreData() -> data is not defined!');
         return;
@@ -94,9 +104,14 @@ function setLocalStoreData(type, data) {
             window.localStorage.setItem(constants.chartRawdataData, JSON.stringify(data));
             break;
         case constants.yrData:
-            //console.log('Setting rawdata for charts');
+            //console.log('Setting data for yr');
             window.localStorage.setItem(constants.yrTime, new Date());
             window.localStorage.setItem(constants.yrData, JSON.stringify(data));
+            break;
+        case constants.informasjonData:
+            //console.log('Setting data for informasjonsslide');
+            window.localStorage.setItem(constants.informasjonTime+infoslideId, new Date());
+            window.localStorage.setItem(constants.informasjonData+infoslideId, JSON.stringify(data));
             break;
         default:
             console.log('Error: setLocalStoreData() -> type not set or invalid');
@@ -105,7 +120,7 @@ function setLocalStoreData(type, data) {
 }
 
 
-function hasNonExpiredData(type) {
+function hasNonExpiredData(type, infoslideId) {
     //console.log('hasNonExpiredData() ', type)
     switch (type) {
         case constants.chart1CalcualtedData:
@@ -134,6 +149,13 @@ function hasNonExpiredData(type) {
             var d1 = new Date();
             var d2 = new Date(d1);
             d2.setHours(d1.getHours() - constants.yrExpireHours);
+            return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
+            break;
+        case constants.informasjonData:
+            var date = window.localStorage.getItem(constants.informasjonTime+infoslideId);
+            var d1 = new Date();
+            var d2 = new Date(d1);
+            d2.setHours(d1.getHours() - constants.informasjonExpireHours);
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         default:

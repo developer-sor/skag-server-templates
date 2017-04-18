@@ -319,7 +319,7 @@ function markHighestBar() {
         maksTimesforbrukLabel.css({ 'top': (topContainerHeight + spaceBetweenTopOfBarAndChartTop + (maksTimesforbrukLabel.height() - 10)) + 'px', 'left': (firstHighest.offset().left - (pathWidht / 2) - 1 - maksTimesforbrukLabel.width() / 2) + 'px' });
     }
     catch (e) {
-        console.log('calculating markedHighestBars label failed');
+        console.error('calculating markedHighestBars label failed');
     }
 }
 

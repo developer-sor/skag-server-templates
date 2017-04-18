@@ -59,10 +59,10 @@ function convertToDataURLviaCanvas(url, callback, outputFormat) {
     };
     img.onerror = function () {
         callback('');
-    }
+    };
     img.src = url;
 }
 
 String.prototype.capitalizeFirstLetter = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};

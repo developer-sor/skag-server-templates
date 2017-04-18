@@ -1,24 +1,3 @@
-/**
- * Created by narve on 2016-02-18.
- */
-//Mock data
-//data.templatesInUse = [
-//    {
-//        name: "chart2",
-//        timeoutMillis: 500000
-//    },
-//    {
-//        name: "chart1",
-//        timeoutMillis: 500000
-//    },
-//    {
-//        name: "yr",
-//        timeoutMillis: 500000
-//    },
-//    {
-//        name: "intro",
-//        timeoutMillis: 500000
-//    }];
 
 
 "use strict";
@@ -30,6 +9,7 @@ var templateController = {
     templatesInUse: null,
     templatesToForceFetchOn: [],
     templateIndex: 0,
+    defaultInfoslideTimeoutMs: 10000,
     currentActiveIframe: constants.content1,
     defaultTimeOut: 5000,
     currentTimeoutPromise: null,
@@ -50,8 +30,35 @@ var templateController = {
         });
     },
     setBackgroundImage: function () {
-        $('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
+        $('#backgroundImage').css({'background-image': "url(data:" + installationData.backgroundImage + ")"});
         $('#backgroundOverlay').addClass(installationData.theme + 'BackgroundOverlay')
+    },
+    fetchClientInfoslides: function (installationData) {
+        var self = this;
+
+        var url = constants.api + constants.informasjonssider.replace("{clientKey}", installation.clientKey);
+        $.ajax({
+            method: "GET",
+            contentType: "application/json",
+            url: url,
+            dataType: 'json'
+        }).done(function (data) {
+            if (data && data.length > 0) {
+                console.log('Fetched informationpages successfully from server ');
+                for(var i = 0; i < data.length; i ++) {
+                    installationData.templatesInUse.push({
+                        name: "informasjon",
+                        timeoutMillis: self.defaultInfoslideTimeoutMs,
+                        informasjonId: data[i].id
+                    });
+                }
+                self.setInstallationData(installationData);
+            }
+            else self.setInstallationData(installationData);
+        }).fail(function (error) {
+            console.error('Failed to fetch client infoslides from server: ', error);
+            self.setInstallationData(installationData);
+        });
     },
     fetchDataFromServer: function () {
         var self = this;
@@ -63,51 +70,50 @@ var templateController = {
             contentType: "application/json",
             url: url,
             dataType: 'json'
-        })
-        .done(function (data) {
+        }).done(function (data) {
             if (data) {
                 //Hide error message if this is showing
                 $("#message").hide();
 
                 /*data.templatesInUse = [
-                   {
-                       name: "chart2",
-                       timeoutMillis: 10000000
-                   },
-                   {
-                       name: "intro",
-                       timeoutMillis: 10000
-                   },
-                   {
-                       name: "yr",
-                       timeoutMillis: 10000
-                   },
-                   {
-                       name: "chart1",
-                       timeoutMillis: 10000
-                   }];*/
-                self.setInstallationData(data);
+                    {
+                        name: "chart2",
+                        timeoutMillis: 10000000
+                    },
+                    {
+                        name: "intro",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "yr",
+                        timeoutMillis: 10000
+                    },
+                    {
+                        name: "chart1",
+                        timeoutMillis: 10000
+                    }
+                ];*/
+                self.fetchClientInfoslides(data);
             }
             else if (!data && self.hasValidInstallationData()) {
-                console.log('Backup solution: getting installationdata from localstorage since fetch failed');
+                console.error('Backup solution: getting installationdata from localstorage since fetch failed');
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.log(self.failText);
+                console.error(self.failText);
                 $("#message").show().text(self.failText);
                 //Retry fetch until we get data
                 self.start();
             }
 
-        })
-        .fail(function (error) {
-            console.log('Error fetching data from server: ', error);
+        }).fail(function (error) {
+            console.error('Error fetching data from server: ', error);
             if (self.hasValidInstallationData()) {
-                console.log('Backup solution: getting installationdata from localstorage since fetch failed');
+                console.error('Backup solution: getting installationdata from localstorage since fetch failed');
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.log(self.failText);
+                console.error(self.failText);
                 $("#message").show().text(self.failText);
                 //Retry fetch until network is back
                 self.start();
@@ -137,7 +143,7 @@ var templateController = {
         forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
         console.log('continue force fetching ? ', forceFetch.toString());
     },
-    checkForValidDataOrFetch: function() {
+    checkForValidDataOrFetch: function () {
         if (hasRecentData(constants.installationData) && this.hasValidInstallationData()) {
             console.log("Found valid installationdata");
             this.setInstallationBasedOnInstallationData();
@@ -148,10 +154,10 @@ var templateController = {
         }
     },
     start: function () {
-        if(forceFetch){
+        if (forceFetch) {
             this.fetchDataFromServer();
         }
-        else{
+        else {
             this.checkForValidDataOrFetch();
         }
     },
@@ -196,7 +202,8 @@ var templateController = {
             this.currentActiveIframe = this.currentActiveIframe === constants.content1 ? constants.content2 : constants.content1;
         }
 
-        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
+        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html" +
+            (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : ''));
 
         console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
     },
@@ -207,7 +214,8 @@ var templateController = {
         var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
 
         if (start) {
-            $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html");
+            $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html" +
+                (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : ''));
         }
         else {
             self.toggleNextIFrame();
@@ -226,11 +234,16 @@ var templateController = {
         $(constants.content1).toggleClass('transparent');
         $(constants.content2).toggleClass('transparent');
     },
-    abortSlide: function (name) {
+    abortSlide: function (name, id) {
         var self = this;
         console.log('aborting slide ' + name + '. Lazy loading next slide');
 
-        if (this.templatesInUse[this.templateIndex].name == name) {
+        if(id && this.templatesInUse[this.templateIndex].name === name
+            && this.templatesInUse[this.templateIndex].id === id){
+            console.log('aborted slide is the active one -> running showNextSlide()');
+            self.showNextSlide();
+        }
+        if (!id && this.templatesInUse[this.templateIndex].name === name) {
             console.log('aborted slide is the active one -> running showNextSlide()');
             self.showNextSlide();
         }

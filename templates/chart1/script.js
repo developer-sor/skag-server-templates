@@ -43,7 +43,6 @@ function prosessRawData(allRawData) {
     var totalRef = 0;
     var totalActual = 0;
     //
-    console.log(rawData);
 
     for (var i = 0; i < rawData.length; i++) {
         chartModel.categories.push(rawData[i].description);
@@ -59,15 +58,14 @@ function prosessRawData(allRawData) {
 
         chartModel.savedAmount += (referenceValue - actualValue);
 
-        console.log(rawData[i]);
         //Kun for console log purpose
         totalRef += referenceValue;
         totalActual += rawData[i].val;
         //
     }
 
-    console.log('Totaltverdi av "ref" data sammenlagt: ', totalRef);
-    console.log('Totaltverdi av "val" data sammenlagt: ', totalActual);
+/*    console.log('Totaltverdi av "ref" data sammenlagt: ', totalRef);
+    console.log('Totaltverdi av "val" data sammenlagt: ', totalActual);*/
 
     chartModel.data.push(referenceData, compareData);
     setLocalStoreData(constants.chart1CalcualtedData, chartModel);
@@ -151,7 +149,7 @@ function savedAmount() {
         amountPrefix.text('kWh');
         chartModel.savedAmount = Math.round(chartModel.savedAmount);
     }
-    console.log('Totalt innspart ', chartModel.savedAmount + ' ' + amountPrefix.text());
+    /*console.log('Totalt innspart ', chartModel.savedAmount + ' ' + amountPrefix.text());*/
     if (chartModel.savedAmount > 0) {
         $("#amountSaved").text(chartModel.savedAmount);
         $("#saved").show();

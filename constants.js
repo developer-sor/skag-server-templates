@@ -1,4 +1,6 @@
 ﻿
+var liveUrl = 'http://ec2-52-57-163-201.eu-central-1.compute.amazonaws.com/api/';
+var devUrl = 'http://ec2-52-58-173-97.eu-central-1.compute.amazonaws.com/api/';
 
 var constants = {
     installationData: 'installationData',
@@ -19,11 +21,17 @@ var constants = {
     chart2CalcualtedData: 'chart2CalcualtedData',
     chart2FetchIntervalInMinutes: 30,
     chart2ExpireHours: 24,
-    api: 'http://ec2-52-57-163-201.eu-central-1.compute.amazonaws.com/api/',
+    informasjonTime: 'informasjonTime',
+    informasjonData: 'informasjonData',
+    informasjonFetchIntervalInMinutes: 30,
+    informasjonExpireHours: 12,
+    api: devUrl,
     installation: 'installation/{key}',
     client: 'installation/{key}/clients',
+    informasjonssider: 'client/{clientKey}/informationPages',
+    informasjonsside: 'informationpage/{informationpageId}',
     dataview: 'installation/{id}/dataview',
     ping: 'installation/{id}/ping',
     content1: '#content1',
     content2: '#content2'
-}
+};
