@@ -39,7 +39,7 @@ $(function () {
 function handleError(informasjonssideId) {
     if (hasNonExpiredData(constants.informasjonData, informasjonssideId)) {
         console.log('Backup solution: getting informasjondata from localstorage since fetch failed');
-        self.setInformationpage(getLocalstoreData(constants.informasjonData));
+        self.setInformationpage(getLocalstoreData(constants.informasjonData, informasjonssideId));
     }
     else {
         console.log('Backup solution failed for the Informasjon template! No data in localstorage and fetch failed, running next slide');
