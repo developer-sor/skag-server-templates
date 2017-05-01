@@ -202,8 +202,10 @@ var templateController = {
             this.currentActiveIframe = this.currentActiveIframe === constants.content1 ? constants.content2 : constants.content1;
         }
 
-        $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html" +
-            (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : ''));
+        var src = "templates/" + currentTemplate.name + "/index.html" + (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : '');
+        var newIframe = '<iframe src="' + src + '"></iframe>';
+
+        $(this.currentActiveIframe).empty().append(newIframe);
 
         console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
     },
@@ -214,8 +216,10 @@ var templateController = {
         var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
 
         if (start) {
-            $(this.currentActiveIframe).attr("src", "templates/" + currentTemplate.name + "/index.html" +
-                (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : ''));
+            var src = "templates/" + currentTemplate.name + "/index.html" + (currentTemplate.informasjonId ? '?informasjonId='+currentTemplate.informasjonId : '');
+            var newIframe = '<iframe src="' + src + '"></iframe>';
+
+            $(this.currentActiveIframe).empty().append(newIframe);
         }
         else {
             self.toggleNextIFrame();
