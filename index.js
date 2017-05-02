@@ -246,7 +246,7 @@ var templateController = {
             console.log('aborted slide is the active one -> running showNextSlide()');
             self.showNextSlide();
         }
-        if (!id && this.templatesInUse[this.templateIndex].name === name) {
+        else if (!id && this.templatesInUse[this.templateIndex].name === name) {
             console.log('aborted slide is the active one -> running showNextSlide()');
             self.showNextSlide();
         }
