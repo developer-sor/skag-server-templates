@@ -52,11 +52,10 @@ var templateController = {
                         informasjonId: data[i].id
                     });
                 }
-                self.setInstallationData(installationData);
             }
-            else self.setInstallationData(installationData);
         }).fail(function (error) {
             console.error('Failed to fetch client infoslides from server: ', error);
+        }).always(function(){
             self.setInstallationData(installationData);
         });
     },
