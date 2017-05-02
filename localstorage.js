@@ -1,5 +1,6 @@
 ﻿
-var windowRef = parent && parent.window ? parent.window : window;
+
+var windowRef = window.location.pathname.replace('skag-server-templates', '').indexOf('templates/') === -1 ? window : parent.window;
 
 function hasRecentData(type, infoslideId) {
     switch (type) {
