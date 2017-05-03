@@ -1,8 +1,4 @@
-﻿//Only for dev
-//var installationData = "";
-//installationData = JSON.parse(window.localStorage.getItem(constants.installationData));
-//$('#backgroundImage').css({ 'background-image': "url(data:" + installationData.backgroundImage + ")" });
-
+﻿
 $(function () {
     var informasjonssideId = getParameterByName('informasjonId', $(document).src);
     console.log('*********** ', informasjonssideId);
