@@ -1,4 +1,4 @@
-﻿if (getParameterByName('key')) {
+﻿/*if (getParameterByName('key')) {
     installation.key = getParameterByName('key');
     window.localStorage.removeItem(constants.installationTime);
     window.localStorage.removeItem(constants.installationData);
@@ -6,7 +6,7 @@
     window.localStorage.removeItem(constants.refChartData);
     window.localStorage.removeItem(constants.yrTime);
     window.localStorage.removeItem(constants.yrData);
-}
+}*/
 
 if (getParameterByName('clear')) {
     var clearData = getParameterByName('clear');
