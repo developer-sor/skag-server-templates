@@ -11,14 +11,15 @@ function viewModel() {
     }
 
 
-    this.clock = ko.observable(getTwoDigitDate());
+    this.clock = ko.observable();
+    this.clock(getTwoDigitDate());
 
     this.tick = function () {
         self.clock(getTwoDigitDate());
     };
 
-    setInterval(self.tick, 3000);
-};
+    setInterval(self.tick, 5000);
+}
 
 
 
