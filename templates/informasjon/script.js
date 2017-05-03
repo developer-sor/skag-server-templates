@@ -4,10 +4,12 @@ $(function () {
     console.log('*********** ', informasjonssideId);
 
     var self = this;
-    if (hasRecentData(constants.informasjonData, informasjonssideId) && !parent.forceFetch) {
+
+    //Informasjonssidene skal forsøke å oppdatere hver gang de laster, så fjerner denne koden....
+    /*if (hasRecentData(constants.informasjonData, informasjonssideId) && !parent.forceFetch) {
         setInformationpage(getLocalstoreData(constants.informasjonData, informasjonssideId));
         return;
-    }
+    }*/
 
     var url = constants.api + constants.informasjonsside.replace("{informationpageId}", informasjonssideId);
 
