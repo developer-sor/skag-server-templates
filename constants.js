@@ -1,5 +1,5 @@
 ﻿
-var liveUrl = 'http://ec2-52-57-163-201.eu-central-1.compute.amazonaws.com/api/';
+var liveUrl = 'http://energivinduet.net/api/';
 var devUrl = 'http://ec2-52-58-173-97.eu-central-1.compute.amazonaws.com/api/';
 
 var constants = {
