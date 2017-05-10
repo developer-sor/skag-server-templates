@@ -25,7 +25,7 @@ var constants = {
     informasjonData: 'informasjonData',
     informasjonFetchIntervalInMinutes: 30,
     informasjonExpireHours: 12,
-    api: devUrl,
+    api: liveUrl,
     installation: 'installation/{key}',
     client: 'installation/{key}/clients',
     informasjonssider: 'client/{clientKey}/informationPages',
