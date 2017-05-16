@@ -6,8 +6,8 @@
 
 @font-face {
     font-family: 'MyArial';
-    src:  url('../fonts/arial.ttf') format('truetype');
-
+    src: url('../fonts/arial.ttf') format('truetype'),
+         url('../fonts/arial.svg') format('svg');
 }
 
 html, body {
