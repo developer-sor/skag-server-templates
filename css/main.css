@@ -59,7 +59,6 @@ html, body {
   width: 100%; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Helvetica,Arial, sans-serif;
   font-weight: 300; }
 
 h1 {
@@ -249,7 +248,6 @@ Spart tall			#1ba4e1*/
 
 .c3-chart-texts .c3-target .c3-texts .c3-text {
   font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
   padding-bottom: 1rem; }
 
 .c3-axis-y {
