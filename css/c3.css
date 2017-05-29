@@ -1,7 +1,7 @@
 /*-- Chart --*/
 .c3 svg {
   font-size: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'MyArial', Arial, Helvetica, sans-serif;
 }
 
 .c3 path, .c3 line {
