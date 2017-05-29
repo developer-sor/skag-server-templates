@@ -51,7 +51,7 @@ function setInformationpage(data) {
         'background-size': 'cover',
         'background-repeat': 'no-repeat'
     });
-    $("#slideTitle").html(data.title);
+    $("#slideTitle").html(data.description);
     $("#textContainer").html(data.bodyText);
 
     $("#main").addClass(data.theme + 'Theme');
