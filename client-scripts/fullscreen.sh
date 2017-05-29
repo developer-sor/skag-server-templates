@@ -7,6 +7,6 @@ sudo -u pi killall -9 -w  iceweasel
 #Sletting av Google Chromium tempfolder hvis denne finnes (tidligere feil)
 sudo rm -rf file:///home/pi/repo/client-scripts/file:
 
-sleep 15 && sudo -u pi chromium-browser -kiosk --args --disable-web-security --disable-translate --disable-session-crashed-bubble --test-type --user-data-dir=file:///home/pi/repo/ file:///home/pi/repo/index.html?forceFetch=true >>/home/pi/ep-log.txt 2>&1 &
+sleep 15 && sudo -u pi chromium-browser -kiosk --args --disable-web-security --disable-session-crashed-bubble --test-type --disable-translate --user-data-dir=file:///home/pi/ file:///home/pi/repo/index.html?forceFetch=true >>/home/pi/ep-log.txt 2>&1 &
 sleep 20
 xte 'mousemove 2000 200' -x:0
