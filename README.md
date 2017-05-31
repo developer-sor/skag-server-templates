@@ -11,6 +11,12 @@ Add certificate, .pkk in Pageant (Foudn in the skag-server map. Retrieve from se
 Run deploy.ps1 in PowerShell
 
 
+Nye nattikoner osv fra Yr.no
+===========================
+Av og til finner yr.no på å legge til nye ikoner
+Fant de siste her: 
+http://www.yr.no/grafikk/sym/v2016/svg/28n.svg
+
 
 Test locally on Windows
 =======================
