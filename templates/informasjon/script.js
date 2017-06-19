@@ -46,7 +46,7 @@ function handleError(informasjonssideId) {
 }
 
 function setInformationpage(data) {
-    $('body').css({
+    $('#backgroundImageInfoslide').css({
         'background-image': "url(data:" + data.backgroundImage + ")",
         'background-size': 'cover',
         'background-repeat': 'no-repeat'
