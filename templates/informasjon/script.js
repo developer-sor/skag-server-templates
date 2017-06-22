@@ -21,11 +21,18 @@ $(function () {
     }).done(function (data) {
         if (data) {
             console.log("Fetching informasjonsslide with id " + informasjonssideId + " successful");
-            convertToDataURLviaCanvas(data.backgroundImageURL, function (base64Img) {
-                data.backgroundImage = base64Img;
+            if(data.backgroundImageURL && checkURL(data.backgroundImageURL)) {
+                convertToDataURLviaCanvas(data.backgroundImageURL, function (base64Img) {
+                    data.backgroundImage = base64Img;
+                    setLocalStoreData(constants.informasjonData, data, informasjonssideId);
+                    setInformationpage(data);
+                });
+            } else {
+                data.backgroundImage = null;
                 setLocalStoreData(constants.informasjonData, data, informasjonssideId);
                 setInformationpage(data);
-            });
+            }
+
         }
         else handleError(informasjonssideId);
     }).fail(function (error) {
@@ -46,13 +53,19 @@ function handleError(informasjonssideId) {
 }
 
 function setInformationpage(data) {
-    $('#backgroundImageInfoslide').css({
-        'background-image': "url(data:" + data.backgroundImage + ")",
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat'
-    });
+    if(data.backgroundImage) {
+        $('#backgroundImageInfoslide').css({
+            'background-image': "url(data:" + data.backgroundImage + ")",
+            'background-size': 'cover',
+            'background-repeat': 'no-repeat'
+        });
+    }
     $("#slideTitle").html(data.description);
     $("#textContainer").html(data.bodyText);
 
     $("#main").addClass(data.theme + 'Theme');
+}
+
+function checkURL(url) {
+    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
