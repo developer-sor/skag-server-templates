@@ -38,7 +38,7 @@ html, body {
   position: relative;
   overflow: hidden; }
 
-#backgroundImage {
+.backgroundImageBlur {
   position: fixed;
   width: 103%;
   height: 103%;
