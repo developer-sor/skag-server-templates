@@ -21,7 +21,7 @@ function createWeatherForecast() {
     }
 
     var url = parent.installationData.location;
-    console.log('yr.no url -> ', url);
+    /*console.log('yr.no url -> ', url);*/
 
     $.ajax({
         method: "GET",
@@ -31,7 +31,7 @@ function createWeatherForecast() {
     })
     .done(function (data) {
         if (data) {
-            console.log("Got vær-data from yr");
+            /*console.log("Got vær-data from yr");*/
             var jsonData = xmlToJson(data);
             setLocalStoreData(constants.yrData, jsonData);
 
@@ -50,11 +50,11 @@ function createWeatherForecast() {
 
 function handleError() {
     if (hasNonExpiredData(constants.yrData)) {
-        console.log('Backup solution: getting yrdata from localstorage since fetch failed');
+        /*console.log('Backup solution: getting yrdata from localstorage since fetch failed');*/
         self.setWeatherForecast(getLocalstoreData(constants.yrData));
     }
     else {
-        console.log('Backup solution failed for the Yr template! No data in localstorage and fetch failed, running next slide');
+        /*console.log('Backup solution failed for the Yr template! No data in localstorage and fetch failed, running next slide');*/
         parent.templateController.abortSlide(template.name);
     }
 }

@@ -3,7 +3,7 @@
 "use strict";
 var installationData = "";
 
-console.log("Loading index");
+/*console.log("Loading index");*/
 
 var templateController = {
     templatesInUse: null,
@@ -44,7 +44,7 @@ var templateController = {
             dataType: 'json'
         }).done(function (data) {
             if (data && data.length > 0) {
-                console.log('Fetched informationpages successfully from server ');
+                /*console.log('Fetched informationpages successfully from server ');*/
                 for(var i = 0; i < data.length; i ++) {
                     installationData.templatesInUse.push({
                         name: "informasjon",
@@ -63,7 +63,7 @@ var templateController = {
         var self = this;
 
         var url = constants.api + constants.installation.replace("{key}", installation.key);
-        console.log("get() installation -> url ", url);
+        /*console.log("get() installation -> url ", url);*/
         $.ajax({
             method: "GET",
             contentType: "application/json",
@@ -129,7 +129,7 @@ var templateController = {
     setInstallationBasedOnInstallationData: function () {
         var data = getLocalstoreData(constants.installationData);
         if (!data) {
-            console.log('setInstallationBasedOnInstallationData() -> local data was non-existing');
+            /*console.log('setInstallationBasedOnInstallationData() -> local data was non-existing');*/
             return false;
         }
         this.templatesInUse = data.templatesInUse;
@@ -140,15 +140,15 @@ var templateController = {
     applyForceFetch: function (template) {
         this.templatesToForceFetchOn.splice(this.templatesToForceFetchOn.indexOf(template), 1);
         forceFetch = this.templatesToForceFetchOn.length > 0 ? forceFetch : false;
-        console.log('continue force fetching ? ', forceFetch.toString());
+        /*console.log('continue force fetching ? ', forceFetch.toString());*/
     },
     checkForValidDataOrFetch: function () {
         if (hasRecentData(constants.installationData) && this.hasValidInstallationData()) {
-            console.log("Found valid installationdata");
+            /*console.log("Found valid installationdata");*/
             this.setInstallationBasedOnInstallationData();
         }
         else {
-            console.log("Installationdata not retrieved yet or to old or fetch is forced. Attempting to fetch from server..");
+            /*console.log("Installationdata not retrieved yet or to old or fetch is forced. Attempting to fetch from server..");*/
             this.fetchDataFromServer();
         }
     },
@@ -184,10 +184,10 @@ var templateController = {
         self.checkForValidDataOrFetch();
         self.setNextSlideIndex();
         var template = this.templatesInUse[self.templateIndex];
-        console.log("Should show next slide...", self.templateIndex);
+        /*console.log("Should show next slide...", self.templateIndex);*/
 
         if (forceFetch) {
-            console.log('Forcing fetch for', template.name);
+            /*console.log('Forcing fetch for', template.name);*/
             self.applyForceFetch(template);
         }
 
@@ -206,10 +206,10 @@ var templateController = {
 
         $(this.currentActiveIframe).empty().append(newIframe);
 
-        console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);
+        /*console.log('lazy loading ', currentTemplate.name, ' in ', this.currentActiveIframe);*/
     },
     showNextSlide: function (start) {
-        console.log('showNextSlide() ');
+        /*console.log('showNextSlide() ');*/
         var self = this;
         var currentTemplate = this.templatesInUse[this.templateIndex];
         var timeoutMillis = currentTemplate.timeoutMillis || self.defaultTimeOut;
@@ -226,7 +226,7 @@ var templateController = {
 
         clearTimeout(self.currentTimeoutPromise);
         self.currentTimeoutPromise = setTimeout(function () {
-            console.log('time for next slide');
+            /*console.log('time for next slide');*/
             self.nextSlide();
         }, timeoutMillis);
 
@@ -239,19 +239,19 @@ var templateController = {
     },
     abortSlide: function (name, id) {
         var self = this;
-        console.log('aborting slide ' + name + '. Lazy loading next slide');
+        /*console.log('aborting slide ' + name + '. Lazy loading next slide');*/
 
         if(id && this.templatesInUse[this.templateIndex].name === name
             && this.templatesInUse[this.templateIndex].id === id){
-            console.log('aborted slide is the active one -> running showNextSlide()');
+            /*console.log('aborted slide is the active one -> running showNextSlide()');*/
             self.showNextSlide();
         }
         else if (!id && this.templatesInUse[this.templateIndex].name === name) {
-            console.log('aborted slide is the active one -> running showNextSlide()');
+            /*console.log('aborted slide is the active one -> running showNextSlide()');*/
             self.showNextSlide();
         }
         else {
-            console.log('aborted slide is lazy loading. Attempting to lazy load another one');
+            /*console.log('aborted slide is lazy loading. Attempting to lazy load another one');*/
             self.setNextSlideIndex();
             this.lazyLoadNextSlide(true);
         }

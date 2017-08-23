@@ -5,7 +5,7 @@
 
 "use strict";
 
-console.log("Loading plugin ", "informasjon");
+/*console.log("Loading plugin ", "informasjon");*/
 
 var template = {
     name: "informasjon",

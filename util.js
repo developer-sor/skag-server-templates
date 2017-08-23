@@ -13,7 +13,7 @@ if (currentInstallation && !skipForYr) {
 
 function isNullOrEmpty(varToCheck) {
     if (typeof varToCheck === 'object') {
-        console.log('isNullOrEmpty, varToCheck is object.');
+        /*console.log('isNullOrEmpty, varToCheck is object.');*/
         return false;
     }
 

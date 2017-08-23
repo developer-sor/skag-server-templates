@@ -1,7 +1,7 @@
 ﻿
 $(function () {
     var informasjonssideId = getParameterByName('informasjonId', $(document).src);
-    console.log('*********** ', informasjonssideId);
+    /*console.log('*********** ', informasjonssideId);*/
 
     var self = this;
 
@@ -20,7 +20,7 @@ $(function () {
         dataType: 'json'
     }).done(function (data) {
         if (data) {
-            console.log("Fetching informasjonsslide with id " + informasjonssideId + " successful");
+            /*console.log("Fetching informasjonsslide with id " + informasjonssideId + " successful");*/
             if(data.backgroundImageURL && checkURL(data.backgroundImageURL)) {
                 convertToDataURLviaCanvas(data.backgroundImageURL, function (base64Img) {
                     data.backgroundImage = base64Img;
@@ -43,11 +43,11 @@ $(function () {
 
 function handleError(informasjonssideId) {
     if (hasNonExpiredData(constants.informasjonData, informasjonssideId)) {
-        console.log('Backup solution: getting informasjondata from localstorage since fetch failed');
+        /*console.log('Backup solution: getting informasjondata from localstorage since fetch failed');*/
         self.setInformationpage(getLocalstoreData(constants.informasjonData, informasjonssideId));
     }
     else {
-        console.log('Backup solution failed for the Informasjon template! No data in localstorage and fetch failed, running next slide');
+        /*console.log('Backup solution failed for the Informasjon template! No data in localstorage and fetch failed, running next slide');*/
         parent.templateController.abortSlide(template.name, informasjonssideId);
     }
 }

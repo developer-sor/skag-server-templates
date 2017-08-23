@@ -11,7 +11,7 @@
 if (getParameterByName('clear')) {
     var clearData = getParameterByName('clear');
     if (clearData && clearData == 'true') {
-        console.log('clearing localstorage');
+        /*console.log('clearing localstorage');*/
         window.localStorage.clear();
     }
 }
@@ -20,6 +20,6 @@ var forceFetch = false;
 if (getParameterByName('forceFetch')) {
     var forceFetch = getParameterByName('forceFetch');
     if (forceFetch && forceFetch == 'true') {
-        console.log('Forcing fetch of new data');
+        /*console.log('Forcing fetch of new data');*/
     }
 }

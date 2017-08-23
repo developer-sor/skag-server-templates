@@ -5,7 +5,7 @@
 
 "use strict";
 
-console.log("Loading plugin ", "chart1");
+/*console.log("Loading plugin ", "chart1");*/
 
 var template = {
     name: "chart1",

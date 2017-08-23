@@ -47,7 +47,7 @@ function hasRecentData(type, infoslideId) {
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         default:
-            console.log('hasRecentData() -> type not set or invalid');
+            /*console.log('hasRecentData() -> type not set or invalid');*/
             return false;
     }
 }
@@ -76,7 +76,7 @@ function getLocalstoreData(type, infoslideId) {
             ls = windowRef.localStorage.getItem(constants.informasjonData+infoslideId);
             break;
         default:
-            console.log('Error: setChartWithLocalstoreData() -> type not set or invalid');
+            /*console.log('Error: setChartWithLocalstoreData() -> type not set or invalid');*/
             break;
     }
     if (ls) {
@@ -87,7 +87,7 @@ function getLocalstoreData(type, infoslideId) {
 
 function setLocalStoreData(type, data, infoslideId) {
     if (!data) {
-        console.log('Error: setLocalStoreData() -> data is not defined!');
+        /*console.log('Error: setLocalStoreData() -> data is not defined!');*/
         return;
     }
 
@@ -118,7 +118,7 @@ function setLocalStoreData(type, data, infoslideId) {
             windowRef.localStorage.setItem(constants.informasjonData+infoslideId, JSON.stringify(data));
             break;
         default:
-            console.log('Error: setLocalStoreData() -> type not set or invalid');
+            /*console.log('Error: setLocalStoreData() -> type not set or invalid');*/
             return;
     }
 }
@@ -163,7 +163,7 @@ function hasNonExpiredData(type, infoslideId) {
             return date !== null && date !== undefined && Date.parse(date) > d2.getTime();
             break;
         default:
-            console.log('hasNonExpiredData() -> type not set or invalid');
+            /*console.log('hasNonExpiredData() -> type not set or invalid');*/
             return false;
     }
 }
