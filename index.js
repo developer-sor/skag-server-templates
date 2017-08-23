@@ -54,7 +54,7 @@ var templateController = {
                 }
             }
         }).fail(function (error) {
-            console.error('Failed to fetch client infoslides from server: ', error);
+            /*console.error('Failed to fetch client infoslides from server: ', error);*/
         }).always(function(){
             self.setInstallationData(installationData);
         });
@@ -95,24 +95,24 @@ var templateController = {
                 self.fetchClientInfoslides(data);
             }
             else if (!data && self.hasValidInstallationData()) {
-                console.error('Backup solution: getting installationdata from localstorage since fetch failed');
+                /*console.error('Backup solution: getting installationdata from localstorage since fetch failed');*/
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.error(self.failText);
+                /*console.error(self.failText);*/
                 $("#message").show().text(self.failText);
                 //Retry fetch until we get data
                 self.start();
             }
 
         }).fail(function (error) {
-            console.error('Error fetching data from server: ', error);
+            /*console.error('Error fetching data from server: ', error);*/
             if (self.hasValidInstallationData()) {
-                console.error('Backup solution: getting installationdata from localstorage since fetch failed');
+                /*console.error('Backup solution: getting installationdata from localstorage since fetch failed');*/
                 self.setInstallationBasedOnInstallationData();
             }
             else {
-                console.error(self.failText);
+                /*console.error(self.failText);*/
                 $("#message").show().text(self.failText);
                 //Retry fetch until network is back
                 self.start();

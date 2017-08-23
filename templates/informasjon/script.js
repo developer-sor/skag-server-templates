@@ -36,7 +36,7 @@ $(function () {
         }
         else handleError(informasjonssideId);
     }).fail(function (error) {
-        console.error("Fetching informasjonsslide with id " + informasjonssideId + " failed!");
+        /*console.error("Fetching informasjonsslide with id " + informasjonssideId + " failed!");*/
         handleError(informasjonssideId);
     });
 });

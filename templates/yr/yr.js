@@ -42,7 +42,7 @@ function createWeatherForecast() {
         }
     })
     .fail(function (error) {
-        console.error('Error fetching data from yr: ', error);
+        /*console.error('Error fetching data from yr: ', error);*/
         handleError();
     });
 
